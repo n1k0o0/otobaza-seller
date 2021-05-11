@@ -140,6 +140,7 @@ export default {
   },
   parts: {
     add: 'Добавление запчастей',
+    add_manual: 'Добавить вручную',
     title: 'Запчасти',
     select_excel: 'Выберите Excel:',
     select_file: 'Выбрать',

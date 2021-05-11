@@ -112,7 +112,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 .input-with-select {
-  /deep/ .el-input {
+  >>> .el-input {
     width: 110px !important;
   }
   .el-input-group__prepend {

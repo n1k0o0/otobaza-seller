@@ -140,6 +140,7 @@ export default {
   },
   parts: {
     add: 'Adding spareparts',
+    add_manual: 'Add manually',
     title: 'Spareparts',
     select_excel: 'Select excel',
     select_file: 'Select',

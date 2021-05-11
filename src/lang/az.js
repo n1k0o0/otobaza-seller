@@ -140,6 +140,7 @@ export default {
   },
   parts: {
     add: 'Ehtiyat hissəsinin əlavə olunması',
+    add_manual: 'Manual olaraq əlavə edin',
     title: 'Ehtiyat hissələri',
     select_excel: 'Excel faylı seçin:',
     select_file: 'Seç',

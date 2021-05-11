@@ -24,6 +24,9 @@ const mutations = {
       return item
     })
   },
+  SET_MANUAL_PARTS(state, payload) {
+    state.excel_parts=[payload,...state.excel_parts]
+  },
   CLEAR_EXCEL_DATA(state) {
     state.excel_parts = []
   },
@@ -93,6 +96,18 @@ const actions = {
         duration: 5 * 1000
       })
     }
+  },
+
+  async ADD_MANUAL({ commit } ){
+    commit('SET_MANUAL_PARTS', {
+      code: "",
+      description: "",
+      manufacturer: "",
+      oem: "",
+      price: '',
+      product_type: '',
+      editable : 1
+    })
   },
 
   async GET_UPLOADED_DATA_FILES({ commit }) {

@@ -19,8 +19,9 @@
         >{{ $t('parts.download_excel') }}</el-button>
       </div>
 
-      <p>{{ $t('parts.select_excel') }}</p>
+
       <div class="excelUpload">
+        <p>{{ $t('parts.select_excel') }}</p>
         <el-upload
           action="#"
           class="upload-demo"
@@ -34,6 +35,11 @@
             $t('parts.select_file')
           }}</el-button>
         </el-upload>
+      </div>
+      <div class="manualAdd">
+        <p>{{ $t('parts.add_manual') }}</p>
+        <el-button icon="el-icon-circle-plus-outline" @click="addManual" size="medium" type="primary" >
+        </el-button>
       </div>
       <el-table
         v-if="excel_parts.length"
@@ -232,7 +238,8 @@ export default {
       CHECK_PARTS: 'parts/CHECK_PARTS',
       ADD_PARTS: 'parts/ADD_PARTS',
       GET_PART_MANUFACTURERS: 'parts/GET_PART_MANUFACTURERS',
-      GET_EXCEL_FILE: 'parts/GET_EXCEL_FILE'
+      GET_EXCEL_FILE: 'parts/GET_EXCEL_FILE',
+      ADD_MANUAL: 'parts/ADD_MANUAL',
     }),
     ...mapMutations({
       CLEAR_EXCEL_DATA: 'parts/CLEAR_EXCEL_DATA'
@@ -318,12 +325,16 @@ export default {
       link.setAttribute('download', 'excel_name.xlsx')
       document.body.appendChild(link)
       link.click()
+    },
+    addManual(){
+      this.ADD_MANUAL()
+      this.checked=false
     }
   }
 }
 </script>
 <style lang="scss">
-.excelUpload {
+.excelUpload,.manualAdd {
   max-width: 300px;
   margin-bottom: 1rem;
 }

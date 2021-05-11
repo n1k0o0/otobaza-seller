@@ -140,6 +140,7 @@ export default {
   },
   parts: {
     add: 'Yedek parça ekleme',
+    add_manual: 'El ile ekle',
     title: 'Yedek parçalar',
     select_excel: "Excel'i seçin",
     select_file: 'Seçin',
