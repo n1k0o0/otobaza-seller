@@ -2,8 +2,9 @@
   <div class="PageContainer">
     <el-breadcrumb separator-class="el-icon-arrow-right" class="Breadcrumbs">
       <el-breadcrumb-item :to="{ path: '/' }">{{
-        $t('dashboard.title')
-      }}</el-breadcrumb-item>
+          $t('dashboard.title')
+                                              }}
+      </el-breadcrumb-item>
       <el-breadcrumb-item>{{ $t('parts.add') }}</el-breadcrumb-item>
     </el-breadcrumb>
     <el-card shadow="always">
@@ -16,31 +17,60 @@
           style="margin-left: auto"
           size="small"
           @click.prevent="downloadExcel"
-        >{{ $t('parts.download_excel') }}</el-button>
-      </div>
-
-
-      <div class="excelUpload">
-        <p>{{ $t('parts.select_excel') }}</p>
-        <el-upload
-          action="#"
-          class="upload-demo"
-          :on-change="handleChange"
-          :auto-upload="false"
-          :limit="1"
-          accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
-          :file-list="fileList"
-        >
-          <el-button size="small" type="primary" :loading="loading">{{
-            $t('parts.select_file')
-          }}</el-button>
-        </el-upload>
-      </div>
-      <div class="manualAdd">
-        <p>{{ $t('parts.add_manual') }}</p>
-        <el-button icon="el-icon-circle-plus-outline" @click="addManual" size="medium" type="primary" >
+        >{{ $t('parts.download_excel') }}
         </el-button>
       </div>
+
+      <el-row>
+        <el-col :span="12">
+          <div class="excelUpload">
+            <p>{{ $t('parts.select_excel') }}</p>
+            <el-upload
+              action="#"
+              class="upload-demo"
+              :on-change="handleChange"
+              :auto-upload="false"
+              :limit="1"
+              accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
+              :file-list="fileList"
+            >
+              <el-button size="small" type="primary" :loading="loading">{{
+                  $t('parts.select_file')
+                                                                        }}
+              </el-button>
+            </el-upload>
+          </div>
+          <div class="manualAdd">
+            <p>{{ $t('parts.add_manual') }}</p>
+            <el-button
+              icon="el-icon-circle-plus-outline"
+              size="medium"
+              type="primary"
+              @click="addManual"
+            />
+          </div>
+        </el-col>
+        <el-col :span="12" class="table_actions">
+          <el-button
+            v-if="excel_parts.length"
+            type="primary"
+            icon="el-icon-refresh"
+            :loading="loadingTable"
+            :disabled="loadingTable"
+            @click="check"
+          >{{ $t('parts.check') }}
+          </el-button>
+          <el-button
+            v-if="canSubmit && isChecked"
+            type="primary"
+            icon="el-icon-plus"
+            :loading="loadingTable"
+            :disabled="loadingTable"
+            @click="submit"
+          >{{ $t('parts.add_parts') }}
+          </el-button>
+        </el-col>
+      </el-row>
       <el-table
         v-if="excel_parts.length"
         v-loading="loadingTable"
@@ -74,19 +104,35 @@
         <el-table-column prop="manufacturer" :label="$t('parts.manufacturer')">
           <template slot-scope="{ row }">
             <template v-if="row.editable">
-              <el-select
+              <!--              <el-select
+                              v-model="row.manufacturer"
+                              size="mini"
+                              filterable
+                              :placeholder="$t('parts.select_manufacturer')"
+                            >
+                              <el-option
+                                v-for="(item, index) in part_manufacturers"
+                                :key="item.value + index"
+                                :label="item.label"
+                                :value="item.value"
+                              />
+                            </el-select>-->
+              <el-autocomplete
                 v-model="row.manufacturer"
-                size="mini"
-                filterable
+                popper-class="my-autocomplete"
+                :fetch-suggestions="querySearch"
+                value-key="value"
+                :highlight-first-item="true"
                 :placeholder="$t('parts.select_manufacturer')"
               >
-                <el-option
-                  v-for="(item, index) in part_manufacturers"
-                  :key="item.value + index"
-                  :label="item.label"
-                  :value="item.value"
+                <i
+                  slot="suffix"
+                  class="el-icon-edit el-input__icon"
                 />
-              </el-select>
+                <template slot-scope="{ item }">
+                  <div class="value">{{ item.label }}</div>
+                </template>
+              </el-autocomplete>
             </template>
             <template v-else>
               {{ row.manufacturer }}
@@ -175,7 +221,8 @@
         :loading="loadingTable"
         :disabled="loadingTable"
         @click="check"
-      >{{ $t('parts.check') }}</el-button>
+      >{{ $t('parts.check') }}
+      </el-button>
       <el-button
         v-if="canSubmit && isChecked"
         type="primary"
@@ -183,28 +230,30 @@
         :loading="loadingTable"
         :disabled="loadingTable"
         @click="submit"
-      >{{ $t('parts.add_parts') }}</el-button>
+      >{{ $t('parts.add_parts') }}
+      </el-button>
     </el-card>
   </div>
 </template>
 <script>
 import { mapGetters, mapActions, mapMutations } from 'vuex'
+
 export default {
   name: 'AddParts',
   data() {
     return {
-      excel_file: '',
-      formData: new FormData(),
-      fileList: [],
-      loading: false,
+      excel_file  : '',
+      formData    : new FormData(),
+      fileList    : [],
+      loading     : false,
       loadingTable: false,
-      checked: false
+      checked     : false
     }
   },
   computed: {
     ...mapGetters({
-      excel_parts: 'parts/excel_parts',
-      currency: 'app/currency',
+      excel_parts       : 'parts/excel_parts',
+      currency          : 'app/currency',
       part_manufacturers: 'parts/part_manufacturers'
     }),
     isChecked() {
@@ -235,11 +284,11 @@ export default {
   },
   methods: {
     ...mapActions({
-      CHECK_PARTS: 'parts/CHECK_PARTS',
-      ADD_PARTS: 'parts/ADD_PARTS',
+      CHECK_PARTS           : 'parts/CHECK_PARTS',
+      ADD_PARTS             : 'parts/ADD_PARTS',
       GET_PART_MANUFACTURERS: 'parts/GET_PART_MANUFACTURERS',
-      GET_EXCEL_FILE: 'parts/GET_EXCEL_FILE',
-      ADD_MANUAL: 'parts/ADD_MANUAL',
+      GET_EXCEL_FILE        : 'parts/GET_EXCEL_FILE',
+      ADD_MANUAL            : 'parts/ADD_MANUAL'
     }),
     ...mapMutations({
       CLEAR_EXCEL_DATA: 'parts/CLEAR_EXCEL_DATA'
@@ -250,7 +299,7 @@ export default {
         parts: this.excel_parts
       })
       this.loadingTable = false
-      this.checked = true
+      this.checked      = true
     },
     edit(row) {
       this.$set(row, 'editable', !row.editable)
@@ -266,14 +315,14 @@ export default {
       this.loadingTable = true
       const parts = this.excel_parts.map(part => {
         return {
-          part_number: part.code,
-          oem: part.oem,
+          part_number : part.code,
+          oem         : part.oem,
           manufacturer: part.manufacturer,
-          description: part.description,
+          description : part.description,
           product_type: part.product_type,
-          price: part.price,
-          price_type: this.currency,
-          status_id: 1
+          price       : part.price,
+          price_type  : this.currency,
+          status_id   : 1
         }
       })
       await this.ADD_PARTS({
@@ -296,7 +345,8 @@ export default {
         })
     },
     tableRowClassName({ row }) {
-      if (Object.keys(row).includes('status')) {
+      if (Object.keys(row)
+        .includes('status')) {
         if (row?.status) {
           return 'success'
         } else {
@@ -306,7 +356,7 @@ export default {
       return ''
     },
     async handleChange(file, fileList) {
-      this.loading = true
+      this.loading  = true
       this.fileList = fileList
 
       this.fileList.map(image => {
@@ -319,29 +369,51 @@ export default {
       this.loading = false
     },
     downloadExcel() {
-      const url = this.excel_file
+      const url  = this.excel_file
       const link = document.createElement('a')
-      link.href = url
+      link.href  = url
       link.setAttribute('download', 'excel_name.xlsx')
       document.body.appendChild(link)
       link.click()
     },
-    addManual(){
+    addManual() {
       this.ADD_MANUAL()
-      this.checked=false
+      this.checked = false
+    },
+    querySearch(queryString, cb) {
+      const links   = this.part_manufacturers
+      const results = queryString ? links.filter(this.createFilter(queryString)) : links
+      // call callback function to return suggestion objects
+      cb(results)
+    },
+    createFilter(queryString) {
+      return (link) => {
+        return (link.label.toLowerCase()
+          .indexOf(queryString.toLowerCase()) === 0)
+      }
     }
   }
 }
 </script>
 <style lang="scss">
-.excelUpload,.manualAdd {
+.excelUpload, .manualAdd {
   max-width: 300px;
   margin-bottom: 1rem;
 }
+
 .el-table .danger {
   background: #fde6e6;
 }
+
 .el-table .success {
   background: #f0f9eb;
+}
+
+.el-row {
+  margin: 5px 0;
+}
+
+.table_actions {
+  padding-top: 45px;
 }
 </style>
