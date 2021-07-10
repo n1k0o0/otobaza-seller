@@ -21,7 +21,7 @@ const mutations = {
   SET_EXCEL_DATA(state, payload) {
     state.excel_parts = payload.map(item => {
       item.editable     = false
-      item.manufacturer = item.manufacturer.toUpperCase()
+      item.manufacturer = item.manufacturer.toString().toUpperCase()
       return item
     })
   },
