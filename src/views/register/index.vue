@@ -122,13 +122,19 @@
             />
           </el-form-item>
 
+          <el-form-item prop="agreement" class="form_agreement">
+            <el-checkbox id="agreement" v-model="registerForm.agreement" />
+            <a href="https://otobaza.com/terms-and-conditions" target="_blank" slot="label">{{ $t('register.agreement') }}</a>
+          </el-form-item>
+
           <div class="register-form-buttons">
             <el-button
               :loading="loading"
               type="primary"
               style="width:100%;margin-bottom:30px;"
               @click.native.prevent="handleRegister"
-            >{{ $t('register.title') }}</el-button>
+            >{{ $t('register.title') }}
+            </el-button>
             <div class="or">
               <span>{{ $t('or') }}</span>
             </div>
@@ -182,16 +188,17 @@ export default {
   components: { CountDownTimer, LangSelect, VueGoogleAutocomplete },
   data() {
     const {
-      first_name,
-      last_name,
-      phone,
-      gender,
-      country,
-      city,
-      password,
-      store_name,
-      address
-    } = validators()
+            first_name,
+            last_name,
+            phone,
+            gender,
+            country,
+            city,
+            password,
+            store_name,
+            address,
+            agreement
+          } = validators()
     return {
       genders: [
         {
@@ -225,29 +232,31 @@ export default {
         store_name: '',
         store_about: '',
         latitude: '',
-        longitude: ''
+        longitude: '',
+        agreement: ''
       },
       registerRules: {
         first_name: [
           { required: true, trigger: 'change', validator: first_name }
         ],
-        last_name: [
+        last_name : [
           { required: true, trigger: 'change', validator: last_name }
         ],
-        phone: [{ required: true, trigger: 'change', validator: phone }],
-        gender: [{ required: true, trigger: 'change', validator: gender }],
-        country: [{ required: true, trigger: 'change', validator: country }],
-        city: [{ required: true, trigger: 'change', validator: city }],
-        password: [{ required: true, trigger: 'change', validator: password }],
-        address: [{ required: true, trigger: 'change', validator: address }],
+        phone     : [{ required: true, trigger: 'change', validator: phone }],
+        gender    : [{ required: true, trigger: 'change', validator: gender }],
+        country   : [{ required: true, trigger: 'change', validator: country }],
+        city      : [{ required: true, trigger: 'change', validator: city }],
+        password  : [{ required: true, trigger: 'change', validator: password }],
+        address   : [{ required: true, trigger: 'change', validator: address }],
+        agreement : [{ required: true, trigger: 'change', validator: agreement }],
         store_name: [
           { required: true, trigger: 'change', validator: store_name }
         ],
-        email: [
+        email     : [
           {
             required: true,
-            trigger: 'change',
-            message: this.$t('validator.email.required')
+            trigger : 'change',
+            message : this.$t('validator.email.required')
           },
           {
             type: 'email',
@@ -429,7 +438,7 @@ $cursor: #fff;
 }
 .register-container-wrapper {
   min-height: 100%;
-  width: 100vw;
+  width: 100%;
   background: #2d3a4b;
 }
 #map {
@@ -467,21 +476,39 @@ $cursor: #fff;
     width: 100%;
     margin: 0 auto;
   }
+
   .el-select {
     width: 100%;
   }
+
   .el-form-item {
     &__label {
       color: #fff;
     }
   }
+
+  .el-form-item:nth-child(13) {
+    z-index: 1;
+    grid-column: 1/-1;
+
+    .el-form-item__label {
+      z-index: 3;
+    }
+
+    .el-form-item__content {
+      z-index: -1;
+    }
+  }
+
   .otp_input {
     caret-color: #454545 !important;
+
     input {
       color: #454545 !important;
       caret-color: #454545 !important;
     }
   }
+
   .el-input,
   .el-textarea {
     display: inline-block;
@@ -495,16 +522,16 @@ $cursor: #fff;
     input,
     textarea {
       background: transparent;
-      border: 0px;
+      border: 0;
       -webkit-appearance: none;
-      border-radius: 0px;
+      border-radius: 0;
       padding: 12px 15px 12px 15px;
       color: $light_gray;
       height: 47px;
       caret-color: $cursor;
 
       &:-webkit-autofill {
-        box-shadow: 0 0 0px 1000px $bg inset !important;
+        box-shadow: 0 0 0 1000px $bg inset !important;
         -webkit-text-fill-color: $cursor !important;
       }
     }
@@ -557,7 +584,7 @@ $light_gray: #eee;
     .title {
       font-size: 26px;
       color: $light_gray;
-      margin: 0px auto 40px auto;
+      margin: 0 auto 40px auto;
       text-align: center;
       font-weight: bold;
     }
@@ -601,16 +628,31 @@ $light_gray: #eee;
 @media screen and (max-width: 768px) {
   .register-container {
     padding: 60px 15px 60px;
+
     .register-form {
-      display: block;
+      grid-template-columns: 1fr;
+      grid-template-areas:unset;
+    }
+
+    .register-form-buttons {
+      grid-area: unset;
     }
   }
 }
+
 .no-receive {
   margin-top: 10px;
+
   a {
     color: #409eff;
     text-decoration: underline;
   }
 }
+
+//.el-form-item{
+//  z-index: 3;
+//  &__content{
+//    z-index:-1!important;
+//  }
+//}
 </style>

@@ -47,24 +47,25 @@ export default {
     password: 'Password'
   },
   register: {
-    title: 'Login',
-    first_name: 'First Name',
-    last_name: 'Last Name',
-    phone: 'Mobile number',
-    email: 'Email',
-    city: 'City',
-    country: 'Country',
-    select_country: 'Select country',
-    currency: 'Currency',
-    select_currency: 'Select currency',
-    gender: 'Gender',
-    select_gender: 'Select gender',
-    select_city: 'Select city',
-    address: 'Address',
-    password: 'Password',
+    title                : 'Login',
+    first_name           : 'First Name',
+    last_name            : 'Last Name',
+    phone                : 'Mobile number',
+    email                : 'Email',
+    city                 : 'City',
+    country              : 'Country',
+    select_country       : 'Select country',
+    currency             : 'Currency',
+    select_currency      : 'Select currency',
+    gender               : 'Gender',
+    select_gender        : 'Select gender',
+    select_city          : 'Select city',
+    address              : 'Address',
+    password             : 'Password',
     password_confirmation: 'Password confirmation',
-    store_name: 'Store name',
-    store_about: 'About store'
+    store_name           : 'Store name',
+    store_about          : 'About store',
+    agreement            : 'I agree with the Terms and Conditions while registering.'
   },
   navbar: {
     logout: 'Logout',
@@ -209,26 +210,29 @@ export default {
       required: 'Enter email!',
       email: 'Enter correct email!'
     },
-    store_name: {
+    store_name  : {
       required: 'Enter store name'
     },
     manufacturer: {
       required: 'Select manufacturer'
     },
-    model: {
+    model       : {
       required: 'Select model'
     },
-    car: {
+    car         : {
       required: 'Select car'
     },
-    year: {
+    year        : {
       required: 'Select year'
     },
-    color: {
+    color       : {
       required: 'Select color'
     },
-    address: {
+    address     : {
       required: 'Enter address!'
+    },
+    agreement   : {
+      required: 'Agreement is required!'
     }
   },
   payment_alerts: {

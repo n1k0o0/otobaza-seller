@@ -42,29 +42,30 @@ export default {
     status: 'Durum'
   },
   login: {
-    title: 'Login',
-    phone: 'Cep numarası',
+    title   : 'Giriş yap',
+    phone   : 'Cep numarası',
     password: 'Parola'
   },
   register: {
-    title: 'Login',
-    first_name: 'İsim',
-    last_name: 'Soyadı',
-    phone: 'Cep numarası',
-    email: 'Email',
-    city: 'Şehir',
-    country: 'Ülke',
-    select_country: 'Ülke seçin',
-    currency: 'Para birimi',
-    select_currency: 'Para birimi seçin',
-    gender: 'Cinsiyet',
-    select_gender: 'Cinsiyet seçin',
-    select_city: 'Şehir seç',
-    address: 'Adres',
-    password: 'Parola',
+    title                : 'Kayıt ol',
+    first_name           : 'İsim',
+    last_name            : 'Soyadı',
+    phone                : 'Cep numarası',
+    email                : 'Email',
+    city                 : 'Şehir',
+    country              : 'Ülke',
+    select_country       : 'Ülke seçin',
+    currency             : 'Para birimi',
+    select_currency      : 'Para birimi seçin',
+    gender               : 'Cinsiyet',
+    select_gender        : 'Cinsiyet seçin',
+    select_city          : 'Şehir seç',
+    address              : 'Adres',
+    password             : 'Parola',
     password_confirmation: 'Şifre onayı',
-    store_name: 'Dükan adı',
-    store_about: 'Dükan hakkında'
+    store_name           : 'Dükan adı',
+    store_about          : 'Dükan hakkında',
+    agreement            : 'Kayıt sırasında Şartlar ve Koşulları kabul ediyorum.'
   },
   navbar: {
     logout: 'Çıkış',
@@ -208,26 +209,29 @@ export default {
       required: 'E-posta girin!',
       email: 'Doğru e-postayı girin!'
     },
-    store_name: {
+    store_name  : {
       required: 'Mağaza adını girin'
     },
     manufacturer: {
       required: 'Üretici seçin'
     },
-    model: {
+    model       : {
       required: 'Model seçin'
     },
-    car: {
+    car         : {
       required: 'Araba seçin'
     },
-    year: {
+    year        : {
       required: 'Yıl seçin'
     },
-    color: {
+    color       : {
       required: 'Renk seçin'
     },
-    address: {
+    address     : {
       required: 'Adresi girin!'
+    },
+    agreement   : {
+      required: 'Sözleşme gerekli!'
     }
   },
   payment_alerts: {

@@ -47,24 +47,25 @@ export default {
     password: 'Şifrə'
   },
   register: {
-    title: 'Qeydiyyat',
-    first_name: 'Ad',
-    last_name: 'Soyad',
-    phone: 'Mobil nömrə',
-    email: 'Email',
-    city: 'Şəhər',
-    country: 'Ölkə',
-    select_country: 'Ölkə seçin',
-    currency: 'Valyuta',
-    select_currency: 'Valyuta seçin',
-    gender: 'Cins',
-    select_gender: 'Cinsinizi seçin',
-    select_city: 'Şəhər seçin',
-    address: 'Ünvan',
-    password: 'Şifrə',
+    title                : 'Qeydiyyat',
+    first_name           : 'Ad',
+    last_name            : 'Soyad',
+    phone                : 'Mobil nömrə',
+    email                : 'Email',
+    city                 : 'Şəhər',
+    country              : 'Ölkə',
+    select_country       : 'Ölkə seçin',
+    currency             : 'Valyuta',
+    select_currency      : 'Valyuta seçin',
+    gender               : 'Cins',
+    select_gender        : 'Cinsinizi seçin',
+    select_city          : 'Şəhər seçin',
+    address              : 'Ünvan',
+    password             : 'Şifrə',
     password_confirmation: 'Təkrar şifrə',
-    store_name: 'Mağaza adı',
-    store_about: 'Mağaza haqqında'
+    store_name           : 'Mağaza adı',
+    store_about          : 'Mağaza haqqında',
+    agreement            : 'Qeydiyyat zamanı Şərtlər və Qaydalarla razılaşıram.'
   },
   navbar: {
     logout: 'Çıxış',
@@ -209,26 +210,29 @@ export default {
       required: 'Email daxil edin!',
       email: 'Düzgün email daxil edin!'
     },
-    store_name: {
+    store_name  : {
       required: 'Mağaza adı daxil edin'
     },
     manufacturer: {
       required: 'İstehsalçı seçin'
     },
-    model: {
+    model       : {
       required: 'Model seçin'
     },
-    car: {
+    car         : {
       required: 'Avtomobil seçin'
     },
-    year: {
+    year        : {
       required: 'İl seçin'
     },
-    color: {
+    color       : {
       required: 'Rəng seçin'
     },
-    address: {
+    address     : {
       required: 'Ünvan daxil edin!'
+    },
+    agreement   : {
+      required: 'Razılaşma mütləqdir!'
     }
   },
   payment_alerts: {

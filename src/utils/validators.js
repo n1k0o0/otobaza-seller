@@ -53,7 +53,7 @@ const currency = (rule, value, callback) => {
   }
 }
 
-const city = (rule, value, callback) => {
+const city       = (rule, value, callback) => {
   if (!value) {
     callback(new Error(i18n.t('register.select_city')))
   } else {
@@ -67,9 +67,17 @@ const store_name = (rule, value, callback) => {
     callback()
   }
 }
-const address = (rule, value, callback) => {
+const address    = (rule, value, callback) => {
   if (!value) {
     callback(new Error(i18n.t('validator.address.required')))
+  } else {
+    callback()
+  }
+}
+
+const agreement = (rule, value, callback) => {
+  if (!value) {
+    callback(new Error(i18n.t('validator.agreement.required')))
   } else {
     callback()
   }
@@ -86,6 +94,7 @@ export default () => {
     currency,
     city,
     store_name,
-    address
+    address,
+    agreement
   }
 }

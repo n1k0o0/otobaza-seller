@@ -47,24 +47,25 @@ export default {
     password: 'Пароль'
   },
   register: {
-    title: 'Логин',
-    first_name: 'Имя',
-    last_name: 'Фамилия',
-    phone: 'Мобильный номер',
-    email: 'Эл. адрес',
-    city: 'Город',
-    country: 'Страна',
-    select_country: 'Выберите страну',
-    currency: 'Валюта',
-    select_currency: 'Выберите валюту',
-    gender: 'Пол',
-    select_gender: 'Выберите пол',
-    select_city: 'Выберите город',
-    address: 'Адрес',
-    password: 'Пароль',
+    title                : 'Логин',
+    first_name           : 'Имя',
+    last_name            : 'Фамилия',
+    phone                : 'Мобильный номер',
+    email                : 'Эл. адрес',
+    city                 : 'Город',
+    country              : 'Страна',
+    select_country       : 'Выберите страну',
+    currency             : 'Валюта',
+    select_currency      : 'Выберите валюту',
+    gender               : 'Пол',
+    select_gender        : 'Выберите пол',
+    select_city          : 'Выберите город',
+    address              : 'Адрес',
+    password             : 'Пароль',
     password_confirmation: 'Подтверждение пароля',
-    store_name: 'Название магазина',
-    store_about: 'О магазине'
+    store_name           : 'Название магазина',
+    store_about          : 'О магазине',
+    agreement            : 'Я согласен с Условиями и Соглашениями при регистрации.'
   },
   navbar: {
     logout: 'Выйти',
@@ -209,26 +210,29 @@ export default {
       required: 'Введите адрес электронной почты!',
       email: 'Введите правильный адрес электронной почты!'
     },
-    store_name: {
+    store_name  : {
       required: 'Введите название магазина'
     },
     manufacturer: {
       required: 'Выберите производителя'
     },
-    model: {
+    model       : {
       required: 'Выберите модель'
     },
-    car: {
+    car         : {
       required: 'Выберите автомобиль'
     },
-    year: {
+    year        : {
       required: 'Выберите год'
     },
-    color: {
+    color       : {
       required: 'Выберите цвет'
     },
-    address: {
+    address     : {
       required: 'Введите адрес!'
+    },
+    agreement   : {
+      required: 'Требуется согласие!'
     }
   },
   payment_alerts: {
