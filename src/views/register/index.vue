@@ -124,7 +124,7 @@
 
           <el-form-item prop="agreement" class="form_agreement">
             <el-checkbox id="agreement" v-model="registerForm.agreement" />
-            <a href="https://otobaza.com/terms-and-conditions" target="_blank" slot="label">{{ $t('register.agreement') }}</a>
+            <a href="https://otobaza.com/terms.html" target="_blank" slot="label">{{ $t('register.agreement') }}</a>
           </el-form-item>
 
           <div class="register-form-buttons">
@@ -493,6 +493,15 @@ $cursor: #fff;
 
     .el-form-item__label {
       z-index: 3;
+
+      a {
+        text-decoration: underline;
+        transition: color .3s;
+
+        &:hover {
+          color: #409EFF;
+        }
+      }
     }
 
     .el-form-item__content {

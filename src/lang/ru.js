@@ -47,7 +47,7 @@ export default {
     password: 'Пароль'
   },
   register: {
-    title                : 'Логин',
+    title                : 'Регистрация',
     first_name           : 'Имя',
     last_name            : 'Фамилия',
     phone                : 'Мобильный номер',

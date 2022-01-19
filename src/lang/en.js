@@ -47,7 +47,7 @@ export default {
     password: 'Password'
   },
   register: {
-    title                : 'Login',
+    title                : 'Register',
     first_name           : 'First Name',
     last_name            : 'Last Name',
     phone                : 'Mobile number',
