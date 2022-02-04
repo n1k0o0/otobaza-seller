@@ -31,6 +31,9 @@ const mutations = {
     state.name = name
   },
   SET_USER(state, payload) {
+    if (!payload.social_links) {
+      payload.social_links = [{ name: '', value: '' }]
+    }
     state.detail = payload
   }
 }
