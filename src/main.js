@@ -17,6 +17,14 @@ import '@/permission' // permission control
 Vue.use(ElementUI, { locale })
 
 Vue.config.productionTip = false
+import * as VueGoogleMaps from 'vue2-google-maps'
+
+Vue.use(VueGoogleMaps, {
+  load: {
+    key: 'AIzaSyAlXPLkziiRHXj9NrexKEbtW9JmGzxTZ0o',
+    libraries: 'places',
+  }
+})
 
 new Vue({
   el: '#app',

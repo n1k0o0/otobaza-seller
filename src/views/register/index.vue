@@ -5,7 +5,7 @@
         <h3 class="title">{{ $t('register.title') }}</h3>
       </div>
       <div class="register-container-form">
-        <lang-select class="lang hover-effect" />
+        <lang-select class="lang hover-effect"/>
         <el-form
           ref="registerForm"
           :loading="loading"
@@ -16,11 +16,11 @@
           label-position="left"
         >
           <el-form-item prop="first_name" :label="$t('register.first_name')">
-            <el-input v-model="registerForm.first_name" />
+            <el-input v-model="registerForm.first_name"/>
           </el-form-item>
 
           <el-form-item prop="last_name" :label="$t('register.last_name')">
-            <el-input v-model="registerForm.last_name" />
+            <el-input v-model="registerForm.last_name"/>
           </el-form-item>
 
           <el-form-item prop="phone" :label="$t('register.phone')">
@@ -29,11 +29,12 @@
               v-model="registerForm.phone"
               name="phone"
               type="text"
+              placeholder="+994551002030"
             />
           </el-form-item>
 
           <el-form-item prop="password" :label="$t('register.password')">
-            <el-input v-model="registerForm.password" :type="passwordType" />
+            <el-input v-model="registerForm.password" :type="passwordType"/>
             <span class="show-pwd" @click="showPwd">
               <svg-icon
                 :icon-class="passwordType === 'password' ? 'eye' : 'eye-open'"
@@ -42,21 +43,7 @@
           </el-form-item>
 
           <el-form-item prop="email" :label="$t('register.email')">
-            <el-input v-model="registerForm.email" type="email" />
-          </el-form-item>
-
-          <el-form-item prop="gender" :label="$t('register.gender')">
-            <el-select
-              v-model="registerForm.gender"
-              :placeholder="$t('register.select_gender')"
-            >
-              <el-option
-                v-for="item in genders"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value"
-              />
-            </el-select>
+            <el-input v-model="registerForm.email" type="email"/>
           </el-form-item>
 
           <el-form-item prop="currency" :label="$t('register.currency')">
@@ -103,27 +90,32 @@
           </el-form-item>
 
           <el-form-item prop="store_name" :label="$t('register.store_name')">
-            <el-input v-model="registerForm.store_name" />
+            <el-input v-model="registerForm.store_name"/>
           </el-form-item>
 
           <el-form-item prop="store_about" :label="$t('register.store_about')">
-            <el-input v-model="registerForm.store_about" />
+            <el-input v-model="registerForm.store_about"/>
           </el-form-item>
 
-          <el-form-item prop="address" :label="$t('register.address')">
-            <vue-google-autocomplete
-              id="map"
-              :country="['az', 'ge']"
-              classname="el-input__inner"
-              placeholder=""
-              enable-geolocation
-              @placechanged="getAddressData"
-              @inputChange="addressManuallyChanged"
-            />
+          <el-form-item prop="address" :label="$t('register.address')" class='address_map'>
+            <!--            <vue-google-autocomplete-->
+            <!--              v-model="registerForm.address"-->
+            <!--              id="map"-->
+            <!--              :country="['az', 'ge']"-->
+            <!--              classname="el-input__inner"-->
+            <!--              placeholder=""-->
+            <!--              enable-geolocation-->
+            <!--              @placechanged="getAddressData"-->
+            <!--              @inputChange="addressManuallyChanged"-->
+            <!--            />-->
+            <vue-google-select
+              @mapAddressData="setMapData"
+            >
+            </vue-google-select>
           </el-form-item>
 
           <el-form-item prop="agreement" class="form_agreement">
-            <el-checkbox id="agreement" v-model="registerForm.agreement" />
+            <el-checkbox id="agreement" v-model="registerForm.agreement"/>
             <a href="https://otobaza.com/terms.html" target="_blank" slot="label">{{ $t('register.agreement') }}</a>
           </el-form-item>
 
@@ -142,12 +134,13 @@
               type="secondary"
               style="width:100%;margin-bottom:30px;"
               @click.native.prevent="handleLogin"
-            >{{ $t('login.title') }}</el-button>
+            >{{ $t('login.title') }}
+            </el-button>
           </div>
         </el-form>
         <el-dialog :visible.sync="otpShow" width="30%">
           <div class="mb-1">{{ $t('otp.title') }}</div>
-          <el-input v-model="otp" type="text" class="otp_input" />
+          <el-input v-model="otp" type="text" class="otp_input"/>
           <div v-if="!showTimer" class="no-receive">
             {{ $t('verificationSmsNotReceived') }}?
             <a href="#" @click.prevent="resendOtp">{{ $t('resend_otp') }}.</a>
@@ -169,7 +162,8 @@
               :disabled="isOtpDisabled"
               type="primary"
               @click.prevent="submitOtp"
-            >{{ $t('confirm') }}</el-button>
+            >{{ $t('confirm') }}
+            </el-button>
           </template>
         </el-dialog>
       </div>
@@ -182,23 +176,25 @@ import CountDownTimer from '@/components/CountDownTimer'
 import LangSelect from '@/components/LangSelect/index'
 import validators from '@/utils/validators'
 import VueGoogleAutocomplete from 'vue-google-autocomplete'
+import VueGoogleSelect from '@/components/MapSelect'
 import { mapActions } from 'vuex'
+
 export default {
   name: 'Register',
-  components: { CountDownTimer, LangSelect, VueGoogleAutocomplete },
-  data() {
+  components: { CountDownTimer, LangSelect, VueGoogleAutocomplete, VueGoogleSelect },
+  data () {
     const {
-            first_name,
-            last_name,
-            phone,
-            gender,
-            country,
-            city,
-            password,
-            store_name,
-            address,
-            agreement
-          } = validators()
+      first_name,
+      last_name,
+      phone,
+      gender,
+      country,
+      city,
+      password,
+      store_name,
+      address,
+      agreement
+    } = validators()
     return {
       genders: [
         {
@@ -239,24 +235,24 @@ export default {
         first_name: [
           { required: true, trigger: 'change', validator: first_name }
         ],
-        last_name : [
+        last_name: [
           { required: true, trigger: 'change', validator: last_name }
         ],
-        phone     : [{ required: true, trigger: 'change', validator: phone }],
-        gender    : [{ required: true, trigger: 'change', validator: gender }],
-        country   : [{ required: true, trigger: 'change', validator: country }],
-        city      : [{ required: true, trigger: 'change', validator: city }],
-        password  : [{ required: true, trigger: 'change', validator: password }],
-        address   : [{ required: true, trigger: 'change', validator: address }],
-        agreement : [{ required: true, trigger: 'change', validator: agreement }],
+        phone: [{ required: true, trigger: 'change', validator: phone }],
+        gender: [{ required: true, trigger: 'change', validator: gender }],
+        country: [{ required: true, trigger: 'change', validator: country }],
+        city: [{ required: true, trigger: 'change', validator: city }],
+        password: [{ required: true, trigger: 'change', validator: password }],
+        address: [{ required: true, trigger: 'change', validator: address }],
+        agreement: [{ required: true, trigger: 'change', validator: agreement }],
         store_name: [
           { required: true, trigger: 'change', validator: store_name }
         ],
-        email     : [
+        email: [
           {
             required: true,
-            trigger : 'change',
-            message : this.$t('validator.email.required')
+            trigger: 'change',
+            message: this.$t('validator.email.required')
           },
           {
             type: 'email',
@@ -271,7 +267,7 @@ export default {
     }
   },
   computed: {
-    countries() {
+    countries () {
       return this.$store.getters['app/countries'].map(item => {
         return {
           value: item.id,
@@ -279,10 +275,10 @@ export default {
         }
       })
     },
-    isOtpDisabled() {
+    isOtpDisabled () {
       return this.otp.length > 4 || this.otp.length < 4 || !Number(this.otp)
     },
-    cities() {
+    cities () {
       const country = this.$store.getters['app/countries'].find(
         item => item.id === this.registerForm.country
       )
@@ -297,7 +293,7 @@ export default {
         })
         : []
     },
-    currencies() {
+    currencies () {
       return this.$store.getters['app/currencies'].map(item => {
         return {
           value: item.id,
@@ -308,13 +304,13 @@ export default {
   },
   watch: {
     $route: {
-      handler: function(route) {
+      handler: function (route) {
         this.redirect = route.query && route.query.redirect
       },
       immediate: true
     }
   },
-  async beforeMount() {
+  async beforeMount () {
     await this.GET_CURRENCIES()
     await this.GET_SETTINGS()
   },
@@ -325,7 +321,7 @@ export default {
       SEND_OTP: 'user/SEND_OTP',
       RESEND_OTP: 'user/RESEND_OTP'
     }),
-    resendOtp() {
+    resendOtp () {
       this.RESEND_OTP({
         token: this.response?.token
       })
@@ -346,20 +342,26 @@ export default {
           })
         })
     },
-    addressManuallyChanged({ newVal }) {
+    addressManuallyChanged ({ newVal }) {
       if (!newVal) {
         this.registerForm.address = ''
         this.registerForm.latitude = ''
         this.registerForm.longitude = ''
       }
     },
-    getAddressData(addressData) {
-      const { route, latitude, longitude } = addressData
-      this.registerForm.address = route
-      this.registerForm.latitude = latitude
-      this.registerForm.longitude = longitude
+    getAddressData (addressData) {
+      console.log(addressData)
+      const { route, lat, lng } = addressData.newLatLng
+      this.registerForm.address = addressData.address
+      this.registerForm.latitude = lat
+      this.registerForm.longitude = lng
     },
-    async submitOtp() {
+    setMapData (data) {
+      this.registerForm.latitude = data.lat
+      this.registerForm.longitude = data.lng
+      this.registerForm.address = data.address
+    },
+    async submitOtp () {
       const token = this.response.token
       const code = +this.otp
       await this.SEND_OTP({
@@ -381,10 +383,10 @@ export default {
           })
       })
     },
-    onCountryChange() {
+    onCountryChange () {
       this.registerForm.city = ''
     },
-    showPwd() {
+    showPwd () {
       if (this.passwordType === 'password') {
         this.passwordType = ''
       } else {
@@ -394,12 +396,12 @@ export default {
         this.$refs.password.focus()
       })
     },
-    handleLogin() {
+    handleLogin () {
       this.$router.push({
         path: '/login'
       })
     },
-    handleRegister() {
+    handleRegister () {
       this.$refs.registerForm.validate(valid => {
         if (valid) {
           this.loading = true
@@ -436,11 +438,13 @@ $cursor: #fff;
     color: $cursor;
   }
 }
+
 .register-container-wrapper {
   min-height: 100%;
   width: 100%;
   background: #2d3a4b;
 }
+
 #map {
   border: 1px solid rgba(255, 255, 255, 0.1) !important;
   background: rgba(0, 0, 0, 0.1) !important;
@@ -449,18 +453,21 @@ $cursor: #fff;
   line-height: 47px;
   color: #fff;
 }
+
 /* reset element-ui css */
 .register-container {
   position: relative;
   padding: 60px 0 35px;
   max-width: 800px;
   margin: 0 auto;
+
   .lang {
     position: absolute;
     right: 16px;
     top: 10px;
     color: #fff;
   }
+
   .register-form {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -468,9 +475,11 @@ $cursor: #fff;
     grid-gap: 16px;
     grid-template-areas: '. .' '. .' '. .' '. .' '. .' '. .' '. .' 'buttons buttons';
   }
+
   .register-form-buttons {
     grid-area: buttons;
   }
+
   &-form {
     max-width: 800px;
     width: 100%;
@@ -545,13 +554,29 @@ $cursor: #fff;
       }
     }
   }
+
   .el-textarea {
     height: 120px !important;
     padding: 15px;
+
     textarea {
       height: 100% !important;
       resize: none;
       padding: 0;
+    }
+  }
+
+  .address_map {
+    grid-column: 1/-1;
+    display: grid;
+
+    .map-container {
+      height: 200px;
+    }
+
+    input.el-input {
+      color: $light_gray;
+      padding: 12px 15px 12px 15px;
     }
   }
 }
@@ -614,6 +639,7 @@ $light_gray: #eee;
     text-align: center;
     height: 18px;
     margin-bottom: 30px;
+
     &:after {
       content: '';
       position: absolute;
@@ -623,6 +649,7 @@ $light_gray: #eee;
       background: #fff;
       height: 1px;
     }
+
     span {
       position: absolute;
       left: 50%;
@@ -634,6 +661,7 @@ $light_gray: #eee;
     }
   }
 }
+
 @media screen and (max-width: 768px) {
   .register-container {
     padding: 60px 15px 60px;
@@ -658,10 +686,8 @@ $light_gray: #eee;
   }
 }
 
-//.el-form-item{
-//  z-index: 3;
-//  &__content{
-//    z-index:-1!important;
-//  }
-//}
+
+.form_agreement {
+  grid-column: 1/-1;
+}
 </style>
