@@ -20,8 +20,8 @@ const getters = {
 const mutations = {
   SET_EXCEL_DATA(state, payload) {
     state.excel_parts = payload.map(item => {
-      item.editable     = false
-      item.manufacturer = item.manufacturer.toString().toUpperCase()
+      item.editable = false
+      item.manufacturer = item.manufacturer?.toString().toUpperCase()
       return item
     })
   },
@@ -74,9 +74,10 @@ const actions = {
       })
       commit('SET_EXCEL_DATA', data)
     } catch (e) {
+      console.log(e)
       Message({
-        message : e?.response?.data?.message || 'Error',
-        type    : 'error',
+        message: e?.response?.data?.message || 'Error',
+        type: 'error',
         duration: 5 * 1000
       })
     }
