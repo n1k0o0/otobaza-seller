@@ -402,11 +402,11 @@ export default {
 }
 
 .el-table .danger {
-  background: #fde6e6;
+  background: #cf9696;
 }
 
 .el-table .success {
-  background: #f0f9eb;
+  background: #88b96c;
 }
 
 .el-row {
