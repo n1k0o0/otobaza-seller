@@ -23,7 +23,7 @@
           prop="order_number"
           :label="$t('orders.order_number')"
         />
-        <el-table-column prop="customer" :label="$t('orders.customer')" />
+        <el-table-column prop="customer.name" :label="$t('orders.customer')"/>
         <el-table-column prop="product" :label="$t('orders.product')" />
         <el-table-column prop="price" :label="$t('orders.price')" />
         <el-table-column prop="created_at" :label="$t('orders.created_at')" />

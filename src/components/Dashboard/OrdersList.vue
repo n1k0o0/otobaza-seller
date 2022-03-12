@@ -7,7 +7,7 @@
     </el-table-column>
     <el-table-column :label="$t('dashboard.customer')" min-width="195">
       <template slot-scope="scope">
-        {{ scope.row.customer }}
+        {{ scope.row.customer.name }}
       </template>
     </el-table-column>
     <el-table-column :label="$t('dashboard.product')" min-width="195">
