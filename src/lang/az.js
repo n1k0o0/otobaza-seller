@@ -204,7 +204,7 @@ export default {
     },
     password: {
       min: 'Minimum 8 simvol daxil edin!',
-      not_equal: 'Sifrə eyni deyil!'
+      not_equal: 'Sifarişlər eyni deyil!'
     },
     email: {
       required: 'Email daxil edin!',

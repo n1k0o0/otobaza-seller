@@ -204,7 +204,7 @@ export default {
     },
     password: {
       min: 'Enter minimum 8 characters!',
-      not_equal: 'Password not equal!'
+      not_equal: 'Passwords do not match!'
     },
     email: {
       required: 'Enter email!',

@@ -33,6 +33,10 @@
             />
           </el-form-item>
 
+          <el-form-item prop="email" :label="$t('register.email')">
+            <el-input v-model="registerForm.email" type="email"/>
+          </el-form-item>
+
           <el-form-item prop="password" :label="$t('register.password')">
             <el-input v-model="registerForm.password" :type="passwordType"/>
             <span class="show-pwd" @click="showPwd">
@@ -42,8 +46,13 @@
             </span>
           </el-form-item>
 
-          <el-form-item prop="email" :label="$t('register.email')">
-            <el-input v-model="registerForm.email" type="email"/>
+          <el-form-item prop="password_confirmation" :label="$t('register.password_confirmation')">
+            <el-input v-model="registerForm.password_confirmation" :type="passwordType"/>
+            <span class="show-pwd" @click="showPwd">
+              <svg-icon
+                :icon-class="passwordType === 'password' ? 'eye' : 'eye-open'"
+              />
+            </span>
           </el-form-item>
 
           <el-form-item prop="currency" :label="$t('register.currency')">
@@ -93,7 +102,7 @@
             <el-input v-model="registerForm.store_name"/>
           </el-form-item>
 
-          <el-form-item prop="store_about" :label="$t('register.store_about')">
+          <el-form-item prop="store_about" :label="$t('register.store_about')" class="grid-col-full">
             <el-input v-model="registerForm.store_about"/>
           </el-form-item>
 
@@ -178,11 +187,19 @@ import validators from '@/utils/validators'
 import VueGoogleAutocomplete from 'vue-google-autocomplete'
 import VueGoogleSelect from '@/components/MapSelect'
 import { mapActions } from 'vuex'
+import i18n from '@/lang'
 
 export default {
   name: 'Register',
   components: { CountDownTimer, LangSelect, VueGoogleAutocomplete, VueGoogleSelect },
   data () {
+    const confirmPassword = (rule, value, callback) => {
+      if (value !== this.registerForm.password) {
+        callback(new Error(i18n.t('validator.password.not_equal')))
+      } else {
+        callback()
+      }
+    }
     const {
       first_name,
       last_name,
@@ -225,6 +242,7 @@ export default {
         email: '',
         address: '',
         password: '',
+        password_confirmation: '',
         store_name: '',
         store_about: '',
         latitude: '',
@@ -243,6 +261,7 @@ export default {
         country: [{ required: true, trigger: 'change', validator: country }],
         city: [{ required: true, trigger: 'change', validator: city }],
         password: [{ required: true, trigger: 'change', validator: password }],
+        password_confirmation: [{ required: true, trigger: 'change', validator: confirmPassword }],
         address: [{ required: true, trigger: 'change', validator: address }],
         agreement: [{ required: true, trigger: 'change', validator: agreement }],
         store_name: [
@@ -473,7 +492,7 @@ $cursor: #fff;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr;
     grid-gap: 16px;
-    grid-template-areas: '. .' '. .' '. .' '. .' '. .' '. .' '. .' 'buttons buttons';
+    grid-template-areas: '. .' '. .' '. .' '. .' '. .' '. .' '. .' '. .' 'buttons buttons';
   }
 
   .register-form-buttons {
@@ -493,6 +512,19 @@ $cursor: #fff;
   .el-form-item {
     &__label {
       color: #fff;
+    }
+
+    &:not(.form_agreement) {
+      position: relative;
+
+      .el-form-item__label {
+        color: #fff;
+        position: absolute;
+        top: -20px;
+        left: 15px;
+        z-index: 9;
+        background-color: transparent;
+      }
     }
   }
 

@@ -80,6 +80,7 @@ export default {
       })
     },
     addressManuallyChanged () {
+      this.markers = {}
       this.$emit('mapAddressData', {
         lat: '',
         lng: '',

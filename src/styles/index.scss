@@ -152,6 +152,11 @@ div:focus {
 .d-flex {
   display: flex;
 }
+
 .align-items-center {
   align-items: center;
+}
+
+.grid-col-full {
+  grid-column: 1/-1
 }
