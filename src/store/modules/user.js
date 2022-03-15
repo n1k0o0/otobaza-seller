@@ -158,9 +158,9 @@ const actions = {
   },
 
   // user logout
-  logout({ commit, state }) {
+  logout ({ commit }) {
     return new Promise((resolve, reject) => {
-      logout(state.token)
+      logout()
         .then(() => {
           removeToken() // must remove  token  first
           resetRouter()
