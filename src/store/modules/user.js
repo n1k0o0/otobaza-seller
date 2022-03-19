@@ -30,7 +30,7 @@ const mutations = {
   SET_NAME: (state, name) => {
     state.name = name
   },
-  SET_USER(state, payload) {
+  SET_USER (state, payload) {
     if (!payload.social_links) {
       payload.social_links = [{ name: '', value: '' }]
     }
@@ -40,19 +40,19 @@ const mutations = {
 
 const actions = {
   // user login
-  login({ commit }, userInfo) {
+  login ({ commit }, userInfo) {
     const { phone, password } = userInfo
     return new Promise((resolve, reject) => {
       login({ phone, password })
         .then(response => {
           const { data } = response
-          if (data.data.group.id === 2) {
+          if (data?.data?.group.id === 2) {
             commit('SET_TOKEN', data.data.token)
             setToken(data.data.token)
             resolve()
           } else {
             Message({
-              message: i18n.t('error'),
+              message: data?.message || i18n.t('error'),
               type: 'error',
               duration: 5 * 1000
             })
@@ -73,7 +73,7 @@ const actions = {
     })
   },
 
-  async SIGN_UP({ commit }, user) {
+  async SIGN_UP ({ commit }, user) {
     try {
       return await request({
         url: '/api/user/register',
@@ -93,7 +93,7 @@ const actions = {
     }
   },
 
-  async SEND_OTP(state, { token, code }) {
+  async SEND_OTP (state, { token, code }) {
     try {
       return await request({
         url: '/api/user/phone/edit',
@@ -115,7 +115,7 @@ const actions = {
     }
   },
 
-  async RESEND_OTP(state, { token }) {
+  async RESEND_OTP (state, { token }) {
     try {
       return await request({
         url: '/api/user/phone/resend',
@@ -136,7 +136,7 @@ const actions = {
   },
 
   // get user info
-  getInfo({ commit, state }) {
+  getInfo ({ commit, state }) {
     return new Promise((resolve, reject) => {
       getInfo(state.token)
         .then(response => {
@@ -171,7 +171,7 @@ const actions = {
   },
 
   // remove token
-  resetToken({ commit }) {
+  resetToken ({ commit }) {
     return new Promise(resolve => {
       removeToken() // must remove  token  first
       commit('RESET_STATE')
@@ -179,7 +179,7 @@ const actions = {
     })
   },
 
-  async UPDATE_PROFILE(state, profile) {
+  async UPDATE_PROFILE (state, profile) {
     try {
       return await request({
         url: '/api/user/edit',
@@ -195,7 +195,7 @@ const actions = {
     }
   },
 
-  async CHANGE_EMAIL(state, new_email) {
+  async CHANGE_EMAIL (state, new_email) {
     try {
       const res = await request({
         url: '/api/user/email/edit',
@@ -221,7 +221,7 @@ const actions = {
     }
   },
 
-  async CHANGE_PASSWORD(state, password) {
+  async CHANGE_PASSWORD (state, password) {
     try {
       const res = await request({
         url: '/api/user/password/edit',
@@ -245,7 +245,7 @@ const actions = {
     }
   },
 
-  async CHANGE_PHONE(state, new_phone) {
+  async CHANGE_PHONE (state, new_phone) {
     try {
       const res = await request({
         url: '/api/user/phone/edit',
