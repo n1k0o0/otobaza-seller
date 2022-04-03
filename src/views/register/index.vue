@@ -15,15 +15,17 @@
           auto-complete="on"
           label-position="left"
         >
-          <el-form-item prop="first_name" :label="$t('register.first_name')">
+          <el-form-item prop="first_name" :label="$t('register.first_name')"
+                        :class="{ 'filled_label': registerForm.first_name}">
             <el-input v-model="registerForm.first_name"/>
           </el-form-item>
 
-          <el-form-item prop="last_name" :label="$t('register.last_name')">
+          <el-form-item prop="last_name" :label="$t('register.last_name')"
+                        :class="{ 'filled_label': registerForm.last_name}">
             <el-input v-model="registerForm.last_name"/>
           </el-form-item>
 
-          <el-form-item prop="phone" :label="$t('register.phone')">
+          <el-form-item prop="phone" :label="$t('register.phone')" :class="{ 'filled_label': registerForm.phone}">
             <el-input
               ref="phone"
               v-model="registerForm.phone"
@@ -33,12 +35,13 @@
             />
           </el-form-item>
 
-          <el-form-item prop="email" :label="$t('register.email')">
+          <el-form-item prop="email" :label="$t('register.email')" :class="{ 'filled_label': registerForm.email}">
             <el-input v-model="registerForm.email" type="email"/>
           </el-form-item>
 
-          <el-form-item prop="password" :label="$t('register.password')">
-            <el-input v-model="registerForm.password" :type="passwordType"/>
+          <el-form-item prop="password" :label="$t('register.password')"
+                        :class="{ 'filled_label': registerForm.password}">
+            <el-input auto-complete="new-password" v-model="registerForm.password" :type="passwordType"/>
             <span class="show-pwd" @click="showPwd">
               <svg-icon
                 :icon-class="passwordType === 'password' ? 'eye' : 'eye-open'"
@@ -46,7 +49,8 @@
             </span>
           </el-form-item>
 
-          <el-form-item prop="password_confirmation" :label="$t('register.password_confirmation')">
+          <el-form-item prop="password_confirmation" :label="$t('register.password_confirmation')"
+                        :class="{ 'filled_label': registerForm.password_confirmation}">
             <el-input v-model="registerForm.password_confirmation" :type="passwordType"/>
             <span class="show-pwd" @click="showPwd">
               <svg-icon
@@ -55,7 +59,8 @@
             </span>
           </el-form-item>
 
-          <el-form-item prop="currency" :label="$t('register.currency')">
+          <el-form-item prop="currency" :label="$t('register.currency')"
+                        :class="{ 'filled_label': registerForm.price_types.id}">
             <el-select
               v-model="registerForm.price_types.id"
               :placeholder="$t('register.select_currency')"
@@ -69,7 +74,7 @@
             </el-select>
           </el-form-item>
 
-          <el-form-item prop="country" :label="$t('register.country')">
+          <el-form-item prop="country" :label="$t('register.country')" :class="{ 'filled_label': registerForm.country}">
             <el-select
               v-model="registerForm.country"
               :placeholder="$t('register.select_country')"
@@ -84,7 +89,7 @@
             </el-select>
           </el-form-item>
 
-          <el-form-item prop="city" :label="$t('register.city')">
+          <el-form-item prop="city" :label="$t('register.city')" :class="{ 'filled_label': registerForm.city}">
             <el-select
               v-model="registerForm.city"
               :placeholder="$t('register.select_city')"
@@ -98,15 +103,18 @@
             </el-select>
           </el-form-item>
 
-          <el-form-item prop="store_name" :label="$t('register.store_name')">
+          <el-form-item prop="store_name" :label="$t('register.store_name')"
+                        :class="{ 'filled_label': registerForm.store_name}">
             <el-input v-model="registerForm.store_name"/>
           </el-form-item>
 
-          <el-form-item prop="store_about" :label="$t('register.store_about')" class="grid-col-full">
+          <el-form-item prop="store_about" :label="$t('register.store_about')" class="grid-col-full"
+                        :class="{ 'filled_label': registerForm.store_about}">
             <el-input v-model="registerForm.store_about"/>
           </el-form-item>
 
-          <el-form-item prop="address" :label="$t('register.address')" class='address_map'>
+          <el-form-item prop="address" :label="$t('register.address')" class='address_map'
+                        :class="{ 'filled_label': registerForm.currentAddress}">
             <!--            <vue-google-autocomplete-->
             <!--              v-model="registerForm.address"-->
             <!--              id="map"-->
@@ -117,6 +125,9 @@
             <!--              @placechanged="getAddressData"-->
             <!--              @inputChange="addressManuallyChanged"-->
             <!--            />-->
+            <template #label>
+              {{ $t('register.address') }}
+            </template>
             <vue-google-select
               @mapAddressData="setMapData"
             >
@@ -247,6 +258,7 @@ export default {
         store_about: '',
         latitude: '',
         longitude: '',
+        currentAddress: '',
         agreement: ''
       },
       registerRules: {
@@ -379,6 +391,7 @@ export default {
       this.registerForm.latitude = data.lat
       this.registerForm.longitude = data.lng
       this.registerForm.address = data.address
+      this.registerForm.currentAddress = data.currentAddress
     },
     async submitOtp () {
       const token = this.response.token
@@ -491,7 +504,7 @@ $cursor: #fff;
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr;
-    grid-gap: 16px;
+    grid-gap: 35px 16px;
     grid-template-areas: '. .' '. .' '. .' '. .' '. .' '. .' '. .' '. .' 'buttons buttons';
   }
 
@@ -516,14 +529,97 @@ $cursor: #fff;
 
     &:not(.form_agreement) {
       position: relative;
+      display: flex;
+      flex-flow: column-reverse;
+      margin-bottom: 0;
 
-      .el-form-item__label {
-        color: #fff;
+      label, input {
+        transition: all 0.2s;
+        touch-action: manipulation;
+      }
+
+      input {
+        border: 0;
+        border-bottom: 1px solid #ccc;
+        font-family: inherit;
+        -webkit-appearance: none;
+        border-radius: 0;
+        cursor: text;
+      }
+
+      input:focus {
+        outline: 0;
+        border-bottom: 1px solid #666;
+      }
+
+      &.address_map {
+        label {
+          text-transform: uppercase;
+          letter-spacing: 0.05em;
+          //transform: translate(10px, -483px) scale(1);
+        }
+      }
+
+      label {
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        //transform: translate(10px, -42px) scale(1);
         position: absolute;
-        top: -20px;
-        left: 15px;
-        z-index: 9;
-        background-color: transparent;
+        top: 0;
+        left: 10px;
+      }
+
+      /**
+      * Translate down and scale the label up to cover the placeholder,
+      * when following an input (with placeholder-shown support).
+      * Also make sure the label is only on one row, at max 2/3rds of the
+      * field—to make sure it scales properly and doesn't wrap.
+      */
+      input:placeholder-shown + label {
+        cursor: text;
+        max-width: 66.66%;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        transform-origin: left bottom;
+        transform: translate(0, 2.125rem) scale(1.5);
+      }
+
+      /**
+      * By default, the placeholder should be transparent. Also, it should
+      * inherit the transition.
+      */
+      ::-webkit-input-placeholder {
+        opacity: 0;
+        transition: inherit;
+      }
+
+      /**
+      * Show the placeholder when the input is focused.
+      */
+      input:focus::-webkit-input-placeholder {
+        opacity: 1;
+      }
+
+      /**
+      * When the element is focused, remove the label transform.
+      * Also, do this when the placeholder is _not_ shown, i.e. when
+      * there's something in the input at all.
+      */
+      input:not(:placeholder-shown) + label {
+        cursor: pointer;
+      }
+
+      &:focus-within {
+        &.address_map {
+          label {
+            transform: translateY(-20px) scale(1);
+          }
+        }
+
+        label {
+          transform: translateY(-20px) scale(1);
+        }
       }
     }
   }
@@ -609,6 +705,19 @@ $cursor: #fff;
     input.el-input {
       color: $light_gray;
       padding: 12px 15px 12px 15px;
+    }
+  }
+
+  .filled_label {
+    &.address_map {
+      label {
+        transform: translateY(-20px) scale(1) !important;
+      }
+    }
+
+    label {
+      transform: translateY(-20px) scale(1) !important;
+      cursor: pointer;
     }
   }
 }

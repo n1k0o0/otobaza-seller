@@ -77,6 +77,11 @@ export default {
           lat: position.coords.latitude,
           lng: position.coords.longitude,
         }
+        this.$emit('mapAddressData', {
+          ...this.center,
+          address: 'map'
+        })
+        this.markers = ({ position: this.center })
       })
     },
     addressManuallyChanged () {
@@ -84,7 +89,8 @@ export default {
       this.$emit('mapAddressData', {
         lat: '',
         lng: '',
-        address: ''
+        address: '',
+        currentAddress: this.$refs.gAutocomplete.$el.value
       })
     }
   },
