@@ -200,7 +200,11 @@ export default {
       required: 'Enter your last name!'
     },
     phone: {
-      required: 'Enter your phone number!'
+      required: 'Enter your phone number!',
+      min: 'Enter  9 characters!',
+    },
+    prefix: {
+      required: 'Enter your phone prefix!'
     },
     password: {
       min: 'Enter minimum 8 characters!',
@@ -210,7 +214,7 @@ export default {
       required: 'Enter email!',
       email: 'Enter correct email!'
     },
-    store_name  : {
+    store_name: {
       required: 'Enter store name'
     },
     manufacturer: {

@@ -200,7 +200,11 @@ export default {
       required: 'Soyadınızı daxil edin!'
     },
     phone: {
-      required: 'Mobil nömrənizi daxil edin!'
+      required: 'Mobil nömrənizi daxil edin!',
+      min: '9 simvol daxil edin!',
+    },
+    prefix: {
+      required: 'Prefix daxil edin!',
     },
     password: {
       min: 'Minimum 8 simvol daxil edin!',
@@ -210,7 +214,7 @@ export default {
       required: 'Email daxil edin!',
       email: 'Düzgün email daxil edin!'
     },
-    store_name  : {
+    store_name: {
       required: 'Mağaza adı daxil edin'
     },
     manufacturer: {

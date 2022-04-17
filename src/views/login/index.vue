@@ -12,26 +12,31 @@
         <h3 class="title">{{ $t('login.title') }}</h3>
       </div>
 
-      <lang-select class="lang hover-effect" />
+      <lang-select class="lang hover-effect"/>
 
       <el-form-item prop="phone">
-        <span class="svg-container">
-          <svg-icon icon-class="user" />
-        </span>
-        <el-input
-          ref="phone"
-          v-model="loginForm.phone"
-          :placeholder="$t('login.phone')"
-          name="phone"
-          type="text"
-          tabindex="1"
-          auto-complete="on"
-        />
+        <el-input placeholder="501000000" maxlength="9" minlength="9" v-model="loginForm.phone">
+          <template slot="prepend">
+            <vue-country-code
+              @onSelect="onSelectCountry"
+              :preferredCountries="['az', 'tr']">
+            </vue-country-code>
+          </template>
+        </el-input>
+        <!--        <el-input-->
+        <!--          ref="phone"-->
+        <!--          v-model="loginForm.phone"-->
+        <!--          :placeholder="$t('login.phone')"-->
+        <!--          name="phone"-->
+        <!--          type="text"-->
+        <!--          tabindex="1"-->
+        <!--          auto-complete="on"-->
+        <!--        />-->
       </el-form-item>
 
       <el-form-item prop="password">
         <span class="svg-container">
-          <svg-icon icon-class="password" />
+          <svg-icon icon-class="password"/>
         </span>
         <el-input
           :key="passwordType"
@@ -56,7 +61,8 @@
         type="primary"
         style="width:100%;margin-bottom:30px;"
         @click.native.prevent="handleLogin"
-      >{{ $t('login.title') }}</el-button>
+      >{{ $t('login.title') }}
+      </el-button>
       <div class="or">
         <span>{{ $t('or') }}</span>
       </div>
@@ -64,7 +70,8 @@
         type="secondary"
         style="width:100%;margin-bottom:30px;"
         @click.native.prevent="handleRegister"
-      >{{ $t('register.title') }}</el-button>
+      >{{ $t('register.title') }}
+      </el-button>
     </el-form>
   </div>
 </template>
@@ -72,18 +79,34 @@
 <script>
 import LangSelect from '@/components/LangSelect/index'
 import validators from '@/utils/validators'
+import VueCountryCode from 'vue-country-code'
+import i18n from '@/lang'
+
 export default {
   name: 'Login',
-  components: { LangSelect },
-  data() {
+  components: { LangSelect, VueCountryCode },
+  data () {
+    const validatePhone = (rule, value, callback) => {
+      if (value === '') {
+        callback(new Error(i18n.t('validator.phone.required')))
+      } else if (value.length < 8) {
+        callback(new Error(i18n.t('validator.phone.min')))
+      } else {
+        if (this.loginForm.prefix === '') {
+          callback(new Error(i18n.t('validator.prefix.required')))
+        }
+        callback()
+      }
+    }
     const { phone, password } = validators()
     return {
       loginForm: {
         phone: '',
-        password: ''
+        password: '',
+        prefix: ''
       },
       loginRules: {
-        phone: [{ required: true, trigger: 'blur', validator: phone }],
+        phone: [{ required: true, trigger: 'blur', validator: validatePhone }],
         password: [{ required: true, trigger: 'blur', validator: password }]
       },
       loading: false,
@@ -93,14 +116,14 @@ export default {
   },
   watch: {
     $route: {
-      handler: function(route) {
+      handler: function (route) {
         this.redirect = route.query && route.query.redirect
       },
       immediate: false
     }
   },
   methods: {
-    showPwd() {
+    showPwd () {
       if (this.passwordType === 'password') {
         this.passwordType = ''
       } else {
@@ -110,17 +133,20 @@ export default {
         this.$refs.password.focus()
       })
     },
-    handleRegister() {
+    handleRegister () {
       this.$router.push({
         path: '/register'
       })
     },
-    handleLogin() {
+    handleLogin () {
       this.$refs.loginForm.validate(valid => {
         if (valid) {
           this.loading = true
           this.$store
-            .dispatch('user/login', this.loginForm)
+            .dispatch('user/login', {
+              phone: '+' + this.loginForm.prefix + this.loginForm.phone,
+              password: this.loginForm.password
+            })
             .then(() => {
               this.$router.push({ path: '/dashboard' })
             })
@@ -131,7 +157,12 @@ export default {
           return false
         }
       })
-    }
+    },
+    onSelectCountry ({ name, iso2, dialCode }) {
+      console.log(name, iso2, dialCode)
+      console.log(4444, this.loginForm)
+      this.loginForm.prefix = dialCode
+    },
   }
 }
 </script>
@@ -155,8 +186,8 @@ $cursor: #fff;
     top: 10px;
     color: #fff;
   }
+
   .el-input {
-    display: inline-block;
     height: 47px;
     width: 85%;
 
@@ -175,6 +206,32 @@ $cursor: #fff;
         -webkit-text-fill-color: $cursor !important;
       }
     }
+
+    .el-input-group__prepend {
+      background-color: transparent;
+      border: none;
+      padding: 0;
+      border-radius: 5px;
+
+      .vue-country-select {
+        border: none;
+        height: 100%;
+
+        .dropdown {
+          border-radius: 5px;
+        }
+
+        .dropdown:hover, .dropdown.open {
+          background-color: #2d3a4b;
+        }
+
+        .dropdown-list {
+          border: none;
+          background-color: #2d3a4b;
+          z-index: 200;
+        }
+      }
+    }
   }
 
   .el-form-item {
@@ -182,6 +239,10 @@ $cursor: #fff;
     background: rgba(0, 0, 0, 0.1);
     border-radius: 5px;
     color: #454545;
+
+    &.is-error {
+      border-color: #F56C6C;
+    }
   }
 }
 </style>
@@ -253,6 +314,7 @@ $light_gray: #eee;
     text-align: center;
     height: 18px;
     margin-bottom: 30px;
+
     &:after {
       content: '';
       position: absolute;
@@ -262,6 +324,7 @@ $light_gray: #eee;
       background: #fff;
       height: 1px;
     }
+
     span {
       position: absolute;
       left: 50%;
