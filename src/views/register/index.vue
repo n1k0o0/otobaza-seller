@@ -1,11 +1,18 @@
 <template>
   <div class="register-container-wrapper">
     <div class="register-container">
+      <div class="auth_logo">
+        <img
+          class="pic-404__parent"
+          src="@/assets/img/logo.svg"
+          alt="404"
+        >
+      </div>
       <div class="title-container">
         <h3 class="title">{{ $t('register.title') }}</h3>
       </div>
       <div class="register-container-form">
-        <lang-select class="lang hover-effect" />
+        <lang-select class="lang hover-effect"/>
         <el-form
           ref="registerForm"
           :loading="loading"
@@ -455,12 +462,22 @@ $cursor: #fff;
   padding: 60px 0 35px;
   max-width: 800px;
   margin: 0 auto;
+
+  .auth_logo {
+    text-align: center;
+
+    img {
+      width: 200px;
+    }
+  }
+
   .lang {
     position: absolute;
     right: 16px;
     top: 10px;
     color: #fff;
   }
+
   .register-form {
     display: grid;
     grid-template-columns: 1fr 1fr;

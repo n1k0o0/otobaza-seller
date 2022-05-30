@@ -8,6 +8,14 @@
       auto-complete="on"
       label-position="left"
     >
+      <div class="auth_logo">
+        <img
+          class="pic-404__parent"
+          src="@/assets/img/logo.svg"
+          alt="404"
+        >
+      </div>
+
       <div class="title-container">
         <h3 class="title">{{ $t('login.title') }}</h3>
       </div>
@@ -180,6 +188,14 @@ $cursor: #fff;
 
 /* reset element-ui css */
 .login-container {
+  .auth_logo {
+    text-align: center;
+
+    img {
+      width: 200px;
+    }
+  }
+
   .lang {
     position: absolute;
     right: 16px;
