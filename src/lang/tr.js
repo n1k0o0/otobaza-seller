@@ -199,7 +199,11 @@ export default {
       required: 'Soyadınızı giriniz!'
     },
     phone: {
-      required: 'Telefon numaranızı girin!'
+      required: 'Telefon numaranızı girin!',
+      min: '9 karakter girin!',
+    },
+    prefix: {
+      required: 'Telefon  önekinizi  girin!'
     },
     password: {
       min: 'En az 8 karakter girin!',
@@ -209,7 +213,7 @@ export default {
       required: 'E-posta girin!',
       email: 'Doğru e-postayı girin!'
     },
-    store_name  : {
+    store_name: {
       required: 'Mağaza adını girin'
     },
     manufacturer: {

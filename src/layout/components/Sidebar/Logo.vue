@@ -7,10 +7,10 @@
         class="sidebar-logo-link"
         to="/"
       >
-        <img v-if="logo" :src="logo_small" class="sidebar-logo">
+        <img v-if="logo" :src="logo_small" class="sidebar-logo" alt="sidebar-logo">
       </router-link>
       <router-link v-else key="expand" class="sidebar-logo-link" to="/">
-        <img v-if="logo" :src="logo" class="sidebar-logo">
+        <img v-if="logo" :src="logo" class="sidebar-logo" alt="sidebar">
       </router-link>
     </transition>
   </div>
@@ -49,7 +49,7 @@ export default {
   width: 100%;
   height: 50px;
   line-height: 50px;
-  background: #2b2f3a;
+  background: #2b8ef0;
   text-align: center;
   overflow: hidden;
 
@@ -77,7 +77,7 @@ export default {
 
   &.collapse {
     .sidebar-logo {
-      margin-right: 0px;
+      margin-right: 0;
     }
   }
 }

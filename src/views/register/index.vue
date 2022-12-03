@@ -1,6 +1,13 @@
 <template>
   <div class="register-container-wrapper">
     <div class="register-container">
+      <div class="auth_logo">
+        <img
+          class="pic-404__parent"
+          src="@/assets/img/logo.svg"
+          alt="404"
+        >
+      </div>
       <div class="title-container">
         <h3 class="title">{{ $t('register.title') }}</h3>
       </div>
@@ -32,6 +39,7 @@
               name="phone"
               type="text"
               placeholder="+994551002030"
+              v-mask="['(+###) ## ###-##-##']"
             />
           </el-form-item>
 
@@ -199,10 +207,12 @@ import VueGoogleAutocomplete from 'vue-google-autocomplete'
 import VueGoogleSelect from '@/components/MapSelect'
 import { mapActions } from 'vuex'
 import i18n from '@/lang'
+import { mask } from 'vue-the-mask'
 
 export default {
   name: 'Register',
   components: { CountDownTimer, LangSelect, VueGoogleAutocomplete, VueGoogleSelect },
+  directives: { mask },
   data () {
     const confirmPassword = (rule, value, callback) => {
       if (value !== this.registerForm.password) {
@@ -403,7 +413,7 @@ export default {
         this.loading = true
         this.$store
           .dispatch('user/login', {
-            phone: this.registerForm.phone,
+            phone: '+' + this.registerForm.phone.replace(/\D/g, ''),
             password: this.registerForm.password
           })
           .then(() => {
@@ -437,6 +447,7 @@ export default {
       this.$refs.registerForm.validate(valid => {
         if (valid) {
           this.loading = true
+          this.registerForm.phone = this.registerForm.phone.replace(/\D/g, '')
           this.$store
             .dispatch('user/SIGN_UP', this.registerForm)
             .then(response => {
@@ -474,7 +485,7 @@ $cursor: #fff;
 .register-container-wrapper {
   min-height: 100%;
   width: 100%;
-  background: #2d3a4b;
+  background: #4da6ff;
 }
 
 #map {
@@ -492,6 +503,14 @@ $cursor: #fff;
   padding: 60px 0 35px;
   max-width: 800px;
   margin: 0 auto;
+
+  .auth_logo {
+    text-align: center;
+
+    img {
+      width: 200px;
+    }
+  }
 
   .lang {
     position: absolute;
@@ -636,7 +655,7 @@ $cursor: #fff;
         transition: color .3s;
 
         &:hover {
-          color: #409EFF;
+          color: #124d8a;
         }
       }
     }
@@ -720,17 +739,25 @@ $cursor: #fff;
       cursor: pointer;
     }
   }
+
+  .el-form-item__error {
+    color: #ff0000;
+  }
+
+  .el-button--primary {
+    background-color: #2b8cef;
+  }
 }
+
 </style>
 <style lang="scss" scoped>
-$bg: #2d3a4b;
+$bg: #4da6ff;
 $dark_gray: #889aa4;
 $light_gray: #eee;
 
 .register-container {
   min-height: 100%;
   width: 100%;
-  background-color: $bg;
   overflow: hidden;
 
   .tips {

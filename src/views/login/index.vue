@@ -8,30 +8,48 @@
       auto-complete="on"
       label-position="left"
     >
+      <div class="auth_logo">
+        <img
+          class="pic-404__parent"
+          src="@/assets/img/logo.svg"
+          alt="404"
+        >
+      </div>
+
       <div class="title-container">
         <h3 class="title">{{ $t('login.title') }}</h3>
       </div>
 
-      <lang-select class="lang hover-effect" />
+      <lang-select class="lang hover-effect"/>
 
       <el-form-item prop="phone">
-        <span class="svg-container">
-          <svg-icon icon-class="user" />
-        </span>
-        <el-input
-          ref="phone"
-          v-model="loginForm.phone"
-          :placeholder="$t('login.phone')"
-          name="phone"
-          type="text"
-          tabindex="1"
-          auto-complete="on"
-        />
+        <el-input placeholder="501000000"
+                  maxlength="12"
+                  minlength="12"
+                  v-model="loginForm.phone"
+                  v-mask="['## ###-##-##']"
+        >
+          <template slot="prepend">
+            <vue-country-code
+              @onSelect="onSelectCountry"
+              :preferredCountries="['az', 'tr']">
+            </vue-country-code>
+          </template>
+        </el-input>
+        <!--        <el-input-->
+        <!--          ref="phone"-->
+        <!--          v-model="loginForm.phone"-->
+        <!--          :placeholder="$t('login.phone')"-->
+        <!--          name="phone"-->
+        <!--          type="text"-->
+        <!--          tabindex="1"-->
+        <!--          auto-complete="on"-->
+        <!--        />-->
       </el-form-item>
 
       <el-form-item prop="password">
         <span class="svg-container">
-          <svg-icon icon-class="password" />
+          <svg-icon icon-class="password"/>
         </span>
         <el-input
           :key="passwordType"
@@ -56,7 +74,8 @@
         type="primary"
         style="width:100%;margin-bottom:30px;"
         @click.native.prevent="handleLogin"
-      >{{ $t('login.title') }}</el-button>
+      >{{ $t('login.title') }}
+      </el-button>
       <div class="or">
         <span>{{ $t('or') }}</span>
       </div>
@@ -64,7 +83,8 @@
         type="secondary"
         style="width:100%;margin-bottom:30px;"
         @click.native.prevent="handleRegister"
-      >{{ $t('register.title') }}</el-button>
+      >{{ $t('register.title') }}
+      </el-button>
     </el-form>
   </div>
 </template>
@@ -72,18 +92,36 @@
 <script>
 import LangSelect from '@/components/LangSelect/index'
 import validators from '@/utils/validators'
+import VueCountryCode from 'vue-country-code'
+import i18n from '@/lang'
+import { mask } from 'vue-the-mask'
+
 export default {
   name: 'Login',
-  components: { LangSelect },
-  data() {
+  components: { LangSelect, VueCountryCode },
+  directives: { mask },
+  data () {
+    const validatePhone = (rule, value, callback) => {
+      if (value === '') {
+        callback(new Error(i18n.t('validator.phone.required')))
+      } else if (value.length < 8) {
+        callback(new Error(i18n.t('validator.phone.min')))
+      } else {
+        if (this.loginForm.prefix === '') {
+          callback(new Error(i18n.t('validator.prefix.required')))
+        }
+        callback()
+      }
+    }
     const { phone, password } = validators()
     return {
       loginForm: {
         phone: '',
-        password: ''
+        password: '',
+        prefix: ''
       },
       loginRules: {
-        phone: [{ required: true, trigger: 'blur', validator: phone }],
+        phone: [{ required: true, trigger: 'blur', validator: validatePhone }],
         password: [{ required: true, trigger: 'blur', validator: password }]
       },
       loading: false,
@@ -93,14 +131,14 @@ export default {
   },
   watch: {
     $route: {
-      handler: function(route) {
+      handler: function (route) {
         this.redirect = route.query && route.query.redirect
       },
       immediate: false
     }
   },
   methods: {
-    showPwd() {
+    showPwd () {
       if (this.passwordType === 'password') {
         this.passwordType = ''
       } else {
@@ -110,17 +148,20 @@ export default {
         this.$refs.password.focus()
       })
     },
-    handleRegister() {
+    handleRegister () {
       this.$router.push({
         path: '/register'
       })
     },
-    handleLogin() {
+    handleLogin () {
       this.$refs.loginForm.validate(valid => {
         if (valid) {
           this.loading = true
           this.$store
-            .dispatch('user/login', this.loginForm)
+            .dispatch('user/login', {
+              phone: '+' + this.loginForm.prefix + this.loginForm.phone.replace(/\D/g, ''),
+              password: this.loginForm.password
+            })
             .then(() => {
               this.$router.push({ path: '/dashboard' })
             })
@@ -131,7 +172,10 @@ export default {
           return false
         }
       })
-    }
+    },
+    onSelectCountry ({ name, iso2, dialCode }) {
+      this.loginForm.prefix = dialCode
+    },
   }
 }
 </script>
@@ -149,30 +193,64 @@ $cursor: #fff;
 
 /* reset element-ui css */
 .login-container {
+  .auth_logo {
+    text-align: center;
+
+    img {
+      width: 200px;
+    }
+  }
+
   .lang {
     position: absolute;
     right: 16px;
     top: 10px;
     color: #fff;
   }
+
   .el-input {
-    display: inline-block;
     height: 47px;
     width: 85%;
 
     input {
       background: transparent;
-      border: 0px;
+      border: 0;
       -webkit-appearance: none;
-      border-radius: 0px;
+      border-radius: 0;
       padding: 12px 5px 12px 15px;
       color: $light_gray;
       height: 47px;
       caret-color: $cursor;
 
       &:-webkit-autofill {
-        box-shadow: 0 0 0px 1000px $bg inset !important;
+        box-shadow: 0 0 0 1000px #4595e5 inset !important;
         -webkit-text-fill-color: $cursor !important;
+      }
+    }
+
+    .el-input-group__prepend {
+      background-color: transparent;
+      border: none;
+      padding: 0;
+      border-radius: 5px;
+
+      .vue-country-select {
+        border: none;
+        height: 100%;
+
+        .dropdown {
+          border-radius: 5px;
+        }
+
+        .dropdown:hover, .dropdown.open {
+          background-color: #4da6ff;
+        }
+
+        .dropdown-list {
+          border: none;
+          background-color: #4da6ff;
+          z-index: 200;
+        }
       }
     }
   }
@@ -182,12 +260,16 @@ $cursor: #fff;
     background: rgba(0, 0, 0, 0.1);
     border-radius: 5px;
     color: #454545;
+
+    &.is-error {
+      border-color: #F56C6C;
+    }
   }
 }
 </style>
 
 <style lang="scss" scoped>
-$bg: #2d3a4b;
+$bg: #4da6ff;
 $dark_gray: #889aa4;
 $light_gray: #eee;
 
@@ -220,7 +302,7 @@ $light_gray: #eee;
 
   .svg-container {
     padding: 6px 5px 6px 15px;
-    color: $dark_gray;
+    color: #000;
     vertical-align: middle;
     width: 30px;
     display: inline-block;
@@ -243,7 +325,7 @@ $light_gray: #eee;
     right: 10px;
     top: 7px;
     font-size: 16px;
-    color: $dark_gray;
+    color: #000000;
     cursor: pointer;
     user-select: none;
   }
@@ -253,6 +335,7 @@ $light_gray: #eee;
     text-align: center;
     height: 18px;
     margin-bottom: 30px;
+
     &:after {
       content: '';
       position: absolute;
@@ -262,6 +345,7 @@ $light_gray: #eee;
       background: #fff;
       height: 1px;
     }
+
     span {
       position: absolute;
       left: 50%;
