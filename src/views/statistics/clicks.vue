@@ -24,14 +24,6 @@
           </template>
         </el-table-column>
         <el-table-column
-          prop="balance_was"
-          :label="$t('statistics.balance_was')"
-        />
-        <el-table-column
-          prop="calculated_price"
-          :label="$t('statistics.calculated_price')"
-        />
-        <el-table-column
           prop="view_total"
           :label="$t('statistics.view_total')"
         />

@@ -12,7 +12,7 @@
       <el-breadcrumb-item>{{ $route.params.date }}</el-breadcrumb-item>
     </el-breadcrumb>
     <el-row :gutter="16">
-      <el-col :xs="24" :sm="24" :lg="16">
+      <el-col :xs="24" :sm="24" :lg="24">
         <el-card shadow="always">
           <div slot="header" class="clearfix">
             <h2>{{ $t('date') }}: {{ $route.params.date }}</h2>
@@ -41,28 +41,6 @@
               :label="$t('statistics.type_cute_name')"
             />
           </el-table>
-        </el-card>
-      </el-col>
-      <el-col :xs="24" :sm="24" :lg="8">
-        <el-card v-loading="listLoading" shadow="always">
-          <div slot="header" class="clearfix">
-            <h2>{{ $t('info') }}:</h2>
-          </div>
-          <div>
-            <strong>{{ $t('statistics.balance_before') }}</strong>: {{ statistics_by_date.balance_before }} usd
-          </div>
-          <div>
-            <strong>{{ $t('statistics.price') }}</strong>: {{ statistics_by_date.price }}
-          </div>
-          <div>
-            <strong>{{ $t('statistics.balance_after') }}</strong>: {{ statistics_by_date.balance_after }} usd
-          </div>
-          <div>
-            <strong>{{ $t('statistics.total_clicks') }}</strong>: {{ statistics_by_date.total_clicks }}
-          </div>
-          <div>
-            <strong>{{ $t('statistics.report_date') }}</strong>: {{ report_date }}
-          </div>
         </el-card>
       </el-col>
     </el-row>
