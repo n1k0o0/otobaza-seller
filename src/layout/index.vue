@@ -55,6 +55,7 @@ export default {
   @import "~@/styles/variables.scss";
 
   .app-wrapper {
+    background-color: #F8F8F8;
     @include clearfix;
     position: relative;
     height: 100%;
@@ -79,13 +80,13 @@ export default {
     top: 0;
     right: 0;
     z-index: 9;
-    width: calc(100% - #{$sideBarWidth});
+    width: 100%;
     transition: width 0.28s;
   }
 
-  .hideSidebar .fixed-header {
-    width: calc(100% - 54px)
-  }
+  //.hideSidebar .fixed-header {
+  //  width: calc(100% - 54px)
+  //}
 
   .mobile .fixed-header {
     width: 100%;

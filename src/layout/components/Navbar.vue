@@ -11,6 +11,7 @@
       <el-dropdown class="avatar-container" trigger="click">
         <div class="avatar-wrapper">
           <el-avatar size="small" icon="el-icon-user-solid" />
+          <h3>{{ name }}</h3>
         </div>
         <el-dropdown-menu slot="dropdown" class="user-dropdown">
           <router-link to="/">
@@ -42,7 +43,7 @@ export default {
     LangSelect
   },
   computed: {
-    ...mapGetters(['sidebar'])
+    ...mapGetters(['sidebar', 'name'])
   },
   methods: {
     toggleSideBar() {
@@ -57,8 +58,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "~@/styles/variables.scss";
 .navbar {
-  height: 50px;
+  height: $headerHeight;
   overflow: hidden;
   position: relative;
   background: #fff;
@@ -86,6 +88,7 @@ export default {
     align-items: center;
     height: 100%;
     justify-content: flex-end;
+    padding-right: 32px;
     &:focus {
       outline: none;
     }
