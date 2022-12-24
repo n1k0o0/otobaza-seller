@@ -29,6 +29,33 @@ export default {
   select_file: 'Выбрать файл',
   only_seller_can_login: 'Только продавец может войти!',
   error: 'Ошибка!',
+  more: 'Больше',
+  menu: {
+    products: 'Товары',
+    used: 'Подержанные',
+  },
+  used: {
+    about_announcement: 'Об объявлении',
+    brand: 'Бренд',
+    model: 'Модель',
+    name: 'Название объявления',
+    price: 'Цена',
+    about: 'Описание',
+    images: 'Рекламные изображения',
+    statuses: {
+      all: 'Все объявления',
+      active: 'Что есть на сайте',
+      deactivated: 'Просрочено',
+      waiting: 'Ожидание',
+      rejected: 'Отклонение'
+    }
+  },
+  actions: {
+    add: 'Добавить',
+    back: 'Назад',
+    save: 'Сохранить',
+    edit: 'Изменить'
+  },
   dashboard: {
     title: 'Панель приборов',
     views: 'Просмотры',

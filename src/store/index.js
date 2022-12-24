@@ -10,6 +10,7 @@ import catalog from './modules/catalog'
 import orders from './modules/orders'
 import parts from './modules/parts'
 import packages from './modules/packages'
+import used from './modules/used'
 
 Vue.use(Vuex)
 
@@ -23,6 +24,7 @@ const store = new Vuex.Store({
     catalog,
     orders,
     parts,
+    used,
     packages
   },
   getters

@@ -29,6 +29,33 @@ export default {
   select_file: 'Dosya seç',
   only_seller_can_login: 'Sadece Satıcı giriş yapabilir!',
   error: 'Hata!',
+  more: 'Daha fazla',
+  menu: {
+    products: 'Ürünler',
+    used: 'Kullanılmış',
+  },
+  used: {
+    about_announcement: 'Reklam Hakkında',
+    brand: 'Marka',
+    model: 'Model',
+    name: 'Reklam Adı',
+    price: 'Fiyat',
+    about: 'Hakkında',
+    images: 'Reklam resimleri',
+    statuses: {
+      all: 'Tüm Reklamlarr',
+      active: 'Sitede neler var',
+      deactivated: 'Süresi doldu',
+      waiting: 'Beklemede',
+      rejected: 'Rededildi'
+    }
+  },
+  actions: {
+    add: 'Ekle',
+    back: 'Geri dön',
+    save: 'Kaydet',
+    edit: 'Düzenle'
+  },
   dashboard: {
     title: 'Panel',
     views: 'Görüntüleme',

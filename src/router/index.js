@@ -1,11 +1,10 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import i18n from '@/lang'
-
-Vue.use(Router)
-
 /* Layout */
 import Layout from '@/layout'
+
+Vue.use(Router)
 
 /**
  * Note: sub-menu only appear when route children.length >= 1
@@ -95,7 +94,7 @@ export const constantRoutes = [
     component: Layout,
     redirect: '/parts',
     name: 'PartsLayout',
-    meta: { title: i18n.t('parts.title'), icon: 'example' },
+    meta: { title: i18n.t('menu.products'), icon: 'example' },
     children: [
       {
         path: '/parts',
@@ -106,9 +105,30 @@ export const constantRoutes = [
       {
         path: '/parts/add',
         name: 'AddParts',
+        hidden: true,
         component: () => import('@/views/parts/add'),
         meta: { title: i18n.t('dismantles.add'), icon: 'table' }
-      }
+      },
+      {
+        path: '/used',
+        name: 'Used',
+        component: () => import('@/views/used/index'),
+        meta: { title: i18n.t('menu.used'), icon: 'table' }
+      },
+      {
+        path: '/used/:id',
+        name: 'EditUsed',
+        hidden: true,
+        component: () => import('@/views/used/edit'),
+        meta: { title: i18n.t('menu.used'), icon: 'table' }
+      },
+      {
+        path: '/used/add',
+        name: 'AddUsed',
+        hidden: true,
+        component: () => import('@/views/used/create'),
+        meta: { title: i18n.t('menu.used'), icon: 'table' }
+      },
     ]
   },
   {

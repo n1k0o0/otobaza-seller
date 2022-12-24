@@ -1,8 +1,10 @@
+@import './fonts.scss';
 @import './variables.scss';
 @import './mixin.scss';
 @import './transition.scss';
 @import './element-ui.scss';
 @import './sidebar.scss';
+
 
 body {
   height: 100%;
@@ -159,4 +161,86 @@ div:focus {
 
 .grid-col-full {
   grid-column: 1/-1
+}
+
+.light_text {
+  color: $lightText;
+}
+
+$sizes: 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 20, 30, 32;
+
+@each $size in $sizes {
+  .mt-#{$size} {
+    margin-top: ($size*2)+px;
+  }
+  .mb-#{$size} {
+    margin-bottom: ($size*2)+px;
+  }
+  .ml-#{$size} {
+    margin-left: ($size*2)+px;
+  }
+  .mr-#{$size} {
+    margin-right: ($size*2)+px;
+  }
+  .mx-#{$size} {
+    margin: 0 ($size*2)+px;
+  }
+  .my-#{$size} {
+    margin: ($size*2)+px 0;
+  }
+
+
+  .pt-#{$size} {
+    padding-top: ($size*2)+px;
+  }
+  .pb-#{$size} {
+    padding-bottom: ($size*2)+px;
+  }
+  .pl-#{$size} {
+    padding-left: ($size*2)+px;
+  }
+  .pr-#{$size} {
+    padding-right: ($size*2)+px;
+  }
+  .px-#{$size} {
+    padding: 0 ($size*2)+px;
+  }
+  .py-#{$size} {
+    padding: ($size*2)+px 0;
+  }
+
+  .w-#{$size} {
+    width: ($size*8)+px;
+  }
+}
+
+.el-input .el-input--suffix {
+  width: 110px;
+}
+
+
+.slick-slide {
+  img {
+    width: 100% !important;
+    height: 200px;
+    border: 1px solid #D0D5DD;
+    border-radius: 12px !important;
+  }
+}
+
+.slick-prev {
+  left: 0 !important;
+  z-index: 9999 !important;
+
+  &:before {
+    content: '<' !important;
+  }
+}
+
+.slick-next {
+  right: 0 !important;
+
+  &:before {
+    content: '>' !important;
+  }
 }

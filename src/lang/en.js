@@ -29,6 +29,33 @@ export default {
   select_file: 'Select File',
   only_seller_can_login: 'Only Seller can login!',
   error: 'Error!',
+  more: 'More',
+  menu: {
+    products: 'Products',
+    used: 'Used',
+  },
+  used: {
+    about_announcement: 'About Announcement',
+    brand: 'Brand',
+    model: 'Model',
+    name: 'Ad name',
+    price: 'Price',
+    about: 'About',
+    images: 'Ad images',
+    statuses: {
+      all: 'All Ads',
+      active: 'What\'s on the site',
+      deactivated: 'Expired',
+      waiting: 'Waiting',
+      rejected: 'Rejected'
+    }
+  },
+  actions: {
+    add: 'Add',
+    back: 'Go back',
+    save: 'Save',
+    edit: 'Edit'
+  },
   dashboard: {
     title: 'Dashboard',
     views: 'Views',

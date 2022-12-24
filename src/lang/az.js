@@ -29,6 +29,34 @@ export default {
   select_file: 'Faylı seçin',
   only_seller_can_login: 'Alıcı kimi daxil olun!',
   error: 'Xəta baş verdi!',
+  search: 'Axtar',
+  more: 'Ətraflı',
+  menu: {
+    products: 'Məhsullar',
+    used: 'Ölüxana',
+  },
+  used: {
+    about_announcement: 'Elan haqqında',
+    brand: 'Marka',
+    model: 'Model',
+    name: 'Elanın adı',
+    price: 'Qiyməti',
+    about: 'Haqqında',
+    images: 'Elan şəkilləri',
+    statuses: {
+      all: 'Bütün elanlar',
+      active: 'Saytda olanlar',
+      deactivated: 'Müddəti başa çatmış',
+      waiting: 'Gözləmə',
+      rejected: 'İmtina'
+    }
+  },
+  actions: {
+    add: 'Əlavə et',
+    back: 'Geri qayıt',
+    save: 'Yadda saxla',
+    edit: 'Dəyişiklik et'
+  },
   dashboard: {
     title: 'Dashboard',
     views: 'Baxış',
