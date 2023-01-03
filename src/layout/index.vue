@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import { Navbar, Sidebar, AppMain } from './components'
+import { AppMain, Navbar, Sidebar } from './components'
 import ResizeMixin from './mixin/ResizeHandler'
 
 export default {
@@ -38,7 +38,7 @@ export default {
         hideSidebar: !this.sidebar.opened,
         openSidebar: this.sidebar.opened,
         withoutAnimation: this.sidebar.withoutAnimation,
-        mobile: this.device === 'mobile'
+        // mobile: this.device === 'mobile'
       }
     }
   },
@@ -55,11 +55,13 @@ export default {
   @import "~@/styles/variables.scss";
 
   .app-wrapper {
+    background-color: #F8F8F8;
     @include clearfix;
     position: relative;
     height: 100%;
     width: 100%;
-    &.mobile.openSidebar{
+
+    &.mobile.openSidebar {
       position: fixed;
       top: 0;
     }
@@ -79,13 +81,13 @@ export default {
     top: 0;
     right: 0;
     z-index: 9;
-    width: calc(100% - #{$sideBarWidth});
+    width: 100%;
     transition: width 0.28s;
   }
 
-  .hideSidebar .fixed-header {
-    width: calc(100% - 54px)
-  }
+  //.hideSidebar .fixed-header {
+  //  width: calc(100% - 54px)
+  //}
 
   .mobile .fixed-header {
     width: 100%;

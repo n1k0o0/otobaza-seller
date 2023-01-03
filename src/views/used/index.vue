@@ -10,6 +10,17 @@
     <el-card shadow="always" v-loading.fullscreen.lock="loading">
       <div slot="header" class="clearfix">
         <h2>{{ $t('menu.used') }}</h2>
+
+        <el-button @click="$router.push({'name':'AddUsed'})" type="text" class="float-right">
+          <div class="span">
+            {{ $t('actions.add') }}
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M5 10H15" stroke="#0086C9" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M10 15V5" stroke="#0086C9" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+
+        </el-button>
       </div>
 
       <template v-if="!products.length">
@@ -47,24 +58,22 @@
           </el-tabs>
         </el-row>
 
-        <el-row :gutter="16">
-          <el-col :xs="12" :sm="8" :md="8" class="used_item_wrapper mb-16" v-for="product in products"
-                  :key="product.id">
-            <div class="used_item">
-              <VueSlickCarousel :arrows="true">
-                <div v-for="img in product.url"><img
-                  :src="img"
-                  alt=""></div>
-              </VueSlickCarousel>
-              <h5>{{ product.manufacturer }}</h5>
-              <p><span>Marka:</span> {{ product.model }}</p>
-              <p><span>Model:</span> W140</p>
-              <p class="used_item_price"><span>Qiymet:</span> {{ product.price.price }} {{ product.price.currency }}</p>
-              <el-button class="w100" @click="$router.push({name: 'EditUsed',params:{id:product.id}})">{{ $t('more') }}
-                <i class="el-icon-arrow-right el-icon-right"></i></el-button>
-            </div>
-          </el-col>
-        </el-row>
+        <div class="used_item_wrapper mb-16">
+          <div class="used_item" v-for="product in products"
+               @click="$router.push({name: 'EditUsed',params:{id:product.id}})"
+               :key="product.id">
+            <VueSlickCarousel :arrows="true">
+              <div v-for="img in product.url"><img
+                :src="img"
+                alt=""></div>
+            </VueSlickCarousel>
+            <h5>{{ product.description }}</h5>
+            <p><span>{{ product.manufacturer }}/ {{ product.model }}</span></p>
+            <p class="used_item_price"><span>Qiymet:</span>
+              <span class="float-right">{{ product.price.price }} {{ product.price.currency_symbol }}</span>
+            </p>
+          </div>
+        </div>
 
       </template>
 
@@ -144,7 +153,18 @@ export default {
   place-items: center;
 }
 
+.used_item_wrapper {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(205px, 1fr));
+  grid-gap: 25px;
+}
+
 .used_item {
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
   .el-button--default {
     font-weight: 600;
     font-size: 16px;
@@ -157,7 +177,7 @@ export default {
   padding: 16px;
 
   h5 {
-    margin: 16px 0;
+    margin: 12px 0 2px 0;
     font-weight: 400;
     font-size: 16px;
     line-height: 24px;
@@ -165,7 +185,7 @@ export default {
   }
 
   p {
-    margin: 12px 0;
+    margin: 4px 0;
     font-weight: 500;
     font-size: 16px;
     line-height: 24px;
@@ -175,13 +195,29 @@ export default {
       color: #0086C9;
     }
 
-    span {
-      font-weight: 400;
-      font-size: 14px;
-      line-height: 20px;
+    span:first-child {
+      font-weight: 500;
+      font-size: 12px;
+      line-height: 18px;
       color: #98A2B3;
     }
   }
 
+}
+
+.el-button--text {
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 24px;
+  color: #0086C9;
+
+  .span {
+    display: flex;
+    place-items: center;
+  }
+
+  svg {
+    margin-left: 8px;
+  }
 }
 </style>

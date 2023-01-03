@@ -9,6 +9,11 @@
     <el-card shadow="always">
       <div slot="header" class="clearfix">
         <h2>{{ $t('parts.title') }}</h2>
+
+        <el-button @click="$router.push({'name':'AddParts'})" type="primary" class="float-right">{{
+            $t('actions.add')
+          }}
+        </el-button>
       </div>
       <h3>{{ $t('select_file') }}:</h3>
       <el-select
@@ -166,6 +171,7 @@
 </template>
 <script>
 import { mapActions, mapGetters } from 'vuex'
+
 export default {
   name: 'Parts',
   data() {

@@ -52,6 +52,11 @@ const mutations = {
     state.sidebar.opened = false
     state.sidebar.withoutAnimation = withoutAnimation
   },
+  OPEN_SIDEBAR: (state, withoutAnimation) => {
+    Cookies.set('sidebarStatus', 1)
+    state.sidebar.opened = true
+    state.sidebar.withoutAnimation = false
+  },
   TOGGLE_DEVICE: (state, device) => {
     state.device = device
   },
@@ -80,19 +85,22 @@ const mutations = {
 }
 
 const actions = {
-  toggleSideBar({ commit }) {
+  toggleSideBar ({ commit }) {
     commit('TOGGLE_SIDEBAR')
   },
-  closeSideBar({ commit }, { withoutAnimation }) {
+  closeSideBar ({ commit }, { withoutAnimation }) {
     commit('CLOSE_SIDEBAR', withoutAnimation)
   },
-  toggleDevice({ commit }, device) {
+  openSideBar ({ commit }, { withoutAnimation }) {
+    commit('OPEN_SIDEBAR', withoutAnimation)
+  },
+  toggleDevice ({ commit }, device) {
     commit('TOGGLE_DEVICE', device)
   },
-  setLanguage({ commit }, language) {
+  setLanguage ({ commit }, language) {
     commit('SET_LANGUAGE', language)
   },
-  async GET_DASHBOARD({ commit }) {
+  async GET_DASHBOARD ({ commit }) {
     const { data } = await request({
       url: '/api/dashboard',
       method: 'get'

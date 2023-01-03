@@ -30,6 +30,7 @@ export default {
   only_seller_can_login: 'Только продавец может войти!',
   error: 'Ошибка!',
   more: 'Больше',
+  remove_question: 'Вы уверены что хотите удалить ?',
   menu: {
     products: 'Товары',
     used: 'Подержанные',

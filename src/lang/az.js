@@ -31,6 +31,7 @@ export default {
   error: 'Xəta baş verdi!',
   search: 'Axtar',
   more: 'Ətraflı',
+  remove_question: 'Silmək istədiyinizə əminsiniz?',
   menu: {
     products: 'Məhsullar',
     used: 'Ölüxana',

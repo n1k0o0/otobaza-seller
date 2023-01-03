@@ -1,16 +1,25 @@
 <template>
   <div class="navbar">
-    <hamburger
-      :is-active="sidebar.opened"
-      class="hamburger-container"
-      @toggleClick="toggleSideBar"
-    />
+    <!--    <hamburger
+          :is-active="sidebar.opened"
+          class="hamburger-container"
+          @toggleClick="toggleSideBar"
+        />-->
+    <div class="logo">
+      <img
+        class="pic-404__parent"
+        src="@/assets/img/logo_new.svg"
+        alt="404"
+      >
+      <p class="logo_text">Bütün ehtiyyat hissələri bir ünvanda!.</p>
+    </div>
     <div class="right-menu">
-      <currency-select class="right-menu-item hover-effect" />
-      <lang-select class="right-menu-item hover-effect" />
+      <currency-select class="right-menu-item hover-effect"/>
+      <lang-select class="right-menu-item hover-effect"/>
       <el-dropdown class="avatar-container" trigger="click">
         <div class="avatar-wrapper">
-          <el-avatar size="small" icon="el-icon-user-solid" />
+          <el-avatar size="small" icon="el-icon-user-solid"/>
+          <h3>{{ name }}</h3>
         </div>
         <el-dropdown-menu slot="dropdown" class="user-dropdown">
           <router-link to="/">
@@ -35,6 +44,7 @@ import CurrencySelect from '@/components/CurrencySelect'
 import { mapGetters } from 'vuex'
 import Hamburger from '@/components/Hamburger'
 import LangSelect from '@/components/LangSelect'
+
 export default {
   components: {
     CurrencySelect,
@@ -42,7 +52,7 @@ export default {
     LangSelect
   },
   computed: {
-    ...mapGetters(['sidebar'])
+    ...mapGetters(['sidebar', 'name'])
   },
   methods: {
     toggleSideBar() {
@@ -57,8 +67,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "~@/styles/variables.scss";
 .navbar {
-  height: 50px;
+  height: $headerHeight;
   overflow: hidden;
   position: relative;
   background: #fff;
@@ -81,11 +92,26 @@ export default {
     float: left;
   }
 
+  .logo {
+    position: absolute;
+    left: 60px;
+    top: 20px;
+
+    &_text {
+      font-weight: 500;
+      font-size: 9px;
+      line-height: 12px;
+      color: #0086C9;
+    }
+  }
+
   .right-menu {
     display: flex;
     align-items: center;
     height: 100%;
     justify-content: flex-end;
+    padding-right: 32px;
+
     &:focus {
       outline: none;
     }
@@ -116,6 +142,12 @@ export default {
       .avatar-wrapper {
         margin-top: 5px;
         position: relative;
+        display: flex;
+        place-items: center;
+
+        h3 {
+          margin-left: 6px;
+        }
 
         .user-avatar {
           cursor: pointer;

@@ -21,56 +21,57 @@
         </el-button>
       </div>
 
-      <el-row>
-        <el-col :span="12">
-          <div class="excelUpload">
-            <p>{{ $t('parts.select_excel') }}</p>
-            <el-upload
-              action="#"
-              class="upload-demo"
-              :on-change="handleChange"
-              :auto-upload="false"
-              :limit="1"
-              accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
-              :file-list="fileList"
-            >
-              <el-button size="small" type="primary" :loading="loading">{{
-                  $t('parts.select_file')
-                                                                        }}
-              </el-button>
-            </el-upload>
-          </div>
-          <div class="manualAdd">
-            <p>{{ $t('parts.add_manual') }}</p>
-            <el-button
-              icon="el-icon-circle-plus-outline"
-              size="medium"
-              type="primary"
-              @click="addManual"
-            />
-          </div>
-        </el-col>
-        <el-col :span="12" class="table_actions">
+      <div class="add_buttons">
+        <div class="excelUpload">
+          <h6>{{ $t('parts.select_excel') }}</h6>
+          <p>Potter ipsum wand elf parchment wingardium. Stone.</p>
+          <el-upload
+            action="#"
+            class="upload-demo w100"
+            :on-change="handleChange"
+            :auto-upload="false"
+            :limit="1"
+            accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
+            :file-list="fileList"
+          >
+            <el-button class="w100" size="small" type="primary" :loading="loading">{{
+                $t('parts.select_file')
+              }}
+            </el-button>
+          </el-upload>
+        </div>
+        <div class="manualAdd">
+          <h6>{{ $t('parts.add_manual') }}</h6>
+          <p>Potter ipsum wand elf parchment wingardium. Stone.</p>
           <el-button
-            v-if="excel_parts.length"
+            size="medium"
             type="primary"
-            icon="el-icon-refresh"
-            :loading="loadingTable"
-            :disabled="loadingTable"
-            @click="check"
-          >{{ $t('parts.check') }}
+            class="w100"
+            @click="addManual"
+          >{{ $t('actions.add') }}
           </el-button>
-          <el-button
-            v-if="canSubmit && isChecked"
-            type="primary"
-            icon="el-icon-plus"
-            :loading="loadingTable"
-            :disabled="loadingTable"
-            @click="submit"
-          >{{ $t('parts.add_parts') }}
-          </el-button>
-        </el-col>
-      </el-row>
+        </div>
+        <!--        <el-col :span="24" class="table_actions float-right">
+                  <el-button
+                    v-if="excel_parts.length"
+                    type="primary"
+                    icon="el-icon-refresh"
+                    :loading="loadingTable"
+                    :disabled="loadingTable"
+                    @click="check"
+                  >{{ $t('parts.check') }}
+                  </el-button>
+                  <el-button
+                    v-if="canSubmit && isChecked"
+                    type="primary"
+                    icon="el-icon-plus"
+                    :loading="loadingTable"
+                    :disabled="loadingTable"
+                    @click="submit"
+                  >{{ $t('parts.add_parts') }}
+                  </el-button>
+                </el-col>-->
+      </div>
       <el-table
         v-if="excel_parts.length"
         v-loading="loadingTable"
@@ -236,7 +237,7 @@
   </div>
 </template>
 <script>
-import { mapGetters, mapActions, mapMutations } from 'vuex'
+import { mapActions, mapGetters, mapMutations } from 'vuex'
 
 export default {
   name: 'AddParts',
@@ -386,7 +387,7 @@ export default {
       // call callback function to return suggestion objects
       cb(results)
     },
-    createFilter(queryString) {
+    createFilter (queryString) {
       return (link) => {
         return (link.label.toLowerCase()
           .indexOf(queryString.toLowerCase()) === 0)
@@ -396,9 +397,34 @@ export default {
 }
 </script>
 <style lang="scss">
+.add_buttons {
+  display: flex;
+  gap: 15px;
+}
+
 .excelUpload, .manualAdd {
-  max-width: 300px;
-  margin-bottom: 1rem;
+  background: #F9FAFB;
+  border-radius: 12px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  max-width: 220px;
+
+  h6 {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    color: #344054;
+    margin: 0;
+  }
+
+  p {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    color: #98A2B3;
+  }
 }
 
 .el-table .danger {
@@ -415,5 +441,9 @@ export default {
 
 .table_actions {
   padding-top: 45px;
+}
+
+.upload-demo > div {
+  width: 100% !important;
 }
 </style>

@@ -34,6 +34,7 @@ export default {
     products: 'Ürünler',
     used: 'Kullanılmış',
   },
+  remove_question: 'Silmek istediğine emin misin?',
   used: {
     about_announcement: 'Reklam Hakkında',
     brand: 'Marka',

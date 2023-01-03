@@ -109,7 +109,20 @@ export default {
     async handleRemove (file, fileList) {
       if (file.id) {
         let ttt = false
-        return this.$confirm(`Cancel the transfert of ${file.name} ?`)
+        let tt = this.$confirm(this.$t('remove_question'))
+        tt.then(() => {
+          this.$message({
+            type: 'success',
+            message: 'Delete completed'
+          })
+        }).catch(() => {
+          this.$message({
+            type: 'info',
+            message: 'Delete canceled'
+          })
+          return false
+        })
+        return tt
       }
     },
     handlePictureCardPreview (file) {

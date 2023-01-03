@@ -30,6 +30,7 @@ export default {
   only_seller_can_login: 'Only Seller can login!',
   error: 'Error!',
   more: 'More',
+  remove_question: 'Are you sure you want to delete?',
   menu: {
     products: 'Products',
     used: 'Used',
@@ -48,7 +49,7 @@ export default {
       deactivated: 'Expired',
       waiting: 'Waiting',
       rejected: 'Rejected'
-    }
+    },
   },
   actions: {
     add: 'Add',
