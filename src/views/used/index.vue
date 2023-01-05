@@ -185,7 +185,7 @@ export default {
   }
 
   p {
-    margin: 4px 0;
+    margin: 0;
     font-weight: 500;
     font-size: 16px;
     line-height: 24px;
@@ -218,6 +218,12 @@ export default {
 
   svg {
     margin-left: 8px;
+  }
+}
+
+.slick-slide {
+  img {
+    height: 150px !important;
   }
 }
 </style>

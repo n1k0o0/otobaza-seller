@@ -99,9 +99,6 @@ export default {
       products: 'parts/products',
     }),
   },
-  async beforeMount () {
-    await this.GET_UPLOADED_DATA_FILES()
-  },
   methods: {
     ...mapActions({
       GET_UPLOADED_DATA_FILES: 'parts/GET_UPLOADED_DATA_FILES',

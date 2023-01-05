@@ -116,17 +116,17 @@ export const constantRoutes = [
         meta: { title: i18n.t('menu.used'), icon: 'table' }
       },
       {
-        path: '/used/:id',
-        name: 'EditUsed',
-        hidden: true,
-        component: () => import('@/views/used/edit'),
-        meta: { title: i18n.t('menu.used'), icon: 'table' }
-      },
-      {
         path: '/used/add',
         name: 'AddUsed',
         hidden: true,
         component: () => import('@/views/used/create'),
+        meta: { title: i18n.t('menu.used'), icon: 'table' }
+      },
+      {
+        path: '/used/:id',
+        name: 'EditUsed',
+        hidden: true,
+        component: () => import('@/views/used/edit'),
         meta: { title: i18n.t('menu.used'), icon: 'table' }
       },
     ]
