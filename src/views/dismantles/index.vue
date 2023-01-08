@@ -2,19 +2,21 @@
   <div class="PageContainer">
     <el-breadcrumb separator-class="el-icon-arrow-right" class="Breadcrumbs">
       <el-breadcrumb-item :to="{ path: '/' }">{{
-        $t('dashboard.title')
-      }}</el-breadcrumb-item>
+          $t('dashboard.title')
+        }}
+      </el-breadcrumb-item>
       <el-breadcrumb-item>{{ $t('dismantles.title') }}</el-breadcrumb-item>
     </el-breadcrumb>
     <el-card shadow="always">
-      <div slot="header" class="clearfix">
+      <template slot="header">
         <h2>{{ $t('dismantles.title') }}</h2>
         <router-link to="/dismantles/add" class="Operation">
           <el-button size="mini" type="primary" icon="el-icon-plus">{{
-            $t('dismantles.add')
-          }}</el-button>
+              $t('dismantles.add')
+            }}
+          </el-button>
         </router-link>
-      </div>
+      </template>
       <el-table
         v-loading="listLoading"
         :data="dismantles"
@@ -54,7 +56,8 @@
               type="primary"
               icon="el-icon-edit"
               @click="edit(row.id)"
-            >{{ $t('edit') }}</el-button>
+            >{{ $t('edit') }}
+            </el-button>
             <el-popconfirm
               class="ml-1"
               :title="$t('dismantles.confirm_delete')"
@@ -68,7 +71,8 @@
                 type="danger"
                 icon="el-icon-delete"
                 :loading="row.loading"
-              >{{ $t('delete') }}</el-button>
+              >{{ $t('delete') }}
+              </el-button>
             </el-popconfirm>
           </template>
         </el-table-column>
@@ -88,6 +92,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
+
 export default {
   name: 'Dashboard',
   data() {

@@ -32,7 +32,7 @@ export default {
   more: 'Daha fazla',
   menu: {
     products: 'Ürünler',
-    used: 'Kullanılmış',
+    used: 'Kullanılmış'
   },
   remove_question: 'Silmek istediğine emin misin?',
   used: {
@@ -43,6 +43,7 @@ export default {
     price: 'Fiyat',
     about: 'Hakkında',
     images: 'Reklam resimleri',
+    tariff_text: 'Şu anda, tüm tarifeler ücretsizdir',
     statuses: {
       all: 'Tüm Reklamlarr',
       active: 'Sitede neler var',
@@ -55,7 +56,12 @@ export default {
     add: 'Ekle',
     back: 'Geri dön',
     save: 'Kaydet',
-    edit: 'Düzenle'
+    edit: 'Düzenle',
+    activate: 'Etkinleştir',
+    deactivate: 'Devre dışı bırakmak',
+    tariff_vip: 'VIP yap',
+    tariff_special: 'Özel Yap',
+    tariff_forward: 'İleri Çek'
   },
   dashboard: {
     title: 'Panel',
@@ -70,30 +76,30 @@ export default {
     status: 'Durum'
   },
   login: {
-    title   : 'Giriş yap',
-    phone   : 'Cep numarası',
+    title: 'Giriş yap',
+    phone: 'Cep numarası',
     password: 'Parola'
   },
   register: {
-    title                : 'Kayıt ol',
-    first_name           : 'İsim',
-    last_name            : 'Soyadı',
-    phone                : 'Cep numarası',
-    email                : 'Email',
-    city                 : 'Şehir',
-    country              : 'Ülke',
-    select_country       : 'Ülke seçin',
-    currency             : 'Para birimi',
-    select_currency      : 'Para birimi seçin',
-    gender               : 'Cinsiyet',
-    select_gender        : 'Cinsiyet seçin',
-    select_city          : 'Şehir seç',
-    address              : 'Adres',
-    password             : 'Parola',
+    title: 'Kayıt ol',
+    first_name: 'İsim',
+    last_name: 'Soyadı',
+    phone: 'Cep numarası',
+    email: 'Email',
+    city: 'Şehir',
+    country: 'Ülke',
+    select_country: 'Ülke seçin',
+    currency: 'Para birimi',
+    select_currency: 'Para birimi seçin',
+    gender: 'Cinsiyet',
+    select_gender: 'Cinsiyet seçin',
+    select_city: 'Şehir seç',
+    address: 'Adres',
+    password: 'Parola',
     password_confirmation: 'Şifre onayı',
-    store_name           : 'Dükan adı',
-    store_about          : 'Dükan hakkında',
-    agreement            : 'Kayıt sırasında Şartlar ve Koşulları kabul ediyorum.'
+    store_name: 'Dükan adı',
+    store_about: 'Dükan hakkında',
+    agreement: 'Kayıt sırasında Şartlar ve Koşulları kabul ediyorum.'
   },
   navbar: {
     logout: 'Çıkış',
@@ -171,7 +177,7 @@ export default {
     add: 'Yedek parça ekleme',
     add_manual: 'El ile ekle',
     title: 'Yedek parçalar',
-    select_excel: "Excel'i seçin",
+    select_excel: 'Excel\'i seçin',
     select_file: 'Seçin',
     code: 'Üretici kodu',
     part_number: 'Üretici kodu',
@@ -228,7 +234,7 @@ export default {
     },
     phone: {
       required: 'Telefon numaranızı girin!',
-      min: '9 karakter girin!',
+      min: '9 karakter girin!'
     },
     prefix: {
       required: 'Telefon  önekinizi  girin!'
@@ -247,22 +253,22 @@ export default {
     manufacturer: {
       required: 'Üretici seçin'
     },
-    model       : {
+    model: {
       required: 'Model seçin'
     },
-    car         : {
+    car: {
       required: 'Araba seçin'
     },
-    year        : {
+    year: {
       required: 'Yıl seçin'
     },
-    color       : {
+    color: {
       required: 'Renk seçin'
     },
-    address     : {
+    address: {
       required: 'Adresi girin!'
     },
-    agreement   : {
+    agreement: {
       required: 'Sözleşme gerekli!'
     }
   },

@@ -33,7 +33,7 @@ export default {
   remove_question: 'Are you sure you want to delete?',
   menu: {
     products: 'Products',
-    used: 'Used',
+    used: 'Used'
   },
   used: {
     about_announcement: 'About Announcement',
@@ -43,19 +43,25 @@ export default {
     price: 'Price',
     about: 'About',
     images: 'Ad images',
+    tariff_text: 'Currently, all tariffs are free of charge',
     statuses: {
       all: 'All Ads',
       active: 'What\'s on the site',
       deactivated: 'Expired',
       waiting: 'Waiting',
       rejected: 'Rejected'
-    },
+    }
   },
   actions: {
     add: 'Add',
     back: 'Go back',
     save: 'Save',
-    edit: 'Edit'
+    edit: 'Edit',
+    activate: 'Activate',
+    deactivate: 'Dectivate',
+    tariff_vip: 'Make VIP',
+    tariff_special: 'Make Special',
+    tariff_forward: 'Pull Forward'
   },
   dashboard: {
     title: 'Dashboard',
@@ -75,25 +81,25 @@ export default {
     password: 'Password'
   },
   register: {
-    title                : 'Register',
-    first_name           : 'First Name',
-    last_name            : 'Last Name',
-    phone                : 'Mobile number',
-    email                : 'Email',
-    city                 : 'City',
-    country              : 'Country',
-    select_country       : 'Select country',
-    currency             : 'Currency',
-    select_currency      : 'Select currency',
-    gender               : 'Gender',
-    select_gender        : 'Select gender',
-    select_city          : 'Select city',
-    address              : 'Address',
-    password             : 'Password',
+    title: 'Register',
+    first_name: 'First Name',
+    last_name: 'Last Name',
+    phone: 'Mobile number',
+    email: 'Email',
+    city: 'City',
+    country: 'Country',
+    select_country: 'Select country',
+    currency: 'Currency',
+    select_currency: 'Select currency',
+    gender: 'Gender',
+    select_gender: 'Select gender',
+    select_city: 'Select city',
+    address: 'Address',
+    password: 'Password',
     password_confirmation: 'Password confirmation',
-    store_name           : 'Store name',
-    store_about          : 'About store',
-    agreement            : 'I agree with the Terms and Conditions while registering.'
+    store_name: 'Store name',
+    store_about: 'About store',
+    agreement: 'I agree with the Terms and Conditions while registering.'
   },
   navbar: {
     logout: 'Logout',
@@ -229,7 +235,7 @@ export default {
     },
     phone: {
       required: 'Enter your phone number!',
-      min: 'Enter  9 characters!',
+      min: 'Enter  9 characters!'
     },
     prefix: {
       required: 'Enter your phone prefix!'
@@ -248,22 +254,22 @@ export default {
     manufacturer: {
       required: 'Select manufacturer'
     },
-    model       : {
+    model: {
       required: 'Select model'
     },
-    car         : {
+    car: {
       required: 'Select car'
     },
-    year        : {
+    year: {
       required: 'Select year'
     },
-    color       : {
+    color: {
       required: 'Select color'
     },
-    address     : {
+    address: {
       required: 'Enter address!'
     },
-    agreement   : {
+    agreement: {
       required: 'Agreement is required!'
     }
   },
@@ -273,6 +279,6 @@ export default {
     error: 'Payment failed. Please try again'
   },
   for_resend_please_wait: 'Wait {time} seconds to resend.',
-  verificationSmsNotReceived: "Still haven't received the SMS?",
+  verificationSmsNotReceived: 'Still haven\'t received the SMS?',
   resend_otp: 'Send again'
 }

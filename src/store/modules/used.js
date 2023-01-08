@@ -182,6 +182,12 @@ const actions = {
       url: `/api/seller/used-parts/image/${id}`,
       method: 'delete'
     })
+  },
+  async CHANGE_STATUS ({ commit }, { id, status }) {
+    const {} = await request({
+      url: `/api/seller/used-parts/${id}?publishable=${status}`,
+      method: 'put'
+    })
   }
 }
 

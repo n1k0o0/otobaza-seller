@@ -2,19 +2,20 @@
   <div class="PageContainer">
     <el-breadcrumb separator-class="el-icon-arrow-right" class="Breadcrumbs">
       <el-breadcrumb-item :to="{ path: '/' }">{{
-        $t('dashboard.title')
-      }}</el-breadcrumb-item>
+          $t('dashboard.title')
+        }}
+      </el-breadcrumb-item>
       <el-breadcrumb-item>{{ $t('parts.title') }}</el-breadcrumb-item>
     </el-breadcrumb>
     <el-card shadow="always">
-      <div slot="header" class="clearfix">
+      <template slot="header">
         <h2>{{ $t('parts.title') }}</h2>
 
-        <el-button @click="$router.push({'name':'AddParts'})" type="primary" class="float-right">{{
+        <el-button type="primary" class="float-right" @click="$router.push({'name':'AddParts'})">{{
             $t('actions.add')
           }}
         </el-button>
-      </div>
+      </template>
       <h3>{{ $t('select_file') }}:</h3>
       <el-select
         v-model="selectedDataFile"
@@ -35,7 +36,8 @@
         icon="el-icon-delete"
         :loading="loadingTable"
         @click="removeDataFile"
-      >{{ $t('parts.remove_selected_file') }}</el-button>
+      >{{ $t('parts.remove_selected_file') }}
+      </el-button>
       <template v-if="products.length && selectedDataFile">
         <el-divider />
         <h4>{{ $t('parts.parts_count') }}: {{ products_pagination.total }}</h4>

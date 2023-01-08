@@ -8,14 +8,13 @@
       <el-breadcrumb-item>{{ $t('menu.used') }}</el-breadcrumb-item>
     </el-breadcrumb>
     <el-card shadow="always">
-      <div slot="header" class="clearfix">
+      <template slot="header">
         <h2>{{ $t('used.about_announcement') }}</h2>
         <div class="actions">
-          <el-button @click="$router.push({name: 'Used'})" icon="el-icon-back">{{ $t('actions.back') }}</el-button>
-          <el-button @click="save" type="primary">{{ $t('actions.add') }} <i class="el-icon-plus el-icon-plus"></i>
-          </el-button>
+          <el-button icon="el-icon-back" @click="$router.push({name: 'Used'})">{{ $t('actions.back') }}</el-button>
+          <el-button type="primary">{{ $t('actions.add') }} <i class="el-icon-plus el-icon-plus"/></el-button>
         </div>
-      </div>
+      </template>
 
       <el-row :gutter="16">
         <el-col :xs="24" :sm="24" :lg="12">
@@ -64,8 +63,8 @@
             type="textarea"
             v-model="form.description"
             :rows="2"
-            placeholder="Please input">
-          </el-input>
+            placeholder="Please input"
+          />
         </el-col>
 
         <el-col :xs="24" :sm="24" :lg="24" class="mt-4">
@@ -85,9 +84,7 @@
         </el-col>
       </el-row>
 
-
     </el-card>
-
 
     <el-dialog :visible.sync="dialogVisible">
       <img width="100%" :src="dialogImageUrl" alt="">
@@ -104,8 +101,6 @@ export default {
     return {
       dialogImageUrl: '',
       dialogVisible: false,
-      manu: {},
-      model: {},
       form: {
         car_manu_id: '',
         car_manu_name: '',

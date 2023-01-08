@@ -5,19 +5,72 @@
           $t('dashboard.title')
         }}
       </el-breadcrumb-item>
-      <el-breadcrumb-item>{{ $t('menu.used') }}</el-breadcrumb-item>
+      <el-breadcrumb-item :to="{ path: '/used' }">{{ $t('menu.used') }}</el-breadcrumb-item>
+      <el-breadcrumb-item>{{ product.model }}</el-breadcrumb-item>
     </el-breadcrumb>
     <el-card shadow="always">
-      <div slot="header" class="clearfix">
-        <h2>{{ $t('used.about_announcement') }}</h2>
-        <div class="actions">
-          <el-button @click="$router.push({name: 'Used'})" icon="el-icon-back">{{ $t('actions.back') }}</el-button>
-          <el-button v-show="!edit" type="primary" @click="edit=true">{{ $t('actions.edit') }} <i
-            class="el-icon-plus el-icon-plus"></i></el-button>
-          <el-button v-show="edit" type="primary" @click="save">{{ $t('actions.save') }} <i
-            class="el-icon-document-checked"></i></el-button>
+      <template slot="header">
+        <div class="left">
+          <svg
+            icon="el-icon-back"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            @click="$router.push({name: 'Used'})"
+          >
+            <path
+              d="M19 12H5M5 12L12 19M5 12L12 5"
+              stroke="#344054"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+
+          <h2>{{ $t('used.about_announcement') }} <span> #{{ product.id }}</span></h2>
         </div>
-      </div>
+
+        <div class="actions">
+          <el-button v-show="!edit && product.status !=='active'" type="success" @click="changeStatus()">
+            {{ $t('actions.activate') }}
+            <i class="el-icon-switch-button"/>
+          </el-button>
+          <el-button v-show="!edit && product.status ==='active'" @click="changeStatus()">
+            {{ $t('actions.deactivate') }}
+            <i class="el-icon-switch-button"/>
+          </el-button>
+
+          <el-button v-show="!edit" type="primary" @click="edit=true">{{ $t('actions.edit') }} <i
+            class="el-icon-plus el-icon-plus"
+          /></el-button>
+          <el-button v-show="edit" type="primary" @click="save">{{ $t('actions.save') }} <i
+            class="el-icon-document-checked"
+          /></el-button>
+        </div>
+      </template>
+
+      <el-row :gutter="20" class="tariffs">
+        <el-col :xs="24" :sm="24" :lg="8">
+          <div class="tariffs_item" @click="changeTariff($t('actions.tariff_forward'))">
+            <img src="@/assets/img/forward.png" alt="">
+            {{ $t('actions.tariff_forward') }}
+          </div>
+        </el-col>
+        <el-col :xs="24" :sm="24" :lg="8">
+          <div class="tariffs_item" @click="changeTariff($t('actions.tariff_vip'))">
+            <img src="@/assets/img/vip.png" alt="">
+            {{ $t('actions.tariff_vip') }}
+          </div>
+        </el-col>
+        <el-col :xs="24" :sm="24" :lg="8">
+          <div class="tariffs_item" @click="changeTariff($t('actions.tariff_special'))">
+            <img src="@/assets/img/special.png" alt="">
+            {{ $t('actions.tariff_special') }}
+          </div>
+        </el-col>
+      </el-row>
 
       <el-row :gutter="16">
         <el-col :xs="24" :sm="24" :lg="12">
@@ -68,8 +121,8 @@
             type="textarea"
             v-model="product.description"
             :rows="2"
-            placeholder="Please input">
-          </el-input>
+            placeholder="Please input"
+          />
         </el-col>
 
         <el-col :xs="24" :sm="24" :lg="24" class="mt-4">
@@ -112,9 +165,15 @@
 
     </el-card>
 
-
     <el-dialog :visible.sync="dialogVisible">
       <img width="100%" :src="dialogImageUrl" alt="">
+    </el-dialog>
+
+    <el-dialog :visible.sync="tariffModal">
+      <template #title>
+        <h2>{{ tariffModalHeader }}</h2>
+      </template>
+      <h3> {{ $t('used.tariff_text') }} </h3>
     </el-dialog>
   </div>
 </template>
@@ -129,6 +188,8 @@ export default {
       dialogImageUrl: '',
       dialogVisible: false,
       edit: false,
+      tariffModal: false,
+      tariffModalHeader: ''
     }
   },
   computed: {
@@ -151,6 +212,7 @@ export default {
       GET_MANUFACTURERS: 'catalog/GET_MANUFACTURERS',
       GET_MANUFACTURER_MODELS: 'catalog/GET_MANUFACTURER_MODELS',
       DELETE_IMG: 'used/DELETE_IMG',
+      CHANGE_STATUS: 'used/CHANGE_STATUS',
     }),
     async handleRemove (file) {
       if (file.id) {
@@ -181,6 +243,10 @@ export default {
       await this.SAVE_PRODUCT()
 
       this.edit = false
+      this.$message({
+        message: 'Success.',
+        type: 'success'
+      })
     },
     manuChanged () {
       this.product.car_manu_name = this.manufacturers.find(el => el.manuId === this.product.car_manu_id).manuName
@@ -189,6 +255,19 @@ export default {
     },
     modelChanged () {
       this.product.car_mod_name = this.manufacturer_models.find(el => el.modId === this.product.car_mod_id).ModelName
+    },
+    changeTariff (title) {
+      this.tariffModalHeader = title
+      this.tariffModal = true
+    },
+    async changeStatus () {
+      let changedStatus = this.product.status === 1 ? 0 : 1
+      await this.CHANGE_STATUS({ id: this.product.id, status: changedStatus })
+      this.$message({
+        message: 'Success.',
+        type: 'success'
+      })
+      this.product.status = this.product.status === 'active' ? 'disabled' : 'active'
     }
   },
 }
@@ -205,5 +284,28 @@ export default {
   font-size: 14px;
   line-height: 20px;
   color: #344054;
+}
+
+.tariffs {
+  &_item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    color: #344054;
+    border: 1px solid #F2F4F7;
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 32px;
+    cursor: pointer;
+    transition: background-color .3s linear;
+
+    &:hover {
+      background-color: #F2F4F7;
+    }
+  }
 }
 </style>
