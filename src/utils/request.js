@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { MessageBox, Message } from 'element-ui'
+import { Message, MessageBox } from 'element-ui'
 import store from '@/store'
 import { getToken } from '@/utils/auth'
 import i18n from '@/lang'
@@ -46,7 +46,7 @@ service.interceptors.response.use(
   response => {
     const res = response
     // if the custom code is not 20000, it is judged as an error.
-    if (res.status !== 200) {
+    if (res.status < 200 || res.status > 299) {
       Message({
         message: res?.message || i18n.t('error'),
         type: 'error',

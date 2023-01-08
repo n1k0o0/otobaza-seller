@@ -23,7 +23,7 @@
         </el-button>
       </div>
 
-      <template v-if="!products.length">
+      <template v-if="false">
         <div class="empty_used mb-32">
           <img src="@/assets/img/add_item.svg" alt="">
           <h2>İlk elanını əlavə et</h2>
@@ -42,7 +42,7 @@
             </el-input>
           </el-col>
           <el-col :md="6">
-            <el-button type="primary" class="w100" @click="GET_PARTS({search:search})">
+            <el-button type="primary" :disabled="search.length<4" class="w100" @click="GET_PARTS({search:search})">
               {{ $t('search') }}
             </el-button>
           </el-col>
@@ -50,27 +50,37 @@
 
         <el-row class="mt-12">
           <el-tabs @tab-click="GET_PARTS({status:activeTab})" v-model="activeTab">
-            <el-tab-pane :label="$t('used.statuses.all')" name="1"></el-tab-pane>
-            <el-tab-pane :label="$t('used.statuses.active')" name="2"></el-tab-pane>
+            <el-tab-pane :label="$t('used.statuses.all')" name="9"></el-tab-pane>
+            <el-tab-pane :label="$t('used.statuses.active')" name="1"></el-tab-pane>
             <el-tab-pane :label="$t('used.statuses.deactivated')" name="3"></el-tab-pane>
-            <el-tab-pane :label="$t('used.statuses.waiting')" name="4"></el-tab-pane>
-            <el-tab-pane :label="$t('used.statuses.rejected')" name="5"></el-tab-pane>
+            <el-tab-pane :label="$t('used.statuses.waiting')" name="2"></el-tab-pane>
+            <el-tab-pane :label="$t('used.statuses.rejected')" name="0"></el-tab-pane>
           </el-tabs>
         </el-row>
 
         <div class="used_item_wrapper mb-16">
           <div class="used_item" v-for="product in products"
-               @click="$router.push({name: 'EditUsed',params:{id:product.id}})"
+               @click.self="$router.push({name: 'EditUsed',params:{id:product.id}})"
                :key="product.id">
-            <VueSlickCarousel :arrows="true">
-              <div v-for="img in product.url"><img
-                :src="img"
-                alt=""></div>
+            <VueSlickCarousel :arrows="true" v-if="product.images.length">
+              <div v-for="img in product.images">
+                <img
+                  :src="img.link"
+                  alt="">
+              </div>
+
             </VueSlickCarousel>
-            <h5>{{ product.description }}</h5>
-            <p><span>{{ product.manufacturer }}/ {{ product.model }}</span></p>
-            <p class="used_item_price"><span>Qiymet:</span>
-              <span class="float-right">{{ product.price.price }} {{ product.price.currency_symbol }}</span>
+            <div @click.self="$router.push({name: 'EditUsed',params:{id:product.id}})" v-else class="text-center">
+              <img
+                src="@/assets/img/default-parts.png"
+                alt="">
+            </div>
+            <h5 @click.self="$router.push({name: 'EditUsed',params:{id:product.id}})">{{ product.description }}</h5>
+            <p @click.self="$router.push({name: 'EditUsed',params:{id:product.id}})"><span>{{ product.car_manu_name }}/ {{
+                product.car_mod_name
+              }}</span></p>
+            <p @click.self="$router.push({name: 'EditUsed',params:{id:product.id}})" class="used_item_price"><span>Qiymet:</span>
+              <span class="float-right">{{ product.price }} {{ product.price_type.name }}</span>
             </p>
           </div>
         </div>
@@ -110,7 +120,7 @@ export default {
     return {
       page: 1,
       empty: true,
-      activeTab: '1',
+      activeTab: '9',
       currentPage: 1,
     }
   },
@@ -130,7 +140,7 @@ export default {
     }
   },
   async beforeMount () {
-    await this.GET_PARTS({ page: this.currentPage })
+    await this.GET_PARTS({ status: this.activeTab, page: this.currentPage })
   },
   methods: {
     loading () {
@@ -155,7 +165,7 @@ export default {
 
 .used_item_wrapper {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(205px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(205px, 1fr));
   grid-gap: 25px;
 }
 

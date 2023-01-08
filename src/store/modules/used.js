@@ -4,17 +4,18 @@ import { Message } from 'element-ui'
 const state = {
   products: [],
   product: {
-    brand: '',
-    model: '',
-    name: '',
-    price: 0,
-    currency: 1,
-    about: '',
-    images: [],
-    deleted_files: [],
+    car_manu_id: '',
+    car_manu_name: '',
+    car_mod_id: '',
+    car_mod_name: '',
+    title: '',
+    price: '',
+    price_type: '',
+    description: '',
+    images: []
   },
   pagination: {},
-  status: 0,
+  status: '',
   search: '',
   loading: false,
 }
@@ -37,6 +38,7 @@ const mutations = {
   },
   SET_PRODUCT (state, payload) {
     state.product = payload
+    state.product.price_type = payload.price_type.id
     state.product.deleted_files = []
   },
   TOGGLE_LOADING (state) {
@@ -51,16 +53,23 @@ const mutations = {
 }
 
 const actions = {
-  async GET_PRODUCTS ({ commit, state }, { status = 0, page = 1 }) {
+  async GET_PRODUCTS ({ commit, state }, { status = null, page = 1 }) {
     try {
       commit('TOGGLE_LOADING')
       if (status) {
         commit('SET_STATUS', status)
       }
+      let url = `/api/seller/used-parts/search?page=${page}`
 
+      if (+state.status !== 9) {
+        url += `&status=${state.status}`
+      }
       const { data } = await request({
-        url: `https://62d45369cd960e45d456a36d.mockapi.io/api/v2/products?page=${page}&status=${state.status}&keyword=${state.search}`,
-        method: 'get'
+        url: url,
+        method: 'post',
+        data: {
+          keyword: state.search.length >= 4 ? state.search : ''
+        }
       })
       commit('SET_PRODUCTS', data?.data)
 
@@ -79,7 +88,7 @@ const actions = {
     try {
       commit('TOGGLE_LOADING')
       const { data } = await request({
-        url: `https://62d45369cd960e45d456a36d.mockapi.io/api/v2/product/${id}`,
+        url: `/api/seller/used-parts/${id}`,
         method: 'get'
       })
       commit('SET_PRODUCT', data?.data)
@@ -95,16 +104,14 @@ const actions = {
     }
   },
   async SAVE_PRODUCT ({ commit, state }) {
-    console.log(state.product)
     let data = state.product
 
     const formData = new FormData()
-    formData.append('_method', 'PUT')
     Object.keys(state.product).forEach(function (key) {
       if (data[key] === 'null' || data[key] === null) {
         data[key] = ''
       }
-      if (key === 'url') {
+      if (key === 'images') {
         data[key].forEach((el) => {
           if (el.raw) {
             formData.append(`${key}[]`, el.raw)
@@ -129,7 +136,7 @@ const actions = {
 
     console.log(formData)
     const { res } = await request.post(
-      `https://62d45369cd960e45d456a36d.mockapi.io/api/v2/product/${state.product.id}`,
+      `/api/seller/used-parts/edit/${state.product.id}`,
       formData,
       {
         headers: {
@@ -137,6 +144,44 @@ const actions = {
         },
       })
 
+  },
+  async CREATE_PRODUCT ({ commit, }, data) {
+    const formData = new FormData()
+    Object.keys(data).forEach(function (key) {
+      if (data[key] === 'null' || data[key] === null) {
+        data[key] = ''
+      }
+      if (key === 'images') {
+        data[key].forEach((el) => {
+          if (el.raw) {
+            formData.append(`${key}[]`, el.raw)
+          }
+        })
+      } else if (data[key] instanceof Object && !(data[key] instanceof File)) {
+        Object.keys(data[key]).forEach(function (subKey) {
+          formData.append(`${key}[${subKey}]`, data[key][subKey])
+        })
+      } else {
+        console.log(22222, key)
+        formData.append(`${key}`, data[key])
+      }
+    })
+
+    const {} = await request.post(
+      '/api/seller/used-parts',
+      formData,
+      {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      })
+
+  },
+  async DELETE_IMG ({ commit }, id) {
+    const {} = await request({
+      url: `/api/seller/used-parts/image/${id}`,
+      method: 'delete'
+    })
   }
 }
 
