@@ -3,10 +3,12 @@
     <el-breadcrumb separator-class="el-icon-arrow-right" class="Breadcrumbs">
       <el-breadcrumb-item :to="{ path: '/' }">{{
         $t('dashboard.title')
-      }}</el-breadcrumb-item>
+      }}
+      </el-breadcrumb-item>
       <el-breadcrumb-item :to="{ path: '/orders' }">{{
         $t('orders.title')
-      }}</el-breadcrumb-item>
+      }}
+      </el-breadcrumb-item>
       <el-breadcrumb-item>{{ orderNumber }}</el-breadcrumb-item>
     </el-breadcrumb>
     <el-row :gutter="16">
@@ -105,6 +107,7 @@
 </template>
 <script>
 import { mapGetters } from 'vuex'
+
 export default {
   name: 'Order',
   data() {

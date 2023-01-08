@@ -2,13 +2,13 @@
   <div class="PageContainer">
     <el-breadcrumb separator-class="el-icon-arrow-right" class="Breadcrumbs">
       <el-breadcrumb-item :to="{ path: '/' }">{{
-          $t('dashboard.title')
-                                              }}
+        $t('dashboard.title')
+      }}
       </el-breadcrumb-item>
       <el-breadcrumb-item>{{ $t('parts.add') }}</el-breadcrumb-item>
     </el-breadcrumb>
     <el-card shadow="always">
-      <div slot="header" class="d-flex align-items-center clearfix">
+      <template slot="header" class="d-flex align-items-center">
         <h2>{{ $t('parts.add') }}</h2>
         <el-button
           v-if="excel_file"
@@ -19,7 +19,7 @@
           @click.prevent="downloadExcel"
         >{{ $t('parts.download_excel') }}
         </el-button>
-      </div>
+      </template>
 
       <div class="add_buttons">
         <div class="excelUpload">
@@ -35,8 +35,8 @@
             :file-list="fileList"
           >
             <el-button class="w100" size="small" type="primary" :loading="loading">{{
-                $t('parts.select_file')
-              }}
+              $t('parts.select_file')
+            }}
             </el-button>
           </el-upload>
         </div>
@@ -243,18 +243,18 @@ export default {
   name: 'AddParts',
   data() {
     return {
-      excel_file  : '',
-      formData    : new FormData(),
-      fileList    : [],
-      loading     : false,
+      excel_file: '',
+      formData: new FormData(),
+      fileList: [],
+      loading: false,
       loadingTable: false,
-      checked     : false
+      checked: false
     }
   },
   computed: {
     ...mapGetters({
-      excel_parts       : 'parts/excel_parts',
-      currency          : 'app/currency',
+      excel_parts: 'parts/excel_parts',
+      currency: 'app/currency',
       part_manufacturers: 'parts/part_manufacturers'
     }),
     isChecked() {
@@ -285,11 +285,11 @@ export default {
   },
   methods: {
     ...mapActions({
-      CHECK_PARTS           : 'parts/CHECK_PARTS',
-      ADD_PARTS             : 'parts/ADD_PARTS',
+      CHECK_PARTS: 'parts/CHECK_PARTS',
+      ADD_PARTS: 'parts/ADD_PARTS',
       GET_PART_MANUFACTURERS: 'parts/GET_PART_MANUFACTURERS',
-      GET_EXCEL_FILE        : 'parts/GET_EXCEL_FILE',
-      ADD_MANUAL            : 'parts/ADD_MANUAL'
+      GET_EXCEL_FILE: 'parts/GET_EXCEL_FILE',
+      ADD_MANUAL: 'parts/ADD_MANUAL'
     }),
     ...mapMutations({
       CLEAR_EXCEL_DATA: 'parts/CLEAR_EXCEL_DATA'
@@ -300,7 +300,7 @@ export default {
         parts: this.excel_parts
       })
       this.loadingTable = false
-      this.checked      = true
+      this.checked = true
     },
     edit(row) {
       this.$set(row, 'editable', !row.editable)
@@ -316,14 +316,14 @@ export default {
       this.loadingTable = true
       const parts = this.excel_parts.map(part => {
         return {
-          part_number : part.code,
-          oem         : part.oem,
+          part_number: part.code,
+          oem: part.oem,
           manufacturer: part.manufacturer,
-          description : part.description,
+          description: part.description,
           product_type: part.product_type,
-          price       : part.price,
-          price_type  : this.currency,
-          status_id   : 1
+          price: part.price,
+          price_type: this.currency,
+          status_id: 1
         }
       })
       await this.ADD_PARTS({
@@ -357,7 +357,7 @@ export default {
       return ''
     },
     async handleChange(file, fileList) {
-      this.loading  = true
+      this.loading = true
       this.fileList = fileList
 
       this.fileList.map(image => {
@@ -370,9 +370,9 @@ export default {
       this.loading = false
     },
     downloadExcel() {
-      const url  = this.excel_file
+      const url = this.excel_file
       const link = document.createElement('a')
-      link.href  = url
+      link.href = url
       link.setAttribute('download', 'excel_name.xlsx')
       document.body.appendChild(link)
       link.click()
@@ -382,12 +382,12 @@ export default {
       this.checked = false
     },
     querySearch(queryString, cb) {
-      const links   = this.part_manufacturers
+      const links = this.part_manufacturers
       const results = queryString ? links.filter(this.createFilter(queryString)) : links
       // call callback function to return suggestion objects
       cb(results)
     },
-    createFilter (queryString) {
+    createFilter(queryString) {
       return (link) => {
         return (link.label.toLowerCase()
           .indexOf(queryString.toLowerCase()) === 0)

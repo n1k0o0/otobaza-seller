@@ -60,43 +60,56 @@ div:focus {
     height: 0;
   }
 }
+
 .milage {
   width: 100% !important;
+
   input {
     text-align: left !important;
     width: 100% !important;
   }
 }
+
 .ml-0 {
   margin-left: 0 !important;
 }
+
 .ml-1 {
   margin-left: 1rem;
 }
+
 .ml-2 {
   margin-left: 2rem;
 }
+
 .ml-3 {
   margin-left: 3rem;
 }
+
 .ml-4 {
   margin-left: 4rem;
 }
+
 .ml-5 {
   margin-left: 5rem;
 }
+
 .mb-1 {
   margin-bottom: 1rem;
 }
+
 .mb-2 {
   margin-bottom: 2rem;
 }
+
 .mb-3 {
   margin-bottom: 3rem;
 }
+
 .mb-4 {
   margin-bottom: 4rem;
 }
+
 .mb-5 {
   margin-bottom: 5rem;
 }
@@ -104,38 +117,106 @@ div:focus {
 .w100 {
   width: 100% !important;
 }
+
 .el-breadcrumb__inner.is-link {
   font-weight: bold !important;
 }
+
 // main-container global css
 .app-container {
   padding: 20px;
 }
+
 .el-card__header {
-  h2 {
-    float: left;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #F2F4F7;
+
+  .left {
+    display: flex;
+    align-items: center;
   }
+
+  h2, svg {
+    float: left;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 32px;
+    color: #344054;
+
+    span {
+      font-weight: 400;
+      font-size: 18px;
+      line-height: 28px;
+    }
+  }
+
+  svg {
+    margin-right: 13px;
+    cursor: pointer;
+  }
+
+  button {
+    border-radius: 8px;
+    height: 44px;
+
+  }
+
+  button.el-button--default {
+    color: #344054;
+  }
+
+  button.el-button--success {
+    background: #F6FEF9;
+    border: 1px solid #12B76A;
+    box-shadow: 0 1px 2px rgba(16, 24, 40, 0.05);
+    color: #12B76A;
+  }
+
+  button.el-button--primary {
+    padding: 8px 14px;
+    gap: 8px;
+
+
+    /* Blue light/600 */
+
+    background: #0086C9;
+
+    border: 1px solid #0086C9;
+    color: #fff;
+    border-radius: 8px;
+    box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.05);
+  }
+
 }
+
 .PageContainer {
   margin: 15px;
+
   .Breadcrumbs {
     margin-bottom: 16px;
   }
+
   .Operation {
     float: right;
   }
+
   .goBack {
     margin-bottom: 16px;
     margin-top: 16px;
   }
+
   h2 {
-    margin:0;
+    margin: 0;
   }
+
   .pagination {
     margin-top: 20px;
   }
+
   .PageTitle {
     margin-bottom: 20px;
+
     .Buttons {
       display: flex;
       align-items: flex-end;
@@ -262,31 +343,14 @@ $sizes: 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 20, 30, 32;
   }
 }
 
-.el-card__header {
-  border-bottom: 1px solid #F2F4F7;
+.el-dialog {
+  border-radius: 16px;
+  margin: 0 !important;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
 
-  h2 {
-    font-weight: 400;
-    font-size: 18px;
-    line-height: 28px;
-    color: #98A2B3;
-  }
-
-  button:not(.el-button--text) {
-    padding: 8px 14px;
-    gap: 8px;
-
-    height: 36px;
-
-    /* Blue light/600 */
-
-    background: #0086C9;
-    /* Blue light/600 */
-
-    border: 1px solid #0086C9;
-    /* Shadow/xs */
-
-    box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.05);
-    border-radius: 8px;
+  &__body {
+    padding: 20px;
   }
 }

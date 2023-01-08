@@ -34,7 +34,7 @@ export default {
   remove_question: 'Silmək istədiyinizə əminsiniz?',
   menu: {
     products: 'Məhsullar',
-    used: 'Ölüxana',
+    used: 'Ölüxana'
   },
   used: {
     about_announcement: 'Elan haqqında',
@@ -50,13 +50,19 @@ export default {
       deactivated: 'Müddəti başa çatmış',
       waiting: 'Gözləmə',
       rejected: 'İmtina'
-    }
+    },
+    tariff_text: 'Hal hazırda bütün tariflər odənişsizdir'
   },
   actions: {
     add: 'Əlavə et',
     back: 'Geri qayıt',
     save: 'Yadda saxla',
-    edit: 'Dəyişiklik et'
+    edit: 'Dəyişiklik et',
+    activate: 'Aktiv et',
+    deactivate: 'Deaktiv et',
+    tariff_vip: 'VIP et',
+    tariff_special: 'Özəl et',
+    tariff_forward: 'İrəli çək'
   },
   dashboard: {
     title: 'Dashboard',
@@ -76,25 +82,25 @@ export default {
     password: 'Şifrə'
   },
   register: {
-    title                : 'Qeydiyyat',
-    first_name           : 'Ad',
-    last_name            : 'Soyad',
-    phone                : 'Mobil nömrə',
-    email                : 'Email',
-    city                 : 'Şəhər',
-    country              : 'Ölkə',
-    select_country       : 'Ölkə seçin',
-    currency             : 'Valyuta',
-    select_currency      : 'Valyuta seçin',
-    gender               : 'Cins',
-    select_gender        : 'Cinsinizi seçin',
-    select_city          : 'Şəhər seçin',
-    address              : 'Ünvan',
-    password             : 'Şifrə',
+    title: 'Qeydiyyat',
+    first_name: 'Ad',
+    last_name: 'Soyad',
+    phone: 'Mobil nömrə',
+    email: 'Email',
+    city: 'Şəhər',
+    country: 'Ölkə',
+    select_country: 'Ölkə seçin',
+    currency: 'Valyuta',
+    select_currency: 'Valyuta seçin',
+    gender: 'Cins',
+    select_gender: 'Cinsinizi seçin',
+    select_city: 'Şəhər seçin',
+    address: 'Ünvan',
+    password: 'Şifrə',
     password_confirmation: 'Təkrar şifrə',
-    store_name           : 'Mağaza adı',
-    store_about          : 'Mağaza haqqında',
-    agreement            : 'Qeydiyyat zamanı Şərtlər və Qaydalarla razılaşıram.'
+    store_name: 'Mağaza adı',
+    store_about: 'Mağaza haqqında',
+    agreement: 'Qeydiyyat zamanı Şərtlər və Qaydalarla razılaşıram.'
   },
   navbar: {
     logout: 'Çıxış',
@@ -230,10 +236,10 @@ export default {
     },
     phone: {
       required: 'Mobil nömrənizi daxil edin!',
-      min: '9 simvol daxil edin!',
+      min: '9 simvol daxil edin!'
     },
     prefix: {
-      required: 'Prefix daxil edin!',
+      required: 'Prefix daxil edin!'
     },
     password: {
       min: 'Minimum 8 simvol daxil edin!',
@@ -249,22 +255,22 @@ export default {
     manufacturer: {
       required: 'İstehsalçı seçin'
     },
-    model       : {
+    model: {
       required: 'Model seçin'
     },
-    car         : {
+    car: {
       required: 'Avtomobil seçin'
     },
-    year        : {
+    year: {
       required: 'İl seçin'
     },
-    color       : {
+    color: {
       required: 'Rəng seçin'
     },
-    address     : {
+    address: {
       required: 'Ünvan daxil edin!'
     },
-    agreement   : {
+    agreement: {
       required: 'Razılaşma mütləqdir!'
     }
   },

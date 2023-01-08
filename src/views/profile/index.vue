@@ -3,13 +3,14 @@
     <el-breadcrumb separator-class="el-icon-arrow-right" class="Breadcrumbs">
       <el-breadcrumb-item :to="{ path: '/' }">{{
         $t('dashboard.title')
-      }}</el-breadcrumb-item>
+      }}
+      </el-breadcrumb-item>
       <el-breadcrumb-item>{{ $t('profile.title') }}</el-breadcrumb-item>
     </el-breadcrumb>
     <el-card v-loading="loading" shadow="always">
-      <div slot="header" class="clearfix">
+      <template slot="header">
         <h2>{{ $t('profile.title') }}</h2>
-      </div>
+      </template>
       <div class="profile-form">
         <h3>{{ $t('profile.profile_details') }}:</h3>
         <el-form
@@ -93,7 +94,8 @@
               :loading="loading"
               type="primary"
               @click.native.prevent="handleRegister"
-            >{{ $t('profile.save') }}</el-button>
+            >{{ $t('profile.save') }}
+            </el-button>
           </div>
         </el-form>
       </div>
@@ -117,7 +119,8 @@
               :loading="loading"
               type="primary"
               @click.native.prevent="handleEmail"
-            >{{ $t('profile.save') }}</el-button>
+            >{{ $t('profile.save') }}
+            </el-button>
           </div>
         </el-form>
       </div>
@@ -161,7 +164,8 @@
               type="primary"
               native-type="submit"
               @click.native.prevent="handlePassword"
-            >{{ $t('profile.save') }}</el-button>
+            >{{ $t('profile.save') }}
+            </el-button>
           </div>
         </el-form>
       </div>
@@ -186,7 +190,8 @@
               type="primary"
               native-type="submit"
               @click.native.prevent="handlePhone"
-            >{{ $t('profile.save') }}</el-button>
+            >{{ $t('profile.save') }}
+            </el-button>
           </div>
         </el-form>
         <el-dialog :visible.sync="otpShow" width="30%">
@@ -198,7 +203,8 @@
               type="primary"
               :disabled="isOtpDisabled"
               @click.prevent="submitOtp"
-            >{{ $t('confirm') }}</el-button>
+            >{{ $t('confirm') }}
+            </el-button>
           </template>
         </el-dialog>
       </div>
@@ -501,12 +507,15 @@ $light_gray: #eee;
   cursor: pointer;
   user-select: none;
 }
+
 .otp_input {
   width: 100%;
 }
+
 .profile-form {
   max-width: 600px;
   width: 100%;
+
   .el-select {
     width: 100%;
   }

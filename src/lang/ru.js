@@ -33,7 +33,7 @@ export default {
   remove_question: 'Вы уверены что хотите удалить ?',
   menu: {
     products: 'Товары',
-    used: 'Подержанные',
+    used: 'Подержанные'
   },
   used: {
     about_announcement: 'Об объявлении',
@@ -43,6 +43,7 @@ export default {
     price: 'Цена',
     about: 'Описание',
     images: 'Рекламные изображения',
+    tariff_text: 'На данный момент все тарифы бесплатны',
     statuses: {
       all: 'Все объявления',
       active: 'Что есть на сайте',
@@ -55,7 +56,8 @@ export default {
     add: 'Добавить',
     back: 'Назад',
     save: 'Сохранить',
-    edit: 'Изменить'
+    edit: 'Изменить',
+    activate: 'Деактивируй'
   },
   dashboard: {
     title: 'Панель приборов',
@@ -75,25 +77,25 @@ export default {
     password: 'Пароль'
   },
   register: {
-    title                : 'Регистрация',
-    first_name           : 'Имя',
-    last_name            : 'Фамилия',
-    phone                : 'Мобильный номер',
-    email                : 'Эл. адрес',
-    city                 : 'Город',
-    country              : 'Страна',
-    select_country       : 'Выберите страну',
-    currency             : 'Валюта',
-    select_currency      : 'Выберите валюту',
-    gender               : 'Пол',
-    select_gender        : 'Выберите пол',
-    select_city          : 'Выберите город',
-    address              : 'Адрес',
-    password             : 'Пароль',
+    title: 'Регистрация',
+    first_name: 'Имя',
+    last_name: 'Фамилия',
+    phone: 'Мобильный номер',
+    email: 'Эл. адрес',
+    city: 'Город',
+    country: 'Страна',
+    select_country: 'Выберите страну',
+    currency: 'Валюта',
+    select_currency: 'Выберите валюту',
+    gender: 'Пол',
+    select_gender: 'Выберите пол',
+    select_city: 'Выберите город',
+    address: 'Адрес',
+    password: 'Пароль',
     password_confirmation: 'Подтверждение пароля',
-    store_name           : 'Название магазина',
-    store_about          : 'О магазине',
-    agreement            : 'Я согласен с Условиями и Соглашениями при регистрации.'
+    store_name: 'Название магазина',
+    store_about: 'О магазине',
+    agreement: 'Я согласен с Условиями и Соглашениями при регистрации.'
   },
   navbar: {
     logout: 'Выйти',
@@ -229,7 +231,7 @@ export default {
     },
     phone: {
       required: 'Введите свой номер телефона!',
-      min: 'Введите 9 символов!',
+      min: 'Введите 9 символов!'
     },
     prefix: {
       required: 'Введите свой префикс телефона!'
@@ -248,22 +250,22 @@ export default {
     manufacturer: {
       required: 'Выберите производителя'
     },
-    model       : {
+    model: {
       required: 'Выберите модель'
     },
-    car         : {
+    car: {
       required: 'Выберите автомобиль'
     },
-    year        : {
+    year: {
       required: 'Выберите год'
     },
-    color       : {
+    color: {
       required: 'Выберите цвет'
     },
-    address     : {
+    address: {
       required: 'Введите адрес!'
     },
-    agreement   : {
+    agreement: {
       required: 'Требуется согласие!'
     }
   },

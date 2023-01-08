@@ -2,26 +2,26 @@
   <div class="PageContainer">
     <el-breadcrumb separator-class="el-icon-arrow-right" class="Breadcrumbs">
       <el-breadcrumb-item :to="{ path: '/' }">{{
-          $t('dashboard.title')
-        }}
+        $t('dashboard.title')
+      }}
       </el-breadcrumb-item>
       <el-breadcrumb-item>{{ $t('menu.used') }}</el-breadcrumb-item>
     </el-breadcrumb>
-    <el-card shadow="always" v-loading.fullscreen.lock="loading">
-      <div slot="header" class="clearfix">
+    <el-card v-loading.fullscreen.lock="loading" shadow="always">
+      <template slot="header">
         <h2>{{ $t('menu.used') }}</h2>
 
-        <el-button @click="$router.push({'name':'AddUsed'})" type="text" class="float-right">
+        <el-button type="text" class="float-right" @click="$router.push({'name':'AddUsed'})">
           <div class="span">
             {{ $t('actions.add') }}
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M5 10H15" stroke="#0086C9" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M10 15V5" stroke="#0086C9" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M5 10H15" stroke="#0086C9" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+              <path d="M10 15V5" stroke="#0086C9" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
             </svg>
           </div>
 
         </el-button>
-      </div>
+      </template>
 
       <template v-if="!products.length">
         <div class="empty_used mb-32">
@@ -29,7 +29,8 @@
           <h2>İlk elanını əlavə et</h2>
           <p class="light_text">İlk elanını yarat, satışa başla, gəlir qazan</p>
           <el-button type="primary" @click="$router.push({name: 'AddUsed'})">{{ $t('actions.add') }} <i
-            class="el-icon-plus el-icon-plus"></i></el-button>
+            class="el-icon-plus el-icon-plus"
+          /></el-button>
         </div>
       </template>
 
@@ -38,8 +39,8 @@
           <el-col :md="18">
             <el-input
               v-model="search"
-              :placeholder="$t('search')">
-            </el-input>
+              :placeholder="$t('search')"
+            />
           </el-col>
           <el-col :md="6">
             <el-button type="primary" class="w100" @click="GET_PARTS({search:search})">
@@ -49,23 +50,27 @@
         </el-row>
 
         <el-row class="mt-12">
-          <el-tabs @tab-click="GET_PARTS({status:activeTab})" v-model="activeTab">
-            <el-tab-pane :label="$t('used.statuses.all')" name="1"></el-tab-pane>
-            <el-tab-pane :label="$t('used.statuses.active')" name="2"></el-tab-pane>
-            <el-tab-pane :label="$t('used.statuses.deactivated')" name="3"></el-tab-pane>
-            <el-tab-pane :label="$t('used.statuses.waiting')" name="4"></el-tab-pane>
-            <el-tab-pane :label="$t('used.statuses.rejected')" name="5"></el-tab-pane>
+          <el-tabs v-model="activeTab" @tab-click="GET_PARTS({status:activeTab})">
+            <el-tab-pane :label="$t('used.statuses.all')" name="1" />
+            <el-tab-pane :label="$t('used.statuses.active')" name="2" />
+            <el-tab-pane :label="$t('used.statuses.deactivated')" name="3" />
+            <el-tab-pane :label="$t('used.statuses.waiting')" name="4" />
+            <el-tab-pane :label="$t('used.statuses.rejected')" name="5" />
           </el-tabs>
         </el-row>
 
         <div class="used_item_wrapper mb-16">
-          <div class="used_item" v-for="product in products"
-               @click="$router.push({name: 'EditUsed',params:{id:product.id}})"
-               :key="product.id">
+          <div
+            v-for="product in products"
+            :key="product.id"
+            class="used_item"
+            @click="$router.push({name: 'EditUsed',params:{id:product.id}})"
+          >
             <VueSlickCarousel :arrows="true">
               <div v-for="img in product.url"><img
                 :src="img"
-                alt=""></div>
+                alt=""
+              ></div>
             </VueSlickCarousel>
             <h5>{{ product.description }}</h5>
             <p><span>{{ product.manufacturer }}/ {{ product.model }}</span></p>
@@ -77,17 +82,17 @@
 
       </template>
 
-      <el-divider></el-divider>
+      <el-divider />
 
       <el-row type="flex" justify="center">
         <el-pagination
           v-model:currentPage="currentPage"
           :hide-on-single-page="true"
-          @current-change="pageChanged"
           background
           layout="prev, pager, next"
-          v-bind="pagination">
-        </el-pagination>
+          v-bind="pagination"
+          @current-change="pageChanged"
+        />
       </el-row>
 
     </el-card>
@@ -106,40 +111,40 @@ import loading from 'element-ui/packages/loading'
 export default {
   name: 'Used',
   components: { VueSlickCarousel },
-  data () {
+  data() {
     return {
       page: 1,
       empty: true,
       activeTab: '1',
-      currentPage: 1,
+      currentPage: 1
     }
   },
   computed: {
     ...mapGetters({
       products: 'used/products',
       pagination: 'used/pagination',
-      loading: 'used/loading',
+      loading: 'used/loading'
     }),
     search: {
-      get () {
+      get() {
         return this.$store.state.used.search
       },
-      set (value) {
+      set(value) {
         this.$store.commit('used/SET_SEARCH', value)
       }
     }
   },
-  async beforeMount () {
+  async beforeMount() {
     await this.GET_PARTS({ page: this.currentPage })
   },
   methods: {
-    loading () {
+    loading() {
       return loading
     },
     ...mapActions({
-      GET_PARTS: 'used/GET_PRODUCTS',
+      GET_PARTS: 'used/GET_PRODUCTS'
     }),
-    async pageChanged (page) {
+    async pageChanged(page) {
       await this.GET_PARTS({ page: page })
     }
   }
