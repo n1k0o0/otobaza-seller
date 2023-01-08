@@ -12,7 +12,8 @@
         <h2>{{ $t('used.about_announcement') }}</h2>
         <div class="actions">
           <el-button icon="el-icon-back" @click="$router.push({name: 'Used'})">{{ $t('actions.back') }}</el-button>
-          <el-button type="primary">{{ $t('actions.add') }} <i class="el-icon-plus el-icon-plus"/></el-button>
+          <el-button type="primary" @click="save">{{ $t('actions.add') }} <i class="el-icon-plus el-icon-plus"/>
+          </el-button>
         </div>
       </template>
 

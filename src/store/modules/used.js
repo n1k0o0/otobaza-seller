@@ -185,7 +185,7 @@ const actions = {
   },
   async CHANGE_STATUS ({ commit }, { id, status }) {
     const {} = await request({
-      url: `/api/seller/used-parts/${id}?publishable=${status}`,
+      url: `/api/seller/used-parts/${id}/status?publishable=${status}`,
       method: 'put'
     })
   }
