@@ -1,11 +1,17 @@
 <template>
   <div class="PageContainer">
-    <el-breadcrumb separator-class="el-icon-arrow-right" class="Breadcrumbs">
-      <el-breadcrumb-item :to="{ path: '/' }">{{
+    <el-breadcrumb
+      separator-class="el-icon-arrow-right"
+      class="Breadcrumbs"
+    >
+      <el-breadcrumb-item :to="{ path: '/' }">
+        {{
           $t('dashboard.title')
         }}
       </el-breadcrumb-item>
-      <el-breadcrumb-item :to="{ path: '/used' }">{{ $t('menu.used') }}</el-breadcrumb-item>
+      <el-breadcrumb-item :to="{ path: '/used' }">
+        {{ $t('menu.used') }}
+      </el-breadcrumb-item>
       <el-breadcrumb-item>{{ product.model }}</el-breadcrumb-item>
     </el-breadcrumb>
     <el-card shadow="always">
@@ -33,49 +39,111 @@
         </div>
 
         <div class="actions">
-          <el-button v-show="!edit && product.status !=='active'" type="success" @click="changeStatus()">
+          <el-button
+            v-show="!edit && !product.is_active"
+            type="success"
+            @click="changeStatus(1)"
+          >
             {{ $t('actions.activate') }}
-            <i class="el-icon-switch-button"/>
+            <i class="el-icon-switch-button" />
           </el-button>
-          <el-button v-show="!edit && product.status ==='active'" @click="changeStatus()">
+          <el-button
+            v-show="!edit && product.is_active"
+            @click="changeStatus(0)"
+          >
             {{ $t('actions.deactivate') }}
-            <i class="el-icon-switch-button"/>
+            <i class="el-icon-switch-button" />
           </el-button>
 
-          <el-button v-show="!edit" type="primary" @click="edit=true">{{ $t('actions.edit') }} <i
-            class="el-icon-plus el-icon-plus"
-          /></el-button>
-          <el-button v-show="edit" type="primary" @click="save">{{ $t('actions.save') }} <i
-            class="el-icon-document-checked"
-          /></el-button>
+          <el-button
+            v-show="!edit"
+            type="primary"
+            @click="edit=true"
+          >
+            {{ $t('actions.edit') }} <i
+              class="el-icon-plus el-icon-plus"
+            />
+          </el-button>
+          <el-button
+            v-show="edit"
+            type="primary"
+            @click="save"
+          >
+            {{ $t('actions.save') }} <i
+              class="el-icon-document-checked"
+            />
+          </el-button>
         </div>
       </template>
 
-      <el-row :gutter="20" class="tariffs">
-        <el-col :xs="24" :sm="24" :lg="8">
-          <div class="tariffs_item" @click="changeTariff($t('actions.tariff_forward'))">
-            <img src="@/assets/img/forward.png" alt="">
+      <el-row
+        :gutter="20"
+        class="tariffs"
+      >
+        <el-col
+          :xs="24"
+          :sm="24"
+          :lg="8"
+        >
+          <div
+            class="tariffs_item"
+            @click="changeTariff($t('actions.tariff_forward'))"
+          >
+            <img
+              src="@/assets/img/forward.png"
+              alt=""
+            >
             {{ $t('actions.tariff_forward') }}
           </div>
         </el-col>
-        <el-col :xs="24" :sm="24" :lg="8">
-          <div class="tariffs_item" @click="changeTariff($t('actions.tariff_vip'))">
-            <img src="@/assets/img/vip.png" alt="">
+        <el-col
+          :xs="24"
+          :sm="24"
+          :lg="8"
+        >
+          <div
+            class="tariffs_item"
+            @click="changeTariff($t('actions.tariff_vip'))"
+          >
+            <img
+              src="@/assets/img/vip.png"
+              alt=""
+            >
             {{ $t('actions.tariff_vip') }}
           </div>
         </el-col>
-        <el-col :xs="24" :sm="24" :lg="8">
-          <div class="tariffs_item" @click="changeTariff($t('actions.tariff_special'))">
-            <img src="@/assets/img/special.png" alt="">
+        <el-col
+          :xs="24"
+          :sm="24"
+          :lg="8"
+        >
+          <div
+            class="tariffs_item"
+            @click="changeTariff($t('actions.tariff_special'))"
+          >
+            <img
+              src="@/assets/img/special.png"
+              alt=""
+            >
             {{ $t('actions.tariff_special') }}
           </div>
         </el-col>
       </el-row>
 
       <el-row :gutter="16">
-        <el-col :xs="24" :sm="24" :lg="12">
-          <div class="sub-title">{{ $t('used.brand') }}</div>
-          <el-select :disabled="!edit" v-model="product.car_manu_id" @change="manuChanged">
+        <el-col
+          :xs="24"
+          :sm="24"
+          :lg="12"
+        >
+          <div class="sub-title">
+            {{ $t('used.brand') }}
+          </div>
+          <el-select
+            v-model="product.car_manu_id"
+            :disabled="!edit"
+            @change="manuChanged"
+          >
             <el-option
               v-for="item in manufacturers"
               :key="item.manuId"
@@ -84,9 +152,19 @@
             />
           </el-select>
         </el-col>
-        <el-col :xs="24" :sm="24" :lg="12">
-          <div class="sub-title">{{ $t('used.model') }}</div>
-          <el-select v-model="product.car_mod_id" :disabled="!product.car_manu_id|| !edit" @change="modelChanged">
+        <el-col
+          :xs="24"
+          :sm="24"
+          :lg="12"
+        >
+          <div class="sub-title">
+            {{ $t('used.model') }}
+          </div>
+          <el-select
+            v-model="product.car_mod_id"
+            :disabled="!product.car_manu_id|| !edit"
+            @change="modelChanged"
+          >
             <el-option
               v-for="item in manufacturer_models"
               :key="item.modId"
@@ -95,16 +173,41 @@
             />
           </el-select>
         </el-col>
-        <el-col :xs="24" :sm="24" :lg="12">
-          <div class="sub-title">{{ $t('used.name') }}</div>
-          <el-input :disabled="!edit" v-model="product.title"></el-input>
+        <el-col
+          :xs="24"
+          :sm="24"
+          :lg="12"
+        >
+          <div class="sub-title">
+            {{ $t('used.name') }}
+          </div>
+          <el-input
+            v-model="product.title"
+            :disabled="!edit"
+          />
         </el-col>
-        <el-col :xs="24" :sm="24" :lg="12">
-          <div class="sub-title">{{ $t('used.price') }}</div>
-          <el-input :disabled="!edit" v-model="product.price" placeholder="Please input"
-                    class="input-with-select">
-            <el-select v-model="product.price_type" :disabled="!edit" slot="prepend"
-                       :placeholder="$t('register.currency')" value="" class="w-15">
+        <el-col
+          :xs="24"
+          :sm="24"
+          :lg="12"
+        >
+          <div class="sub-title">
+            {{ $t('used.price') }}
+          </div>
+          <el-input
+            v-model="product.price"
+            :disabled="!edit"
+            placeholder="Please input"
+            class="input-with-select"
+          >
+            <el-select
+              slot="prepend"
+              v-model="product.price_type"
+              :disabled="!edit"
+              :placeholder="$t('register.currency')"
+              value=""
+              class="w-15"
+            >
               <el-option
                 v-for="item in currencies"
                 :key="item.id"
@@ -114,19 +217,32 @@
             </el-select>
           </el-input>
         </el-col>
-        <el-col :xs="24" :sm="24" :lg="24">
-          <div class="sub-title">{{ $t('used.about') }}</div>
+        <el-col
+          :xs="24"
+          :sm="24"
+          :lg="24"
+        >
+          <div class="sub-title">
+            {{ $t('used.about') }}
+          </div>
           <el-input
+            v-model="product.description"
             :disabled="!edit"
             type="textarea"
-            v-model="product.description"
             :rows="2"
             placeholder="Please input"
           />
         </el-col>
 
-        <el-col :xs="24" :sm="24" :lg="24" class="mt-4">
-          <div class="sub-title">{{ $t('used.images') }}</div>
+        <el-col
+          :xs="24"
+          :sm="24"
+          :lg="24"
+          class="mt-4"
+        >
+          <div class="sub-title">
+            {{ $t('used.images') }}
+          </div>
           <el-upload
             :file-list="product.images"
             :disabled="!edit"
@@ -137,36 +253,46 @@
             :before-remove="handleRemove"
             :on-change="handlePictureChanged"
             accept=".png,.jpg,.jpeg,.gif"
-            action="">
-            <i class="el-icon-plus"></i>
-            <div slot="file" slot-scope="{file}">
-              <img class="el-upload-list__item-thumbnail" :src="file.link || file.url" :alt="file.id">
+            action=""
+          >
+            <i class="el-icon-plus" />
+            <div
+              slot="file"
+              slot-scope="{file}"
+            >
+              <img
+                class="el-upload-list__item-thumbnail"
+                :src="file.link || file.url"
+                :alt="file.id"
+              >
 
               <span class="el-upload-list__item-actions">
                 <span
                   class="el-upload-list__item-preview"
                   @click="handlePictureCardPreview(file)"
                 >
-                  <i class="el-icon-zoom-in"></i>
+                  <i class="el-icon-zoom-in" />
                 </span>
                 <span
                   v-if="edit"
                   class="el-upload-list__item-delete"
                   @click="handleRemove(file)"
                 >
-                  <i class="el-icon-delete"></i>
+                  <i class="el-icon-delete" />
                 </span>
               </span>
-
             </div>
           </el-upload>
         </el-col>
       </el-row>
-
     </el-card>
 
     <el-dialog :visible.sync="dialogVisible">
-      <img width="100%" :src="dialogImageUrl" alt="">
+      <img
+        width="100%"
+        :src="dialogImageUrl"
+        alt=""
+      >
     </el-dialog>
 
     <el-dialog :visible.sync="tariffModal">
@@ -260,14 +386,13 @@ export default {
       this.tariffModalHeader = title
       this.tariffModal = true
     },
-    async changeStatus () {
-      let changedStatus = this.product.status === 1 ? 0 : 1
-      await this.CHANGE_STATUS({ id: this.product.id, status: changedStatus })
+    async changeStatus (status) {
+      await this.CHANGE_STATUS({ id: this.product.id, status: status })
       this.$message({
         message: 'Success.',
         type: 'success'
       })
-      this.product.status = this.product.status === 'active' ? 'disabled' : 'active'
+      this.product.status = status
     }
   },
 }

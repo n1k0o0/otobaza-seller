@@ -10,30 +10,26 @@ const service = axios.create({
 })
 
 // request interceptor
-service.interceptors.request.use(
-  config => {
-    // do something before request is sent
-    if (store.getters.token) {
-      // let each request carry token
-      // ['X-Token'] is a custom headers key
-      // please modify it according to the actual situation
-      config.headers['Authorization'] = 'Bearer ' + getToken()
-    }
-    config.headers['Content-Type'] = 'application/json'
-    config.headers['Accept'] = 'application/json'
-    config.headers['Content-Language'] = i18n?.locale || 'az'
-    return config
-  },
-  error => {
-    // do something with request error
-    console.log(error) // for debug
-    return Promise.reject(error)
+service.interceptors.request.use(config => {
+  // do something before request is sent
+  if (store.getters.token) {
+    // let each request carry token
+    // ['X-Token'] is a custom headers key
+    // please modify it according to the actual situation
+    config.headers['Authorization'] = 'Bearer ' + getToken()
   }
-)
+  config.headers['Content-Type'] = 'application/json'
+  config.headers['Accept'] = 'application/json'
+  config.headers['Content-Language'] = i18n?.locale || 'az'
+  return config
+}, error => {
+  // do something with request error
+  console.log(error) // for debug
+  return Promise.reject(error)
+})
 
 // response interceptor
-service.interceptors.response.use(
-  /**
+service.interceptors.response.use(/**
    * If you want to get http information such as headers or status
    * Please return  response => response
    */
@@ -42,33 +38,20 @@ service.interceptors.response.use(
    * Determine the request status by custom code
    * Here is just an example
    * You can also judge the status by HTTP Status Code
-   */
-  response => {
+   */ response => {
     const res = response
     // if the custom code is not 20000, it is judged as an error.
     if (res.status < 200 || res.status > 299) {
       Message({
-        message: res?.message || i18n.t('error'),
-        type: 'error',
-        duration: 5 * 1000
+        message: res?.message || i18n.t('error'), type: 'error', duration: 5 * 1000
       })
 
       // 50008: Illegal token; 50012: Other clients logged in; 50014: Token expired;
-      if (
-        res.status === 50008 ||
-        res.status === 50012 ||
-        res.status === 50014
-      ) {
+      if (res.status === 50008 || res.status === 50012 || res.status === 50014) {
         // to re-login
-        MessageBox.confirm(
-          'You have been logged out, you can cancel to stay on this page, or log in again',
-          'Confirm logout',
-          {
-            confirmButtonText: 'Re-Login',
-            cancelButtonText: 'Cancel',
-            type: 'warning'
-          }
-        ).then(() => {
+        MessageBox.confirm('You have been logged out, you can cancel to stay on this page, or log in again', 'Confirm logout', {
+          confirmButtonText: 'Re-Login', cancelButtonText: 'Cancel', type: 'warning'
+        }).then(() => {
           store.dispatch('user/resetToken').then(() => {
             location.reload()
           })
@@ -78,16 +61,15 @@ service.interceptors.response.use(
     } else {
       return res
     }
-  },
-  error => {
-    // console.log('err' + error) // for debug
-    // Message({
-    //   message: error.message,
-    //   type: 'error',
-    //   duration: 5 * 1000
-    // })
+  }, error => {
+    let defaultError = i18n.t('error')
+    const errors = error?.response?.data?.errors || error?.response?.data?.message || [defaultError]
+    const errorMessage = typeof errors === 'string' ? (error?.response?.data?.message || defaultError) : Object.values(errors).join('<br>')
+
+    Message({
+      dangerouslyUseHTMLString: true, message: errorMessage, type: 'error', duration: 5 * 1000
+    })
     return Promise.reject(error)
-  }
-)
+  })
 
 export default service
