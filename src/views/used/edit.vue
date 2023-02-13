@@ -392,7 +392,7 @@ export default {
         message: 'Success.',
         type: 'success'
       })
-      this.product.status = status
+      this.product.is_active = status
     }
   },
 }
