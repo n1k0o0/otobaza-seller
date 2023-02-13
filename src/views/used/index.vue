@@ -63,17 +63,20 @@
           <div class="used_item" v-for="product in products"
                @click="$router.push({name: 'EditUsed',params:{id:product.id}})"
                :key="product.id">
-            <div v-if="product.images.length">
+            <div class="used_item_image">
               <img
+                v-if="product.images.length"
                 :src="product.images[0].link"
+                alt="">
+              <img
+                v-else
+                src="@/assets/img/default-parts.png"
                 alt="">
             </div>
 
 
-            <div v-else class="text-center">
-              <img
-                src="@/assets/img/default-parts.png"
-                alt="">
+            <div class="text-center">
+
             </div>
             <h5>{{ product.description }}</h5>
             <p><span>{{ product.car_manu_name }}/ {{
@@ -213,6 +216,14 @@ export default {
     }
   }
 
+  &_image {
+    display: flex;
+    place-content: center;
+
+    img {
+      width: 150px;
+    }
+  }
 }
 
 .el-button--text {
