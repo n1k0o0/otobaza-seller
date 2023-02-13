@@ -61,26 +61,25 @@
 
         <div class="used_item_wrapper mb-16">
           <div class="used_item" v-for="product in products"
-               @click.self="$router.push({name: 'EditUsed',params:{id:product.id}})"
+               @click="$router.push({name: 'EditUsed',params:{id:product.id}})"
                :key="product.id">
-            <VueSlickCarousel :arrows="true" v-if="product.images.length">
-              <div v-for="img in product.images">
-                <img
-                  :src="img.link"
-                  alt="">
-              </div>
+            <div v-if="product.images.length">
+              <img
+                :src="product.images[0].link"
+                alt="">
+            </div>
 
-            </VueSlickCarousel>
-            <div @click.self="$router.push({name: 'EditUsed',params:{id:product.id}})" v-else class="text-center">
+
+            <div v-else class="text-center">
               <img
                 src="@/assets/img/default-parts.png"
                 alt="">
             </div>
-            <h5 @click.self="$router.push({name: 'EditUsed',params:{id:product.id}})">{{ product.description }}</h5>
-            <p @click.self="$router.push({name: 'EditUsed',params:{id:product.id}})"><span>{{ product.car_manu_name }}/ {{
+            <h5>{{ product.description }}</h5>
+            <p><span>{{ product.car_manu_name }}/ {{
                 product.car_mod_name
               }}</span></p>
-            <p @click.self="$router.push({name: 'EditUsed',params:{id:product.id}})" class="used_item_price"><span>Qiymet:</span>
+            <p class="used_item_price"><span>Qiymet:</span>
               <span class="float-right">{{ product.price }} {{ product.price_type.name }}</span>
             </p>
           </div>

@@ -34,7 +34,7 @@ export default {
   remove_question: 'Silmək istədiyinizə əminsiniz?',
   menu: {
     products: 'Məhsullar',
-    used: 'Ölüxana'
+    used: 'Elanlar'
   },
   used: {
     about_announcement: 'Elan haqqında',

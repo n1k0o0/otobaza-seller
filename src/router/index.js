@@ -131,7 +131,7 @@ export const constantRoutes = [
       },
     ]
   },
-  {
+  /*{
     path: '/dismantles',
     component: Layout,
     redirect: '/dismantles',
@@ -167,7 +167,7 @@ export const constantRoutes = [
         }
       }
     ]
-  },
+  },*/
   {
     path: '/statistics',
     component: Layout,
