@@ -45,14 +45,14 @@
             @click="changeStatus(1)"
           >
             {{ $t('actions.activate') }}
-            <i class="el-icon-switch-button" />
+            <i class="el-icon-switch-button"/>
           </el-button>
           <el-button
             v-show="!edit && product.is_active"
             @click="changeStatus(0)"
           >
             {{ $t('actions.deactivate') }}
-            <i class="el-icon-switch-button" />
+            <i class="el-icon-switch-button"/>
           </el-button>
 
           <el-button
@@ -61,17 +61,18 @@
             @click="edit=true"
           >
             {{ $t('actions.edit') }} <i
-              class="el-icon-plus el-icon-plus"
-            />
+            class="el-icon-plus el-icon-plus"
+          />
           </el-button>
           <el-button
+            :loading="loading"
             v-show="edit"
             type="primary"
             @click="save"
           >
             {{ $t('actions.save') }} <i
-              class="el-icon-document-checked"
-            />
+            class="el-icon-document-checked"
+          />
           </el-button>
         </div>
       </template>
@@ -255,10 +256,11 @@
             accept=".png,.jpg,.jpeg,.gif"
             action=""
           >
-            <i class="el-icon-plus" />
+            <i class="el-icon-plus"/>
             <div
               slot="file"
               slot-scope="{file}"
+              class="h-100"
             >
               <img
                 class="el-upload-list__item-thumbnail"
@@ -271,14 +273,14 @@
                   class="el-upload-list__item-preview"
                   @click="handlePictureCardPreview(file)"
                 >
-                  <i class="el-icon-zoom-in" />
+                  <i class="el-icon-zoom-in"/>
                 </span>
                 <span
                   v-if="edit"
                   class="el-upload-list__item-delete"
                   @click="handleRemove(file)"
                 >
-                  <i class="el-icon-delete" />
+                  <i class="el-icon-delete"/>
                 </span>
               </span>
             </div>
@@ -311,6 +313,7 @@ export default {
   name: 'Used',
   data () {
     return {
+      loading: false,
       dialogImageUrl: '',
       dialogVisible: false,
       edit: false,
@@ -366,13 +369,19 @@ export default {
       this.product.images = fileList
     },
     async save () {
-      await this.SAVE_PRODUCT()
+      this.loading = true
+      try {
+        await this.SAVE_PRODUCT()
 
-      this.edit = false
-      this.$message({
-        message: 'Success.',
-        type: 'success'
-      })
+        this.edit = false
+        this.$message({
+          message: 'Success.',
+          type: 'success'
+        })
+      } finally {
+        this.loading = false
+      }
+
     },
     manuChanged () {
       this.product.car_manu_name = this.manufacturers.find(el => el.manuId === this.product.car_manu_id).manuName

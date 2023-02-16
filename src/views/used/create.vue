@@ -12,7 +12,8 @@
         <h2>{{ $t('used.about_announcement') }}</h2>
         <div class="actions">
           <el-button icon="el-icon-back" @click="$router.push({name: 'Used'})">{{ $t('actions.back') }}</el-button>
-          <el-button type="primary" @click="save">{{ $t('actions.add') }} <i class="el-icon-plus el-icon-plus"/>
+          <el-button :loading="loading" type="primary" @click="save">{{ $t('actions.add') }} <i
+            class="el-icon-plus el-icon-plus"/>
           </el-button>
         </div>
       </template>
@@ -100,6 +101,7 @@ export default {
   name: 'Used',
   data () {
     return {
+      loading: false,
       dialogImageUrl: '',
       dialogVisible: false,
       form: {
@@ -109,7 +111,7 @@ export default {
         car_mod_name: '',
         title: '',
         price: '',
-        price_type: '',
+        price_type: 4,
         description: '',
         images: []
       }
@@ -143,9 +145,14 @@ export default {
       this.dialogVisible = true
     },
     async save () {
-      await this.CREATE_PRODUCT(this.form)
+      this.loading = true
+      try {
+        await this.CREATE_PRODUCT(this.form)
 
-      await this.$router.push({ name: 'Used' })
+        await this.$router.push({ name: 'Used' })
+      } finally {
+        this.loading = false
+      }
     },
     manuChanged () {
       this.form.car_manu_name = this.manufacturers.find(el => el.manuId === this.form.car_manu_id).manuName
