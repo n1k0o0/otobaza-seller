@@ -389,7 +389,7 @@ export default {
     },
     createFilter (queryString) {
       return (link) => {
-        return (link.label.toLowerCase()
+        return (link?.label && link.label.toLowerCase()
           .indexOf(queryString.toLowerCase()) === 0)
       }
     }
