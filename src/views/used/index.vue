@@ -63,6 +63,11 @@
           <div class="used_item" v-for="product in products"
                @click="$router.push({name: 'EditUsed',params:{id:product.id}})"
                :key="product.id">
+
+            <div class="used_item_status" :class="'status_'+product.status">
+              <span>{{ getStatusText(product.status) }}</span>
+            </div>
+
             <div class="used_item_image">
               <img
                 v-if="product.images.length"
@@ -76,7 +81,6 @@
 
 
             <div class="text-center">
-
             </div>
             <h5>{{ product.description }}</h5>
             <p><span>{{ product.car_manu_name }}/ {{
@@ -154,6 +158,20 @@ export default {
     }),
     async pageChanged (page) {
       await this.GET_PARTS({ page: page })
+    },
+    getStatusText (status) {
+      switch (status) {
+        case 0:
+          return this.$t('used.statuses.rejected')
+        case 1:
+          return this.$t('used.statuses.active')
+        case 2:
+          return this.$t('used.statuses.waiting')
+        case 3:
+          return this.$t('used.statuses.deactivated')
+        default :
+          return 'Unknown'
+      }
     }
   }
 }
@@ -173,6 +191,7 @@ export default {
 }
 
 .used_item {
+  position: relative;
   cursor: pointer;
   display: flex;
   flex-direction: column;
@@ -225,6 +244,41 @@ export default {
       height: 150px;
       object-position: center;
       object-fit: cover;
+    }
+  }
+
+  &_status {
+    position: absolute;
+    left: 8px;
+    top: 8px;
+    font-size: 14px;
+    line-height: 18px;
+    border-radius: 16px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 4px 15px;
+
+
+    &.status_0 {
+      color: #B54708;
+      background: #FFFAEB;
+    }
+
+    &.status_1 {
+      color: #027A48;
+      background: #ECFDF3;
+    }
+
+    &.status_2 {
+      color: #175CD3;
+      background: #EFF8FF;
+    }
+
+    &.status_3 {
+      color: #B42318;
+      background: #FEF3F2;
     }
   }
 }
