@@ -2,6 +2,8 @@ import request from '@/utils/request'
 import { Message } from 'element-ui'
 
 const state = {
+  brands: [],
+  models: [],
   products: [],
   product: {
     car_manu_id: '',
@@ -27,6 +29,8 @@ const getters = {
   loading: state => state.loading,
   status: state => state.status,
   search: state => state.search,
+  brands: state => state.brands,
+  models: state => state.models,
 }
 
 const mutations = {
@@ -49,6 +53,12 @@ const mutations = {
   },
   SET_SEARCH (state, payload) {
     state.search = payload
+  },
+  SET_BRANDS (state, payload) {
+    state.brands = payload
+  },
+  SET_MODELS (state, payload) {
+    state.models = payload
   }
 }
 
@@ -188,7 +198,49 @@ const actions = {
       url: `/api/seller/used-parts/${id}/status?publishable=${status}`,
       method: 'put'
     })
-  }
+  },
+
+  async GET_BRANDS ({ commit }) {
+    try {
+      commit('TOGGLE_LOADING')
+      const { data } = await request({
+        url: process.env.VUE_APP_CATALOG_API_URL + `/api/marks`,
+        method: 'get'
+      })
+      commit('SET_BRANDS', data)
+
+    } catch (e) {
+      Message({
+        message: e?.response?.data?.message || 'Error',
+        type: 'error',
+        duration: 5 * 1000
+      })
+    } finally {
+      commit('TOGGLE_LOADING')
+    }
+  },
+  async GET_MODELS ({ commit }, { manufacturer }) {
+    try {
+      commit('TOGGLE_LOADING')
+      const { data } = await request({
+        url: process.env.VUE_APP_CATALOG_API_URL + `/api/marks/${manufacturer}`,
+        method: 'get'
+      })
+
+      const ss = data.filter((v, i, a) => a.findIndex(v2 => (v2.modelId === v.modelId)) === i)
+
+      commit('SET_MODELS', ss)
+
+    } catch (e) {
+      Message({
+        message: e?.response?.data?.message || 'Error',
+        type: 'error',
+        duration: 5 * 1000
+      })
+    } finally {
+      commit('TOGGLE_LOADING')
+    }
+  },
 }
 
 export default {

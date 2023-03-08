@@ -35,9 +35,9 @@
           <el-select v-model="form.car_mod_id" :disabled="!form.car_manu_id" @change="modelChanged">
             <el-option
               v-for="item in manufacturer_models"
-              :key="item.modId"
-              :label="item.ModelName"
-              :value="item.modId"
+              :key="item.modelId"
+              :label="item.modelname"
+              :value="item.modelId"
             />
           </el-select>
         </el-col>
@@ -123,16 +123,16 @@ export default {
   computed: {
     ...mapGetters({
       products: 'parts/products',
-      manufacturers: 'catalog/manufacturers',
-      manufacturer_models: 'catalog/manufacturer_models',
+      manufacturers: 'used/brands',
+      manufacturer_models: 'used/models',
       currencies: 'app/currencies',
     }),
   },
   methods: {
     ...mapActions({
-      GET_MANUFACTURERS: 'catalog/GET_MANUFACTURERS',
+      GET_MANUFACTURERS: 'used/GET_BRANDS',
       CREATE_PRODUCT: 'used/CREATE_PRODUCT',
-      GET_MANUFACTURER_MODELS: 'catalog/GET_MANUFACTURER_MODELS',
+      GET_MANUFACTURER_MODELS: 'used/GET_MODELS',
     }),
     handleRemove (file, fileList) {
       this.form.images = fileList

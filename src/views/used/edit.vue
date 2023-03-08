@@ -168,9 +168,9 @@
           >
             <el-option
               v-for="item in manufacturer_models"
-              :key="item.modId"
-              :label="item.ModelName"
-              :value="item.modId"
+              :key="item.modelId"
+              :label="item.modelname"
+              :value="item.modelId"
             />
           </el-select>
         </el-col>
@@ -324,8 +324,8 @@ export default {
   computed: {
     ...mapGetters({
       product: 'used/product',
-      manufacturers: 'catalog/manufacturers',
-      manufacturer_models: 'catalog/manufacturer_models',
+      manufacturers: 'used/brands',
+      manufacturer_models: 'used/models',
       currencies: 'app/currencies',
     }),
   },
@@ -338,8 +338,8 @@ export default {
     ...mapActions({
       GET_PRODUCT: 'used/GET_PRODUCT',
       SAVE_PRODUCT: 'used/SAVE_PRODUCT',
-      GET_MANUFACTURERS: 'catalog/GET_MANUFACTURERS',
-      GET_MANUFACTURER_MODELS: 'catalog/GET_MANUFACTURER_MODELS',
+      GET_MANUFACTURERS: 'used/GET_BRANDS',
+      GET_MANUFACTURER_MODELS: 'used/GET_MODELS',
       DELETE_IMG: 'used/DELETE_IMG',
       CHANGE_STATUS: 'used/CHANGE_STATUS',
     }),
