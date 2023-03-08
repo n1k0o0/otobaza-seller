@@ -389,7 +389,7 @@ export default {
       this.GET_MANUFACTURER_MODELS({ manufacturer: this.product.car_manu_id })
     },
     modelChanged () {
-      this.product.car_mod_name = this.manufacturer_models.find(el => el.modId === this.product.car_mod_id).ModelName
+      this.product.car_mod_name = this.manufacturer_models.find(el => el.modelId === this.product.car_mod_id).modelname
     },
     changeTariff (title) {
       this.tariffModalHeader = title

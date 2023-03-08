@@ -159,7 +159,7 @@ export default {
       this.GET_MANUFACTURER_MODELS({ manufacturer: this.form.car_manu_id })
     },
     modelChanged () {
-      this.form.car_mod_name = this.manufacturer_models.find(el => el.modId === this.form.car_mod_id).ModelName
+      this.form.car_mod_name = this.manufacturer_models.find(el => el.modelId === this.form.car_mod_id).modelname
     }
   }
 }
