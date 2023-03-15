@@ -42,6 +42,7 @@
 </template>
 <script>
 import { mapActions } from 'vuex'
+
 export default {
   name: 'Plan',
   props: {
@@ -67,8 +68,8 @@ export default {
       this.loading = true
       await this.SELLER_PACKAGE_CHANGE(seller_package_id)
         .then(response => {
-          if (response.status) {
-            window.location.href = response.redirect
+          if (response.data.status) {
+            window.location.href = response.data.redirect
           }
         })
         .finally(() => {
