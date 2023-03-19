@@ -4,6 +4,7 @@ export default {
   timeless: 'Zamanı belirsiz',
   limit: 'Limit',
   package: 'Paket',
+  package_text: 'Mevcut paketlerden birini seçerek işinizi büyütebilirsiniz!',
   your_current_package: 'Mevcut paketiniz',
   choose_package: 'Paket seçin',
   period: 'Dönem',
@@ -46,7 +47,8 @@ export default {
     tariff_text: 'Şu anda, tüm tarifeler ücretsizdir',
     statuses: {
       all: 'Tüm Reklamlarr',
-      active: 'Sitede neler var',
+      active: 'Onaylı',
+      on_site: 'Sitede neler var',
       deactivated: 'Süresi doldu',
       waiting: 'Beklemede',
       rejected: 'Rededildi'

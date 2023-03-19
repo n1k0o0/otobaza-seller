@@ -13,6 +13,7 @@
 <script>
 import Plan from '@/components/Plan'
 import { mapActions, mapGetters } from 'vuex'
+
 export default {
   name: 'PackagePlans',
   components: { Plan },
@@ -67,10 +68,10 @@ $plan-margin: 1em;
   display: flex;
   flex-wrap: wrap;
   margin: $plan-margin;
-  display: flex;
   flex-direction: row;
   align-items: flex-start;
   justify-content: center;
+  gap: 24px;
 }
 
 @media screen and (max-width: 25em) {

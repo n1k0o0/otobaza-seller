@@ -4,6 +4,7 @@ export default {
   timeless: 'Вневременный',
   limit: 'Предел',
   package: 'Пакет',
+  package_text: 'Вы можете развивать свой бизнес, выбрав один из доступных пакетов!',
   your_current_package: 'Ваш текущий пакет',
   choose_package: 'Выберите пакет',
   period: 'Период',
@@ -46,7 +47,8 @@ export default {
     tariff_text: 'На данный момент все тарифы бесплатны',
     statuses: {
       all: 'Все объявления',
-      active: 'Что есть на сайте',
+      active: 'Одобренные',
+      on_site: 'Что есть на сайте',
       deactivated: 'Просрочено',
       waiting: 'Ожидание',
       rejected: 'Отклонение'

@@ -4,6 +4,7 @@ export default {
   timeless: 'Timeless',
   limit: 'Limit',
   package: 'Package',
+  package_text: 'You can grow your business by choosing one of the available packages!',
   your_current_package: 'Your current package',
   choose_package: 'Choose package',
   period: 'Period',
@@ -46,7 +47,8 @@ export default {
     tariff_text: 'Currently, all tariffs are free of charge',
     statuses: {
       all: 'All Ads',
-      active: 'What\'s on the site',
+      active: 'Approved',
+      on_site: 'What\'s on the site',
       deactivated: 'Expired',
       waiting: 'Waiting',
       rejected: 'Rejected'

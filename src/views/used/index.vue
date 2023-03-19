@@ -51,11 +51,31 @@
 
         <el-row class="mt-12">
           <el-tabs @tab-click="GET_PARTS({status:activeTab})" v-model="activeTab">
-            <el-tab-pane :label="$t('used.statuses.all')" name="9"></el-tab-pane>
-            <el-tab-pane :label="$t('used.statuses.active')" name="1"></el-tab-pane>
-            <el-tab-pane :label="$t('used.statuses.deactivated')" name="3"></el-tab-pane>
-            <el-tab-pane :label="$t('used.statuses.waiting')" name="2"></el-tab-pane>
-            <el-tab-pane :label="$t('used.statuses.rejected')" name="0"></el-tab-pane>
+            <el-tab-pane :label="$t('used.statuses.all')" name="9">
+              <span slot="label">
+                  {{ $t('used.statuses.all') }} ({{ statuses_count['total'] }})
+              </span>
+            </el-tab-pane>
+            <el-tab-pane :label="$t('used.statuses.on_site')" name="1">
+              <span slot="label">
+                  {{ $t('used.statuses.on_site') }} ({{ statuses_count[3] }})
+              </span>
+            </el-tab-pane>
+            <el-tab-pane :label="$t('used.statuses.deactivated')" name="3">
+              <span slot="label">
+                  {{ $t('used.statuses.deactivated') }} ({{ statuses_count[1] }})
+              </span>
+            </el-tab-pane>
+            <el-tab-pane :label="$t('used.statuses.waiting')" name="2">
+              <span slot="label">
+                  {{ $t('used.statuses.waiting') }} ({{ statuses_count[2] }})
+              </span>
+            </el-tab-pane>
+            <el-tab-pane :label="$t('used.statuses.rejected')" name="0">
+              <span slot="label">
+                  {{ $t('used.statuses.rejected') }} ({{ statuses_count[0] }})
+              </span>
+            </el-tab-pane>
           </el-tabs>
         </el-row>
 
@@ -135,6 +155,7 @@ export default {
     ...mapGetters({
       products: 'used/products',
       pagination: 'used/pagination',
+      statuses_count: 'used/statuses_count',
       loading: 'used/loading'
     }),
     search: {
@@ -148,13 +169,15 @@ export default {
   },
   async beforeMount () {
     await this.GET_PARTS({ status: this.activeTab, page: this.currentPage })
+    await this.GET_STATUSES_COUNT()
   },
   methods: {
     loading () {
       return loading
     },
     ...mapActions({
-      GET_PARTS: 'used/GET_PRODUCTS'
+      GET_PARTS: 'used/GET_PRODUCTS',
+      GET_STATUSES_COUNT: 'used/GET_STATUSES_COUNT',
     }),
     async pageChanged (page) {
       await this.GET_PARTS({ page: page })
@@ -303,5 +326,22 @@ export default {
   img {
     height: 150px !important;
   }
+}
+
+.el-tabs__item span {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  text-align: center;
+  color: #98A2B3 !important;
+
+  &.is-active {
+    color: #344054 !important;
+  }
+}
+
+.el-tabs__item.is-active span {
+  color: #344054 !important;
 }
 </style>

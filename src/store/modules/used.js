@@ -20,6 +20,7 @@ const state = {
   status: '',
   search: '',
   loading: false,
+  statuses_count: {},
 }
 
 const getters = {
@@ -31,6 +32,7 @@ const getters = {
   search: state => state.search,
   brands: state => state.brands,
   models: state => state.models,
+  statuses_count: state => state.statuses_count,
 }
 
 const mutations = {
@@ -59,6 +61,9 @@ const mutations = {
   },
   SET_MODELS (state, payload) {
     state.models = payload
+  },
+  SET_STATUSES_COUNT (state, payload) {
+    state.statuses_count = payload
   }
 }
 
@@ -113,7 +118,7 @@ const actions = {
       commit('TOGGLE_LOADING')
     }
   },
-  async SAVE_PRODUCT ({ commit, state }) {
+  async SAVE_PRODUCT ({ state }) {
     let data = state.product
 
     const formData = new FormData()
@@ -144,8 +149,7 @@ const actions = {
       }
     })
 
-    console.log(formData)
-    const { res } = await request.post(
+    const {} = await request.post(
       `/api/seller/used-parts/edit/${state.product.id}`,
       formData,
       {
@@ -198,6 +202,27 @@ const actions = {
       url: `/api/seller/used-parts/${id}/status?publishable=${status}`,
       method: 'put'
     })
+  },
+
+  async GET_STATUSES_COUNT ({ commit }) {
+    try {
+      commit('TOGGLE_LOADING')
+
+      const { data } = await request({
+        url: `/api/seller/used-parts/statistics/group`,
+        method: 'get'
+      })
+      commit('SET_STATUSES_COUNT', data)
+
+    } catch (e) {
+      Message({
+        message: e?.response?.data?.message || 'Error',
+        type: 'error',
+        duration: 5 * 1000
+      })
+    } finally {
+      commit('TOGGLE_LOADING')
+    }
   },
 
   async GET_BRANDS ({ commit }) {

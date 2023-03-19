@@ -7,48 +7,28 @@
       <el-breadcrumb-item>{{ $t('packages.title') }}</el-breadcrumb-item>
     </el-breadcrumb>
     <el-row :gutter="16">
-      <el-col :xs="24" :sm="16" :lg="18">
+      <el-col>
         <el-card shadow="always">
-          <div slot="header" class="clearfix">
-            <h2>{{ $t('choose_package') }}:</h2>
+          <div class="plan_title clearfix text-center">
+            <h2>{{ $t('choose_package') }}</h2>
+            <p>{{ $t('package_text') }}</p>
           </div>
-          <PackagePlans />
+          <PackagePlans/>
         </el-card>
       </el-col>
-      <el-col :xs="24" :sm="8" :lg="6">
-        <el-card
-          v-loading="prolongPackageLoading || !currentPackage"
-          shadow="always"
-        >
-          <div slot="header" class="clearfix">
-            <h2>{{ $t('your_current_package') }}:</h2>
-          </div>
-          <div class="mb-1">
-            {{ $t('package') }}: <strong>{{ currentPackage }}</strong>
-          </div>
-          <div class="mb-1">
-            {{ $t('limit') }}: <strong>{{ limit }}</strong>
-          </div>
-          <div class="mb-1">{{ $t('expires') }}: {{ getDate(expires) }}</div>
-          <div>
-            <el-button
-              type="secondary"
-              @click="prolongPackage"
-            ><i class="el-icon-refresh" /> {{ $t('refresh_plan') }}</el-button>
-          </div>
-        </el-card>
-      </el-col>
+
     </el-row>
   </div>
 </template>
 <script>
 import PackagePlans from '@/components/PackagePlans'
 import dayjs from 'dayjs'
-import { mapGetters, mapActions } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
+
 export default {
   name: 'Packages',
   components: { PackagePlans },
-  data() {
+  data () {
     return {
       prolongPackageLoading: false
     }
@@ -90,9 +70,33 @@ export default {
           this.prolongPackageLoading = false
         })
     },
-    getDate(date) {
+    getDate (date) {
       return date ? dayjs(date).format('YYYY-MM-DD HH:mm') : ''
     }
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.plan_title {
+  margin: 32px 0;
+
+  h2 {
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 32px;
+    color: #344054;
+  }
+
+  p {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    /* identical to box height, or 150% */
+
+    text-align: center;
+    /* Gray/500 */
+    color: #667085;
+  }
+}
+</style>

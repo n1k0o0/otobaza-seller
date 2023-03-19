@@ -4,6 +4,7 @@ export default {
   timeless: 'müddətsiz',
   limit: 'Limit',
   package: 'Paket',
+  package_text: 'Mövcud paketlərdən birini seçərək biznesinizi böyüdə bilərsiz!',
   your_current_package: 'Sizin hazırki paketiniz',
   choose_package: 'Paket seçimi',
   period: 'İstifadə müddəti',
@@ -46,10 +47,11 @@ export default {
     images: 'Elan şəkilləri',
     statuses: {
       all: 'Bütün elanlar',
-      active: 'Saytda olanlar',
+      active: 'Təstiqlənmiş',
       deactivated: 'Müddəti başa çatmış',
       waiting: 'Gözləmə',
-      rejected: 'İmtina'
+      rejected: 'İmtina',
+      on_site: 'Saytda olanlar',
     },
     tariff_text: 'Hal hazırda bütün tariflər odənişsizdir'
   },

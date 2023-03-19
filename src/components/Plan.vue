@@ -6,8 +6,8 @@
     <div class="infoContainer">
       <div class="price">
         <template v-if="plan.has_price">
-          <p>{{ plan.price }} {{ plan.currency_code }}</p>
-          <span>/{{ $t('month') }}</span>
+          <p class="price_price">{{ plan.price }} {{ plan.currency_code }}</p>
+          <span class="price_month">/{{ $t('month') }}</span>
         </template>
         <template v-else>
           <p>{{ $t('free') }}</p>
@@ -80,40 +80,53 @@ export default {
 }
 </script>
 <style lang="scss">
-$accent-color: #409eff;
+$accent-color: #0086C9;
 $text-color: #2d3b48;
 $plan-padding: 1em;
 $plan-margin: 1em;
 $title-background: #409eff;
-$title-size: 1.45em;
-$price-size: 1.35em;
+$title-size: 1em;
+$price-size: 24px;
 $feature-size: 1em;
 .plan {
-  background: #f7f7f7;
-  width: 20em;
   box-sizing: border-box;
-  text-align: center;
-  margin: $plan-margin;
-  margin-bottom: $plan-margin;
-  outline: 1px solid $accent-color;
+  padding: $plan-margin;
+  background: #FFFFFF;
+  /* Gray/100 */
+
+  border: 1px solid #F2F4F7;
+  border-radius: 16px;
+
   &.current {
-    outline: 10px solid $accent-color;
+    .infoContainer {
+      .selectPlan {
+        /* Blue light/50 */
+        background: #F0F9FF;
+        /* Blue light/50 */
+        border: 1px solid #F0F9FF;
+        /* Shadow/xs */
+        box-shadow: 0 1px 2px rgba(16, 24, 40, 0.05);
+        border-radius: 8px;
+        color: #0086C9;
+      }
+    }
   }
+
   .titleContainer {
-    background-color: $title-background;
-    padding: $plan-padding;
+
     .title {
       font-size: $title-size;
-      text-transform: uppercase;
-      color: #fff;
-      font-weight: 700;
+      font-weight: 400;
+      line-height: 24px;
+      text-transform: capitalize;
+      color: #344054;
     }
   }
   .infoContainer {
-    padding: $plan-padding;
     color: $text-color;
     box-sizing: border-box;
-    min-height: 270px;
+    text-align: left;
+
     .price {
       font-size: $price-size;
       padding: $plan-padding 0;
@@ -121,14 +134,19 @@ $feature-size: 1em;
       margin-top: 0;
       display: inline-block;
       width: 80%;
+
       p {
         font-size: $price-size;
         display: inline-block;
         margin: 0;
+        font-weight: 500;
+        line-height: 32px;
+        color: #0086C9;
       }
       span {
-        font-size: $price-size * 0.75;
+        font-size: 16px;
         display: inline-block;
+        color: #98A2B3;
       }
     }
     .desc {
@@ -145,28 +163,37 @@ $feature-size: 1em;
       font-size: $feature-size;
       list-style: none;
       padding-left: 0;
+      color: #344054;
+      line-height: 20px;
+      font-weight: 400;
+
       li {
         padding: $plan-padding/2;
       }
     }
     .selectPlan {
-      border: 2px solid $accent-color;
-      padding: $plan-padding * 0.75 $plan-padding;
-      border-radius: $plan-padding * 2.5;
+      background: #FFFFFF;
+      /* Gray/300 */
+      border: 1px solid #D0D5DD;
+      /* Shadow/xs */
+      box-shadow: 0 1px 2px rgba(16, 24, 40, 0.05);
+
+      border-radius: 8px;
       cursor: pointer;
       transition: all 0.25s;
       margin: $plan-margin auto;
       box-sizing: border-box;
-      max-width: 70%;
-      display: block;
       font-weight: 700;
-      &.active {
-        &:hover {
-          background-color: transparent;
-          cursor: auto;
-          color: $text-color;
-        }
-      }
+      width: 100%;
+
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      padding: 8px 14px;
+      color: #344054;
+
+
       &:hover {
         background-color: $accent-color;
         color: white;
