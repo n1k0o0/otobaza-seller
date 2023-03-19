@@ -4,6 +4,7 @@ export default {
   timeless: 'Timeless',
   limit: 'Limit',
   package: 'Package',
+  extend_period: 'Extend period',
   package_text: 'You can grow your business by choosing one of the available packages!',
   your_current_package: 'Your current package',
   choose_package: 'Choose package',

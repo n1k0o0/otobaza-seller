@@ -4,6 +4,7 @@ export default {
   timeless: 'Вневременный',
   limit: 'Предел',
   package: 'Пакет',
+  extend_period: 'Продлить срок',
   package_text: 'Вы можете развивать свой бизнес, выбрав один из доступных пакетов!',
   your_current_package: 'Ваш текущий пакет',
   choose_package: 'Выберите пакет',

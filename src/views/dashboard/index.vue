@@ -4,26 +4,16 @@
       <h2>{{ $t('dashboard.title') }}</h2>
     </div>
     <el-row :gutter="16">
-      <el-col :xs="24" :sm="18" :lg="16">
-        <div class="chart-wrapper">
-          <el-card class="box-card">
-            <div slot="header" class="clearfix">
-              <strong>{{ $t('dashboard.statistics') }}</strong>
-            </div>
-            <BarCart />
-          </el-card>
-        </div>
-      </el-col>
-      <el-col :xs="24" :sm="6" :lg="8">
-        <Badges />
+      <el-col :xs="24">
+        <Badges/>
       </el-col>
       <el-col :xs="24">
         <div class="chart-wrapper">
           <el-card class="box-card">
             <div slot="header" class="clearfix">
-              <strong>{{ $t('dashboard.last_orders') }}</strong>
+              <strong class="last_order_title">{{ $t('dashboard.last_orders') }}</strong>
             </div>
-            <OrdersList />
+            <OrdersList/>
           </el-card>
         </div>
       </el-col>
@@ -35,11 +25,21 @@
 import Badges from '@/components/Dashboard/Badges'
 import BarCart from '@/components/Dashboard/BarCart'
 import OrdersList from '@/components/Dashboard/OrdersList'
+
 export default {
   name: 'Dashboard',
   components: { OrdersList, BarCart, Badges },
-  async beforeMount() {
+  async beforeMount () {
     await this.$store.dispatch('app/GET_DASHBOARD')
   }
 }
 </script>
+
+<style lang="scss">
+.last_order_title {
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 28px;
+  color: #98A2B3;
+}
+</style>

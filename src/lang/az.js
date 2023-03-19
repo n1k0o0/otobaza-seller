@@ -4,6 +4,7 @@ export default {
   timeless: 'müddətsiz',
   limit: 'Limit',
   package: 'Paket',
+  extend_period: 'Müddəti artır',
   package_text: 'Mövcud paketlərdən birini seçərək biznesinizi böyüdə bilərsiz!',
   your_current_package: 'Sizin hazırki paketiniz',
   choose_package: 'Paket seçimi',
