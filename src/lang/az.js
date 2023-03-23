@@ -1,5 +1,7 @@
 export default {
   information: 'Məlumat',
+  attention: 'Diqqət',
+  understood: 'Anladım',
   successfully_currency_changed: 'Valyuta dəyişdirildi',
   timeless: 'müddətsiz',
   limit: 'Limit',
@@ -228,7 +230,12 @@ export default {
   },
   packages: {
     title: 'Satıcı paketi',
-    expiration: 'Paketin bitmə tarixi'
+    expiration: 'Paketin bitmə tarixi',
+    down_title: 'Kiçik paketə keçid edirsiz.',
+    down_text: 'Mövcud elan sayınız bu paketin dəstəklədiyindən çoxdur. Mövcud elanlarınızda X ədədini deaktiv edərək bu paketə keçid edə bilərsizş',
+    up_title: 'Yüksək paketə keçid edirsiz.',
+    up_text: 'Hazırda mövcud olan X ədəd elanınız bu paketinlimitindən istifadə edəcək və Y ədəd limitiniz qalacaq',
+    alert: 'Başqa paketə keçid edərkən mövcud paketiniz silinəcək və yeni paket aktivləşəcək'
   },
   validator: {
     first_name: {

@@ -1,5 +1,7 @@
 export default {
   information: 'Bilgi',
+  attention: 'Dikkat',
+  understood: 'Anlaşıldı',
   successfully_currency_changed: 'Para birimi değişti',
   timeless: 'Zamanı belirsiz',
   limit: 'Limit',
@@ -226,7 +228,12 @@ export default {
   },
   packages: {
     title: 'Satıcılar paketi',
-    expiration: 'Paketin son kullanma tarihi'
+    expiration: 'Paketin son kullanma tarihi',
+    down_title: 'Daha küçük bir pakete geçiyorsunuz.',
+    down_text: 'Mevcut reklam sayınız bu paketin desteklediğinden fazla. Mevcut ilanlarınızda X sayısını devre dışı bırakarak bu pakete geçiş yapabilirsiniz.',
+    up_title: 'Daha yüksek bir pakete yükseltiyorsunuz.',
+    up_text: 'Mevcut X reklam sayınız bu paketin limitini kullanacak ve size Y limiti kalacak',
+    alert: 'Başka bir pakete geçiş yaptığınızda mevcut paketiniz silinecek ve yeni paket aktif olacaktır'
   },
   validator: {
     first_name: {

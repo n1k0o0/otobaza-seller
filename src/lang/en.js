@@ -1,5 +1,7 @@
 export default {
   information: 'Information',
+  attention: 'Attention',
+  understood: 'Understood',
   successfully_currency_changed: 'Currency changed',
   timeless: 'Timeless',
   limit: 'Limit',
@@ -227,7 +229,12 @@ export default {
   },
   packages: {
     title: 'Sellers package',
-    expiration: 'Package expiration date'
+    expiration: 'Package expiration date',
+    down_title: 'You are switching to a smaller package.',
+    down_text: 'Your existing number of ads is more than this package supports. You can switch to this package by deactivating the X number in your existing ads.',
+    up_title: 'You are upgrading to a higher package.',
+    up_text: 'Your current X number of ads will use the limit of this package and you will be left with a limit of Y',
+    alert: 'When switching to another package, your existing package will be deleted and the new package will be activated'
   },
   validator: {
     first_name: {
