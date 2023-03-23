@@ -84,7 +84,23 @@ const actions = {
       })
       return e
     }
-  }
+  },
+  async BUY_REQUESTS () {
+    try {
+      const { data } = await request({
+        url: '/api/user/package/sorgu/buy',
+        method: 'post'
+      })
+      return data
+    } catch (e) {
+      Message({
+        message: e?.response?.data?.message || 'Error',
+        type: 'error',
+        duration: 5 * 1000
+      })
+    }
+  },
+
 }
 
 export default {
