@@ -13,7 +13,9 @@ const state = {
   },
   device: 'desktop',
   language: Cookies.get('language') ? Cookies.get('language') : 'az',
-  dashboard: {},
+  dashboard: {
+    sorgu_package_expire_date: ''
+  },
   dashboard_orders: [],
   currencies: [],
   currency: +currency,
