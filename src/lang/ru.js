@@ -60,7 +60,8 @@ export default {
       all: 'Все объявления',
       active: 'Одобренные',
       on_site: 'Что есть на сайте',
-      deactivated: 'Просрочено',
+      deactivated: 'Деактивирован',
+      expired: 'Просрочено',
       waiting: 'Ожидание',
       rejected: 'Отклонение'
     }

@@ -58,22 +58,27 @@
             </el-tab-pane>
             <el-tab-pane :label="$t('used.statuses.on_site')" name="1">
               <span slot="label">
-                  {{ $t('used.statuses.on_site') }} ({{ statuses_count[3] }})
+                  {{ $t('used.statuses.on_site') }} ({{ statuses_count.group_summary.approved }})
               </span>
             </el-tab-pane>
-            <el-tab-pane :label="$t('used.statuses.deactivated')" name="3">
+            <el-tab-pane :label="$t('used.statuses.expired')" name="3">
               <span slot="label">
-                  {{ $t('used.statuses.deactivated') }} ({{ statuses_count[1] }})
+                  {{ $t('used.statuses.expired') }} ({{ statuses_count.group_summary.expired }})
               </span>
             </el-tab-pane>
             <el-tab-pane :label="$t('used.statuses.waiting')" name="2">
               <span slot="label">
-                  {{ $t('used.statuses.waiting') }} ({{ statuses_count[2] }})
+                  {{ $t('used.statuses.waiting') }} ({{ statuses_count.group_summary.waiting }})
               </span>
             </el-tab-pane>
             <el-tab-pane :label="$t('used.statuses.rejected')" name="0">
               <span slot="label">
-                  {{ $t('used.statuses.rejected') }} ({{ statuses_count[0] }})
+                  {{ $t('used.statuses.rejected') }} ({{ statuses_count.group_summary.rejected }})
+              </span>
+            </el-tab-pane>
+            <el-tab-pane :label="$t('used.statuses.deactivated')" name="4">
+              <span slot="label">
+                  {{ $t('used.statuses.deactivated') }} ({{ statuses_count.group_summary.deactivated }})
               </span>
             </el-tab-pane>
           </el-tabs>
@@ -191,6 +196,8 @@ export default {
         case 2:
           return this.$t('used.statuses.waiting')
         case 3:
+          return this.$t('used.statuses.expired')
+        case 4:
           return this.$t('used.statuses.deactivated')
         default :
           return 'Unknown'

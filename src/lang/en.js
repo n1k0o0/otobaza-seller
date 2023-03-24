@@ -60,7 +60,8 @@ export default {
       all: 'All Ads',
       active: 'Approved',
       on_site: 'What\'s on the site',
-      deactivated: 'Expired',
+      deactivated: 'Deactivated',
+      expired: 'Expired',
       waiting: 'Waiting',
       rejected: 'Rejected'
     }

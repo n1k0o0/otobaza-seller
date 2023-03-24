@@ -61,6 +61,7 @@ export default {
       active: 'Onaylı',
       on_site: 'Sitede neler var',
       deactivated: 'Süresi doldu',
+      expired: 'Etkisizleştirildi',
       waiting: 'Beklemede',
       rejected: 'Rededildi'
     }

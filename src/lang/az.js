@@ -59,7 +59,8 @@ export default {
     statuses: {
       all: 'Bütün elanlar',
       active: 'Təstiqlənmiş',
-      deactivated: 'Müddəti başa çatmış',
+      deactivated: 'Deaktiv',
+      expired: 'Müddəti başa çatmış',
       waiting: 'Gözləmə',
       rejected: 'İmtina',
       on_site: 'Saytda olanlar',

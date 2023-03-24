@@ -20,7 +20,17 @@ const state = {
   status: '',
   search: '',
   loading: false,
-  statuses_count: {},
+  statuses_count: {
+    group_summary: {
+      approved: 0,
+      deactivated: 0,
+      expired: 0,
+      rejected: 0,
+      waiting: 0,
+    },
+    limit: 600,
+    total: 39
+  },
 }
 
 const getters = {
