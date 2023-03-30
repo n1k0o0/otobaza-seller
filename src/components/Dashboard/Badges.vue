@@ -42,7 +42,7 @@
           {{ $t('packages.expiration') }}
         </div>
         <div class="card-panel-num">
-          {{ dashboard.package_expire_date }}
+          {{ dashboard.used_part_package_expire_date }}
         </div>
         <div class="cart-panel-increase" @click="$router.push({name:'PackagesLayout'})">
           {{ $t('extend_period') }}
