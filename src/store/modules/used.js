@@ -28,8 +28,8 @@ const state = {
       rejected: 0,
       waiting: 0,
     },
-    limit: 600,
-    total: 39
+    limit: 0,
+    total: 0
   },
 }
 

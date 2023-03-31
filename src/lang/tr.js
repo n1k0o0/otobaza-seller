@@ -66,7 +66,11 @@ export default {
       expired: 'Etkisizleştirildi',
       waiting: 'Beklemede',
       rejected: 'Rededildi'
-    }
+    },
+    add_count: 'Reklam sayısı',
+    package_limit: 'Paket limiti',
+    add_first_ad: 'İlk reklamınızı oluşturun',
+    first_ad_text: 'İlk reklamınızı oluşturun, satışa başlayın, gelir elde edin',
   },
   actions: {
     add: 'Ekle',
