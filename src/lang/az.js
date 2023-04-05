@@ -67,7 +67,11 @@ export default {
       rejected: 'İmtina',
       on_site: 'Saytda olanlar',
     },
-    tariff_text: 'Hal hazırda bütün tariflər odənişsizdir'
+    tariff_text: 'Hal hazırda bütün tariflər odənişsizdir',
+    add_count: 'Mövcud elan sayı',
+    package_limit: 'Paket limiti',
+    add_first_ad: 'İlk elanını əlavə et',
+    first_ad_text: 'İlk elanını yarat, satışa başla, gəlir qazan',
   },
   actions: {
     add: 'Əlavə et',

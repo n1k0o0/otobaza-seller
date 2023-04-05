@@ -1,36 +1,81 @@
 <template>
   <div class="PageContainer">
-    <el-breadcrumb separator-class="el-icon-arrow-right" class="Breadcrumbs">
-      <el-breadcrumb-item :to="{ path: '/' }">{{
+    <el-breadcrumb
+      separator-class="el-icon-arrow-right"
+      class="Breadcrumbs"
+    >
+      <el-breadcrumb-item :to="{ path: '/' }">
+        {{
           $t('dashboard.title')
         }}
       </el-breadcrumb-item>
       <el-breadcrumb-item>{{ $t('menu.used') }}</el-breadcrumb-item>
     </el-breadcrumb>
-    <el-card v-loading.fullscreen.lock="loading" shadow="always">
+    <el-card
+      v-loading.fullscreen.lock="loading"
+      shadow="always"
+    >
       <template slot="header">
-        <h2>{{ $t('menu.used') }}</h2>
-
-        <el-button type="text" class="float-right" @click="$router.push({'name':'AddUsed'})">
+        <div>
+          <h2 class="w100">
+            {{ $t('menu.used') }}
+          </h2>
+          <p class="stats">
+            {{ $t('used.add_count') }}: <span>{{ statuses_count.total }}</span> {{ $t('used.package_limit') }}:
+            <span>{{ current_package.limit || 0 }}</span>
+          </p>
+        </div>
+        <el-button
+          type="text"
+          class="float-right"
+          @click="$router.push({'name':'AddUsed'})"
+        >
           <div class="span">
             {{ $t('actions.add') }}
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M5 10H15" stroke="#0086C9" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M10 15V5" stroke="#0086C9" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 20 20"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M5 10H15"
+                stroke="#0086C9"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M10 15V5"
+                stroke="#0086C9"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
             </svg>
           </div>
-
         </el-button>
       </template>
 
-      <template v-if="false">
+      <template v-if="!products.length">
         <div class="empty_used mb-32">
-          <img src="@/assets/img/add_item.svg" alt="">
-          <h2>İlk elanını əlavə et</h2>
-          <p class="light_text">İlk elanını yarat, satışa başla, gəlir qazan</p>
-          <el-button type="primary" @click="$router.push({name: 'AddUsed'})">{{ $t('actions.add') }} <i
-            class="el-icon-plus el-icon-plus"
-          /></el-button>
+          <img
+            src="@/assets/img/add_item.svg"
+            alt=""
+          >
+          <h2>{{ $t('used.add_first_ad') }}</h2>
+          <p class="light_text">
+            {{ $t('used.first_ad_text') }}
+          </p>
+          <el-button
+            type="primary"
+            @click="$router.push({name: 'AddUsed'})"
+          >
+            {{ $t('actions.add') }} <i
+              class="el-icon-plus el-icon-plus"
+            />
+          </el-button>
         </div>
       </template>
 
@@ -39,57 +84,90 @@
           <el-col :md="18">
             <el-input
               v-model="search"
+              clearable
               :placeholder="$t('search')"
+              @clear="GET_PARTS({search:search})"
             />
           </el-col>
           <el-col :md="6">
-            <el-button type="primary" :disabled="search.length<4" class="w100" @click="GET_PARTS({search:search})">
+            <el-button
+              type="primary"
+              :disabled="search.length<4"
+              class="w100"
+              @click="GET_PARTS({search:search})"
+            >
               {{ $t('search') }}
             </el-button>
           </el-col>
         </el-row>
 
         <el-row class="mt-12">
-          <el-tabs @tab-click="GET_PARTS({status:activeTab})" v-model="activeTab">
-            <el-tab-pane :label="$t('used.statuses.all')" name="9">
+          <el-tabs
+            v-model="activeTab"
+            @tab-click="GET_PARTS({status:activeTab})"
+          >
+            <el-tab-pane
+              :label="$t('used.statuses.all')"
+              name="9"
+            >
               <span slot="label">
-                  {{ $t('used.statuses.all') }} ({{ statuses_count['total'] }})
+                {{ $t('used.statuses.all') }} ({{ statuses_count['total'] }})
               </span>
             </el-tab-pane>
-            <el-tab-pane :label="$t('used.statuses.on_site')" name="1">
+            <el-tab-pane
+              :label="$t('used.statuses.on_site')"
+              name="1"
+            >
               <span slot="label">
-                  {{ $t('used.statuses.on_site') }} ({{ statuses_count.group_summary.approved }})
+                {{ $t('used.statuses.on_site') }} ({{ statuses_count.group_summary.approved }})
               </span>
             </el-tab-pane>
-            <el-tab-pane :label="$t('used.statuses.expired')" name="3">
+            <el-tab-pane
+              :label="$t('used.statuses.expired')"
+              name="3"
+            >
               <span slot="label">
-                  {{ $t('used.statuses.expired') }} ({{ statuses_count.group_summary.expired }})
+                {{ $t('used.statuses.expired') }} ({{ statuses_count.group_summary.expired }})
               </span>
             </el-tab-pane>
-            <el-tab-pane :label="$t('used.statuses.waiting')" name="2">
+            <el-tab-pane
+              :label="$t('used.statuses.waiting')"
+              name="2"
+            >
               <span slot="label">
-                  {{ $t('used.statuses.waiting') }} ({{ statuses_count.group_summary.waiting }})
+                {{ $t('used.statuses.waiting') }} ({{ statuses_count.group_summary.waiting }})
               </span>
             </el-tab-pane>
-            <el-tab-pane :label="$t('used.statuses.rejected')" name="0">
+            <el-tab-pane
+              :label="$t('used.statuses.rejected')"
+              name="0"
+            >
               <span slot="label">
-                  {{ $t('used.statuses.rejected') }} ({{ statuses_count.group_summary.rejected }})
+                {{ $t('used.statuses.rejected') }} ({{ statuses_count.group_summary.rejected }})
               </span>
             </el-tab-pane>
-            <el-tab-pane :label="$t('used.statuses.deactivated')" name="4">
+            <el-tab-pane
+              :label="$t('used.statuses.deactivated')"
+              name="4"
+            >
               <span slot="label">
-                  {{ $t('used.statuses.deactivated') }} ({{ statuses_count.group_summary.deactivated }})
+                {{ $t('used.statuses.deactivated') }} ({{ statuses_count.group_summary.deactivated }})
               </span>
             </el-tab-pane>
           </el-tabs>
         </el-row>
 
         <div class="used_item_wrapper mb-16">
-          <div class="used_item" v-for="product in products"
-               @click="$router.push({name: 'EditUsed',params:{id:product.id}})"
-               :key="product.id">
-
-            <div class="used_item_status" :class="'status_'+product.status">
+          <div
+            v-for="product in products"
+            :key="product.id"
+            class="used_item"
+            @click="$router.push({name: 'EditUsed',params:{id:product.id}})"
+          >
+            <div
+              class="used_item_status"
+              :class="'status_'+product.status"
+            >
               <span>{{ getStatusText(product.status) }}</span>
             </div>
 
@@ -97,31 +175,37 @@
               <img
                 v-if="product.images.length"
                 :src="product.images[0].link"
-                alt="">
+                alt=""
+              >
               <img
                 v-else
                 src="@/assets/img/default-parts.png"
-                alt="">
+                alt=""
+              >
             </div>
 
 
-            <div class="text-center">
-            </div>
+            <div class="text-center" />
             <h5>{{ product.description }}</h5>
-            <p><span>{{ product.car_manu_name }}/ {{
+            <p>
+              <span>{{ product.car_manu_name }}/ {{
                 product.car_mod_name
-              }}</span></p>
-            <p class="used_item_price"><span>Qiymet:</span>
+              }}</span>
+            </p>
+            <p class="used_item_price">
+              <span>Qiymet:</span>
               <span class="float-right">{{ product.price }} {{ product.price_type.name }}</span>
             </p>
           </div>
         </div>
-
       </template>
 
-      <el-divider/>
+      <el-divider />
 
-      <el-row type="flex" justify="center">
+      <el-row
+        type="flex"
+        justify="center"
+      >
         <el-pagination
           v-model:currentPage="currentPage"
           :hide-on-single-page="true"
@@ -131,7 +215,6 @@
           @current-change="pageChanged"
         />
       </el-row>
-
     </el-card>
   </div>
 </template>
@@ -161,6 +244,7 @@ export default {
       products: 'used/products',
       pagination: 'used/pagination',
       statuses_count: 'used/statuses_count',
+      current_package: 'packages/current_package',
       loading: 'used/loading'
     }),
     search: {
@@ -175,6 +259,7 @@ export default {
   async beforeMount () {
     await this.GET_PARTS({ status: this.activeTab, page: this.currentPage })
     await this.GET_STATUSES_COUNT()
+    await this.GET_SELLER_PACKAGE()
   },
   methods: {
     loading () {
@@ -183,6 +268,7 @@ export default {
     ...mapActions({
       GET_PARTS: 'used/GET_PRODUCTS',
       GET_STATUSES_COUNT: 'used/GET_STATUSES_COUNT',
+      GET_SELLER_PACKAGE: 'packages/GET_SELLER_PACKAGE',
     }),
     async pageChanged (page) {
       await this.GET_PARTS({ page: page })
@@ -350,5 +436,18 @@ export default {
 
 .el-tabs__item.is-active span {
   color: #344054 !important;
+}
+
+.stats {
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 18px;
+  text-align: center;
+  color: #344054;
+
+  span {
+    color: #026AA2;
+    font-style: italic;
+  }
 }
 </style>

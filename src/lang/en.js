@@ -66,7 +66,11 @@ export default {
       expired: 'Expired',
       waiting: 'Waiting',
       rejected: 'Rejected'
-    }
+    },
+    add_count: 'Ad count',
+    package_limit: 'Package limit',
+    add_first_ad: 'Add first ad',
+    first_ad_text: 'Create your first site, start selling, earn income',
   },
   actions: {
     add: 'Add',

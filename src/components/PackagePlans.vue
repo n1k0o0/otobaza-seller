@@ -77,7 +77,7 @@
         </div>
 
         <div class="button">
-          <el-button>{{ $t('contact_us') }}</el-button>
+          <el-button @click="goContacts">{{ $t('contact_us') }}</el-button>
         </div>
       </div>
     </div>
@@ -146,6 +146,9 @@ export default {
           this.loadingButtons = false
           this.dialogVisible = false
         })
+    },
+    goContacts () {
+      window.open(process.env.VUE_APP_FRONT_URL + '/contact')
     }
   }
 }
@@ -258,7 +261,7 @@ $plan-margin: 1em;
         border: 1px solid #D0D5DD;
         /* Shadow/xs */
 
-        box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.05);
+        box-shadow: 0 1px 2px rgba(16, 24, 40, 0.05);
         border-radius: 8px;
 
         /* Inside auto layout */
@@ -356,7 +359,7 @@ $plan-margin: 1em;
         border: 1px solid #D0D5DD;
         /* Shadow/xs */
 
-        box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.05);
+        box-shadow: 0 1px 2px rgba(16, 24, 40, 0.05);
         border-radius: 8px;
 
         /* Inside auto layout */
