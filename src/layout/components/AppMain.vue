@@ -9,15 +9,7 @@
     >
       <div v-html="products_invisible_msg" />
     </el-alert>
-    <el-alert
-      v-if="is_balance_overed"
-      :title="$t('information')"
-      type="warning"
-      show-icon
-      :closable="false"
-    >
-      <div v-html="balance_overed_msg" />
-    </el-alert>
+
     <el-alert
       v-if="is_package_expired"
       :title="$t('information')"
@@ -27,7 +19,10 @@
     >
       <div v-html="package_expired_msg" />
     </el-alert>
-    <transition name="fade-transform" mode="out-in">
+    <transition
+      name="fade-transform"
+      mode="out-in"
+    >
       <router-view :key="key" />
     </transition>
   </section>

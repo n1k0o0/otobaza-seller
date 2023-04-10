@@ -22,7 +22,7 @@
           </h2>
           <p class="stats">
             {{ $t('used.add_count') }}: <span>{{ statuses_count.total }}</span> {{ $t('used.package_limit') }}:
-            <span>{{ current_package.limit || 0 }}</span>
+            <span>{{ current_package.used_parts_limit || 0 }}</span>
           </p>
         </div>
         <el-button
