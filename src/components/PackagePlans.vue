@@ -23,7 +23,7 @@
           <p>{{ $t('part_easy_sell') }}</p>
         </div>
         <div class="price">
-          <strong>20</strong> <span>/{{ $t('month') }}</span>
+          <strong>20</strong> <span>/AZN</span>
         </div>
         <div class="button">
           <el-button :loading="loadingButtons" @click="buyRequests">{{ $t('buy') }}</el-button>
