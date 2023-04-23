@@ -45,6 +45,8 @@ export default {
   error: 'Xəta baş verdi!',
   search: 'Axtar',
   more: 'Ətraflı',
+  payment_method: 'Ödəniş növü',
+  payment_method_card: 'Bank Kartı',
   remove_question: 'Silmək istədiyinizə əminsiniz?',
   menu: {
     products: 'Məhsullar',
@@ -72,6 +74,7 @@ export default {
     package_limit: 'Paket limiti',
     add_first_ad: 'İlk elanını əlavə et',
     first_ad_text: 'İlk elanını yarat, satışa başla, gəlir qazan',
+    vip_service_label: ' {times} dəfə {hours} saatdan bir'
   },
   actions: {
     add: 'Əlavə et',
@@ -80,9 +83,14 @@ export default {
     edit: 'Dəyişiklik et',
     activate: 'Aktiv et',
     deactivate: 'Deaktiv et',
+    pay: 'Ödə',
+    pay_note: '“Ödə” düyməsini sıxmaqla siz Otobaza.com saytının istifadəçi şərtlərini və Ofertanı qəbul etmiş sayılırsız.',
     tariff_vip: 'VIP et',
+    tariff_vip_text: 'Elanlarınız ana səhifədə təsadüfü qaydada və və axtarış nəticələrində VİP hissəsində göstəriləcək.',
     tariff_special: 'Özəl et',
-    tariff_forward: 'İrəli çək'
+    tariff_special_text: 'Elanlarınız saytda seçilən müddət ərzində öndə, Özəl elanlar bölməsində göstəriləcək.',
+    tariff_forward: 'İrəli çək',
+    tariff_forward_text: 'Elanlarınız son elanlar bölməsində və axtarışlarda ilk sıralarda göstəriləcək. '
   },
   dashboard: {
     title: 'Dashboard',
@@ -306,5 +314,7 @@ export default {
   },
   for_resend_please_wait: 'Yenidən göndərmək üçün {time} saniyə gözləyin.',
   verificationSmsNotReceived: 'SMS hələ də almamısınız?',
-  resend_otp: 'Yenidən göndər'
+  resend_otp: 'Yenidən göndər',
+  random: 'Təsadüfü qaydada',
+  day: 'gün',
 }

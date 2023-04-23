@@ -44,6 +44,8 @@ export default {
   only_seller_can_login: 'Только продавец может войти!',
   error: 'Ошибка!',
   more: 'Больше',
+  payment_method: 'Способ оплаты',
+  payment_method_card: 'Банковская карта',
   remove_question: 'Вы уверены что хотите удалить ?',
   menu: {
     products: 'Товары',
@@ -71,6 +73,7 @@ export default {
     package_limit: 'Лимит пакета',
     add_first_ad: 'Создайте свое первое объявление',
     first_ad_text: 'Создайте свое первое объявление, начните продавать, получайте доход',
+    vip_service_label: ' {times} раз каждые {hours} часов'
   },
   actions: {
     add: 'Добавить',
@@ -78,9 +81,14 @@ export default {
     save: 'Сохранить',
     edit: 'Изменить',
     activate: 'Деактивируй',
+    pay: 'Оплатить',
+    pay_note: 'Нажав кнопку "Оплатить", вы принимаете условия использования Otobaza.com и Предложение.',
     tariff_vip: 'Сделать VIP',
     tariff_special: 'Сделать особенным',
-    tariff_forward: 'Тянуть вперед'
+    tariff_forward: 'Тянуть вперед',
+    tariff_vip_text: 'Ваша реклама будет случайным образом отображаться на главной странице и в разделе VIP в результатах поиска.',
+    tariff_special_text: 'Ваша реклама будет отображаться в начале сайта в разделе "Специальные объявления" в течение выбранного периода времени.',
+    tariff_forward_text: 'Ваши объявления будут появляться в разделе последних объявлений и первыми в результатах поиска.'
   },
   dashboard: {
     title: 'Панель приборов',
@@ -304,5 +312,7 @@ export default {
   },
   for_resend_please_wait: 'Подождите {time} секунд для повторной отправки.',
   verificationSmsNotReceived: 'Все еще не получили SMS?',
-  resend_otp: 'Отправь еще раз'
+  resend_otp: 'Отправь еще раз',
+  random: 'Rastgele sıraylaa',
+  day: 'день',
 }

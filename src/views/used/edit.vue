@@ -12,7 +12,7 @@
       <el-breadcrumb-item :to="{ path: '/used' }">
         {{ $t('menu.used') }}
       </el-breadcrumb-item>
-      <el-breadcrumb-item>{{ product.model }}</el-breadcrumb-item>
+      <el-breadcrumb-item>{{ product.title }}</el-breadcrumb-item>
     </el-breadcrumb>
     <el-card shadow="always">
       <template slot="header">
@@ -45,14 +45,14 @@
             @click="changeStatus(1)"
           >
             {{ $t('actions.activate') }}
-            <i class="el-icon-switch-button"/>
+            <i class="el-icon-switch-button" />
           </el-button>
           <el-button
             v-show="!edit && product.is_active"
             @click="changeStatus(0)"
           >
             {{ $t('actions.deactivate') }}
-            <i class="el-icon-switch-button"/>
+            <i class="el-icon-switch-button" />
           </el-button>
 
           <el-button
@@ -61,18 +61,18 @@
             @click="edit=true"
           >
             {{ $t('actions.edit') }} <i
-            class="el-icon-plus el-icon-plus"
-          />
+              class="el-icon-plus el-icon-plus"
+            />
           </el-button>
           <el-button
-            :loading="loading"
             v-show="edit"
+            :loading="loading"
             type="primary"
             @click="save"
           >
             {{ $t('actions.save') }} <i
-            class="el-icon-document-checked"
-          />
+              class="el-icon-document-checked"
+            />
           </el-button>
         </div>
       </template>
@@ -88,7 +88,7 @@
         >
           <div
             class="tariffs_item"
-            @click="changeTariff($t('actions.tariff_forward'))"
+            @click="$router.push({name: 'ForwardUsed',params:{id:product.id}})"
           >
             <img
               src="@/assets/img/forward.png"
@@ -104,7 +104,7 @@
         >
           <div
             class="tariffs_item"
-            @click="changeTariff($t('actions.tariff_vip'))"
+            @click="$router.push({name: 'VIPUsed',params:{id:product.id}})"
           >
             <img
               src="@/assets/img/vip.png"
@@ -120,7 +120,7 @@
         >
           <div
             class="tariffs_item"
-            @click="changeTariff($t('actions.tariff_special'))"
+            @click="$router.push({name: 'SpecialUsed',params:{id:product.id}})"
           >
             <img
               src="@/assets/img/special.png"
@@ -256,7 +256,7 @@
             accept=".png,.jpg,.jpeg,.gif"
             action=""
           >
-            <i class="el-icon-plus"/>
+            <i class="el-icon-plus" />
             <div
               slot="file"
               slot-scope="{file}"
@@ -273,14 +273,14 @@
                   class="el-upload-list__item-preview"
                   @click="handlePictureCardPreview(file)"
                 >
-                  <i class="el-icon-zoom-in"/>
+                  <i class="el-icon-zoom-in" />
                 </span>
                 <span
                   v-if="edit"
                   class="el-upload-list__item-delete"
                   @click="handleRemove(file)"
                 >
-                  <i class="el-icon-delete"/>
+                  <i class="el-icon-delete" />
                 </span>
               </span>
             </div>

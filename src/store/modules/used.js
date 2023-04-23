@@ -6,6 +6,7 @@ const state = {
   models: [],
   products: [],
   product: {
+    id: '',
     car_manu_id: '',
     car_manu_name: '',
     car_mod_id: '',
@@ -31,6 +32,9 @@ const state = {
     limit: 0,
     total: 0
   },
+  vip_list: [],
+  forward_list: [],
+  special_list: [],
 }
 
 const getters = {
@@ -43,6 +47,9 @@ const getters = {
   brands: state => state.brands,
   models: state => state.models,
   statuses_count: state => state.statuses_count,
+  vip_list: state => state.vip_list,
+  forward_list: state => state.vip_list,
+  special_list: state => state.vip_list,
 }
 
 const mutations = {
@@ -74,7 +81,16 @@ const mutations = {
   },
   SET_STATUSES_COUNT (state, payload) {
     state.statuses_count = payload
-  }
+  },
+  SET_VIP (state, payload) {
+    state.vip_list = payload
+  },
+  SET_FORWARD (state, payload) {
+    state.vip_list = payload
+  },
+  SET_SPECIAL (state, payload) {
+    state.vip_list = payload
+  },
 }
 
 const actions = {
@@ -276,6 +292,127 @@ const actions = {
       commit('TOGGLE_LOADING')
     }
   },
+
+  async GET_VIP ({ commit, state }) {
+    try {
+      commit('TOGGLE_LOADING')
+      const { data } = await request({
+        url: process.env.VUE_APP_BASE_2_API_URL + '/api/seller/ads/vip/service-list',
+        method: 'get',
+      })
+
+      commit('SET_VIP', data.data)
+
+    } catch (e) {
+      Message({
+        message: e?.response?.data?.message || 'Error',
+        type: 'error',
+        duration: 5 * 1000
+      })
+    } finally {
+      commit('TOGGLE_LOADING')
+    }
+  },
+  async GET_FORWARD ({ commit, state }) {
+    try {
+      commit('TOGGLE_LOADING')
+      const { data } = await request({
+        url: process.env.VUE_APP_BASE_2_API_URL + '/api/seller/ads/forward/service-list',
+        method: 'get',
+      })
+
+      commit('SET_FORWARD', data.data)
+
+    } catch (e) {
+      Message({
+        message: e?.response?.data?.message || 'Error',
+        type: 'error',
+        duration: 5 * 1000
+      })
+    } finally {
+      commit('TOGGLE_LOADING')
+    }
+  },
+  async GET_SPECIAL ({ commit, state }) {
+    try {
+      commit('TOGGLE_LOADING')
+      const { data } = await request({
+        url: process.env.VUE_APP_BASE_2_API_URL + '/api/seller/ads/forward/service-list',
+        method: 'get',
+      })
+
+      commit('SET_SPECIAL', data)
+
+    } catch (e) {
+      Message({
+        message: e?.response?.data?.message || 'Error',
+        type: 'error',
+        duration: 5 * 1000
+      })
+    } finally {
+      commit('TOGGLE_LOADING')
+    }
+  },
+
+  async PAY_VIP ({ commit, state }, { partId, serviceId }) {
+    try {
+      commit('TOGGLE_LOADING')
+      const { data } = await request({
+        url: process.env.VUE_APP_BASE_2_API_URL + '/api/seller/ads/vip/order',
+        method: 'post',
+        data: {
+          used_part_id: partId,
+          service_id: serviceId,
+        }
+      })
+
+      if (data.status) {
+        window.href = data.redirect
+      } else {
+        Message({
+          message: data.message || 'Error',
+          type: 'error',
+          duration: 5 * 1000
+        })
+      }
+
+    } catch (e) {
+      Message({
+        message: e?.response?.data?.message || 'Error',
+        type: 'error',
+        duration: 5 * 1000
+      })
+    } finally {
+      commit('TOGGLE_LOADING')
+    }
+  },
+  async PAY_FORWARD ({ commit, state }, { partId, serviceId }) {
+    try {
+      commit('TOGGLE_LOADING')
+      const { data } = await request({
+        url: process.env.VUE_APP_BASE_2_API_URL + '/api/seller/ads/forward/order',
+        method: 'post',
+        data: {
+          used_part_id: partId,
+          service_id: serviceId,
+        }
+      })
+
+      if (data.status) {
+        window.location.href = data.redirect
+      } else {
+        Message({
+          message: data.message || 'Error',
+          type: 'error',
+          duration: 5 * 1000
+        })
+      }
+
+    } finally {
+      commit('TOGGLE_LOADING')
+    }
+  },
+
 }
 
 export default {

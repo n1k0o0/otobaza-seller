@@ -44,6 +44,8 @@ export default {
   only_seller_can_login: 'Only Seller can login!',
   error: 'Error!',
   more: 'More',
+  payment_method: 'Payment method',
+  payment_method_card: 'Bank Card',
   remove_question: 'Are you sure you want to delete?',
   menu: {
     products: 'Products',
@@ -71,6 +73,7 @@ export default {
     package_limit: 'Package limit',
     add_first_ad: 'Add first ad',
     first_ad_text: 'Create your first site, start selling, earn income',
+    vip_service_label: '{times} times every {hours} hours'
   },
   actions: {
     add: 'Add',
@@ -79,9 +82,14 @@ export default {
     edit: 'Edit',
     activate: 'Activate',
     deactivate: 'Dectivate',
+    pay: 'Pay',
+    pay_note: 'By clicking the "Pay" button, you are deemed to have accepted the Otobaza.com user terms and the Offer.',
     tariff_vip: 'Make VIP',
     tariff_special: 'Make Special',
-    tariff_forward: 'Pull Forward'
+    tariff_forward: 'Pull Forward',
+    tariff_vip_text: 'Your ads will be displayed randomly on the home page and in the VIP section in the search results.',
+    tariff_special_text: 'Your ads will be displayed at the front of the site in the Special ads section for the selected period of time.',
+    tariff_forward_text: 'Your ads will appear in the recent ads section and first in searches.'
   },
   dashboard: {
     title: 'Dashboard',
@@ -305,5 +313,7 @@ export default {
   },
   for_resend_please_wait: 'Wait {time} seconds to resend.',
   verificationSmsNotReceived: 'Still haven\'t received the SMS?',
-  resend_otp: 'Send again'
+  resend_otp: 'Send again',
+  random: 'In random order',
+  day: 'day',
 }

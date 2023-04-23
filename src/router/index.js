@@ -129,6 +129,27 @@ export const constantRoutes = [
         component: () => import('@/views/used/edit'),
         meta: { title: i18n.t('menu.used'), icon: 'table' }
       },
+      {
+        path: '/used/:id/vip',
+        name: 'VIPUsed',
+        hidden: true,
+        component: () => import('@/views/used/vip'),
+        meta: { title: i18n.t('menu.used'), icon: 'table' }
+      },
+      {
+        path: '/used/:id/forward',
+        name: 'ForwardUsed',
+        hidden: true,
+        component: () => import('@/views/used/forward'),
+        meta: { title: i18n.t('menu.used'), icon: 'table' }
+      },
+      {
+        path: '/used/:id/special',
+        name: 'SpecialUsed',
+        hidden: true,
+        component: () => import('@/views/used/special'),
+        meta: { title: i18n.t('menu.used'), icon: 'table' }
+      },
     ]
   },
   /*{

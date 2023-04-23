@@ -44,6 +44,8 @@ export default {
   only_seller_can_login: 'Sadece Satıcı giriş yapabilir!',
   error: 'Hata!',
   more: 'Daha fazla',
+  payment_method: 'Ödeme türü',
+  payment_method_card: 'Banka Kartı',
   menu: {
     products: 'Ürünler',
     used: 'Kullanılmış'
@@ -71,6 +73,7 @@ export default {
     package_limit: 'Paket limiti',
     add_first_ad: 'İlk reklamınızı oluşturun',
     first_ad_text: 'İlk reklamınızı oluşturun, satışa başlayın, gelir elde edin',
+    vip_service_label: '{hours} saatte bir {times} kez'
   },
   actions: {
     add: 'Ekle',
@@ -79,9 +82,14 @@ export default {
     edit: 'Düzenle',
     activate: 'Etkinleştir',
     deactivate: 'Devre dışı bırakmak',
+    pay: 'Öde',
+    pay_note: '"Öde" butonuna tıklayarak Otobaza.com kullanım koşullarını ve Teklif\'i kabul etmiş sayılırsınız',
     tariff_vip: 'VIP yap',
     tariff_special: 'Özel Yap',
-    tariff_forward: 'İleri Çek'
+    tariff_forward: 'İleri Çek',
+    tariff_vip_text: 'Reklamlarınız ana sayfada ve arama sonuçlarında VIP bölümünde rastgele gösterilecektir.',
+    tariff_special_text: 'İlanlarınız, seçilen süre boyunca Özel reklamlar bölümünde sitenin önünde gösterilecektir.',
+    tariff_forward_text: 'Reklamlarınız son ilanlar bölümünde ve aramalarda ilk sırada çıkacaktır.'
   },
   dashboard: {
     title: 'Panel',
@@ -304,5 +312,7 @@ export default {
   },
   for_resend_please_wait: 'Tekrar göndermek için {time} saniye bekleyin.',
   verificationSmsNotReceived: 'Hala SMS almadınız mı?',
-  resend_otp: 'Tekrar gönderin'
+  resend_otp: 'Tekrar gönderin',
+  random: 'В случайном порядке',
+  day: 'gün',
 }
