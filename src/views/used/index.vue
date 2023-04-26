@@ -92,7 +92,7 @@
           <el-col :md="6">
             <el-button
               type="primary"
-              :disabled="search.length<4 && search.length"
+              :disabled="search.length<4 && search.length>0"
               class="w100"
               @click="GET_PARTS({search:search})"
             >
@@ -207,10 +207,11 @@
         justify="center"
       >
         <el-pagination
-          v-model:currentPage="currentPage"
+          v-model="currentPage"
           :hide-on-single-page="true"
           background
           layout="prev, pager, next"
+          :page-size="pagination.per_page"
           v-bind="pagination"
           @current-change="pageChanged"
         />
