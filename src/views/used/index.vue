@@ -58,7 +58,7 @@
         </el-button>
       </template>
 
-      <template v-if="!products.length">
+      <template v-if="!statuses_count.total">
         <div class="empty_used mb-32">
           <img
             src="@/assets/img/add_item.svg"
@@ -92,7 +92,7 @@
           <el-col :md="6">
             <el-button
               type="primary"
-              :disabled="search.length<4"
+              :disabled="search.length<4 && search.length"
               class="w100"
               @click="GET_PARTS({search:search})"
             >
@@ -221,8 +221,6 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
-
-import VueSlickCarousel from 'vue-slick-carousel'
 import 'vue-slick-carousel/dist/vue-slick-carousel.css'
 // optional style for arrows & dots
 import 'vue-slick-carousel/dist/vue-slick-carousel-theme.css'
@@ -230,7 +228,6 @@ import loading from 'element-ui/packages/loading'
 
 export default {
   name: 'Used',
-  components: { VueSlickCarousel },
   data () {
     return {
       page: 1,
