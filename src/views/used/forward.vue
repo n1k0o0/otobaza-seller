@@ -15,7 +15,7 @@
       <el-breadcrumb-item :to="{ name: 'EditUsed',param:{id:product.id} }">
         {{ product.title }}
       </el-breadcrumb-item>
-      <el-breadcrumb-item>VIP</el-breadcrumb-item>
+      <el-breadcrumb-item>{{ $t('actions.tariff_forward') }}</el-breadcrumb-item>
     </el-breadcrumb>
     <el-card
       v-loading="loading"

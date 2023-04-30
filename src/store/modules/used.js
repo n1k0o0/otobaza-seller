@@ -367,7 +367,7 @@ const actions = {
       })
 
       if (data.status) {
-        window.href = data.redirect
+        window.location.href = data.redirect
       } else {
         Message({
           message: data.message || 'Error',
