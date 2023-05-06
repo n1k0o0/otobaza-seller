@@ -86,7 +86,7 @@ export default {
     pay: 'Ödə',
     pay_note: '“Ödə” düyməsini sıxmaqla siz Otobaza.com saytının istifadəçi şərtlərini və Ofertanı qəbul etmiş sayılırsız.',
     tariff_vip: 'VIP et',
-    tariff_vip_text: 'Elanlarınız ana səhifədə təsadüfü qaydada və və axtarış nəticələrində VİP hissəsində göstəriləcək.',
+    tariff_vip_text: 'Elanlarınız ana səhifədə təsadüfü qaydada və axtarış nəticələrində VİP hissəsində göstəriləcək.',
     tariff_special: 'Özəl et',
     tariff_special_text: 'Elanlarınız saytda seçilən müddət ərzində öndə, Özəl elanlar bölməsində göstəriləcək.',
     tariff_forward: 'İrəli çək',
