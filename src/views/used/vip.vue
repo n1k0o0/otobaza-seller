@@ -58,7 +58,7 @@
             :key="vip.id"
             :label="vip.id"
           >
-            {{ vip.service_period_in_days }} ( {{ $t('random') }} ) - {{ vip.price }} {{ vip.price_type.currency_code }}
+            {{ vip.service_period_in_days }} {{ $t('day') }} ( {{ $t('random') }} ) - {{ vip.price }} {{ vip.price_type.currency_code }}
           </el-radio>
         </el-radio-group>
       </div>
