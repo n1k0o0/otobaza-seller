@@ -80,8 +80,17 @@ module.exports = {
       })
       .end()
 
+    config.module
+      .rule('vue')
+      .use('vue-loader')
+      .tap(options => {
+        options.compiler = require('vue-template-babel-compiler')
+        return options
+      })
+      .end()
+
     config
-    // https://webpack.js.org/configuration/devtool/#development
+      // https://webpack.js.org/configuration/devtool/#development
       .when(process.env.NODE_ENV === 'development',
         config => config.devtool('cheap-source-map')
       )

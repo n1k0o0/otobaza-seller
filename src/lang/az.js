@@ -74,7 +74,12 @@ export default {
     package_limit: 'Paket limiti',
     add_first_ad: 'İlk elanını əlavə et',
     first_ad_text: 'İlk elanını yarat, satışa başla, gəlir qazan',
-    vip_service_label: ' {times} dəfə {hours} saatdan bir'
+    vip_service_label: ' {times} dəfə {hours} saatdan bir',
+    special_service_dates_label: 'Xidmət müddəti seç',
+    special_service_period: 'Xidmətin müddəti',
+    special_service_cost: 'Xidmətin dəyəri',
+    busy: 'Məşğuldur',
+    choose_dates: 'Tarixlər qeyd edin',
   },
   actions: {
     add: 'Əlavə et',

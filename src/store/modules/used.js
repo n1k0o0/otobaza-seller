@@ -34,7 +34,9 @@ const state = {
   },
   vip_list: [],
   forward_list: [],
-  special_list: [],
+  special_list: {
+    slots: []
+  },
 }
 
 const getters = {
@@ -49,7 +51,7 @@ const getters = {
   statuses_count: state => state.statuses_count,
   vip_list: state => state.vip_list,
   forward_list: state => state.vip_list,
-  special_list: state => state.vip_list,
+  special_list: state => state.special_list,
 }
 
 const mutations = {
@@ -89,7 +91,8 @@ const mutations = {
     state.vip_list = payload
   },
   SET_SPECIAL (state, payload) {
-    state.vip_list = payload
+    state.special_list = payload
+    state.special_list.slots = state.special_list.slots.replace(' ', '').split(',')
   },
 }
 
@@ -337,7 +340,7 @@ const actions = {
     try {
       commit('TOGGLE_LOADING')
       const { data } = await request({
-        url: process.env.VUE_APP_BASE_2_API_URL + '/api/seller/ads/forward/service-list',
+        url: process.env.VUE_APP_BASE_2_API_URL + '/api/seller/ads/private/check-busy-slots',
         method: 'get',
       })
 
@@ -395,6 +398,32 @@ const actions = {
         data: {
           used_part_id: partId,
           service_id: serviceId,
+        }
+      })
+
+      if (data.status) {
+        window.location.href = data.redirect
+      } else {
+        Message({
+          message: data.message || 'Error',
+          type: 'error',
+          duration: 5 * 1000
+        })
+      }
+
+    } finally {
+      commit('TOGGLE_LOADING')
+    }
+  },
+  async PAY_SPECIAL ({ commit, state }, { partId, dates }) {
+    try {
+      commit('TOGGLE_LOADING')
+      const { data } = await request({
+        url: process.env.VUE_APP_BASE_2_API_URL + '/api/seller/ads/private/order',
+        method: 'post',
+        data: {
+          used_part_id: partId,
+          dates: dates,
         }
       })
 

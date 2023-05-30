@@ -73,7 +73,12 @@ export default {
     package_limit: 'Лимит пакета',
     add_first_ad: 'Создайте свое первое объявление',
     first_ad_text: 'Создайте свое первое объявление, начните продавать, получайте доход',
-    vip_service_label: ' {times} раз каждые {hours} часов'
+    vip_service_label: ' {times} раз каждые {hours} часов',
+    special_service_dates_label: 'Выберите срок службы',
+    special_service_period: 'Срок службы',
+    special_service_cost: 'Стоимость услуги',
+    busy: 'Занят',
+    choose_dates: 'Выберите даты',
   },
   actions: {
     add: 'Добавить',

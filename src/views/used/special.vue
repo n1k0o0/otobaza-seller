@@ -22,7 +22,6 @@
         <div>
           <div class="left">
             <svg
-              icon="el-icon-back"
               width="24"
               height="24"
               viewBox="0 0 24 24"
@@ -48,22 +47,49 @@
         </div>
       </template>
 
-      <div>
-        <el-radio-group v-model="chosenDay">
-          <el-radio :label="1">
-            1 gün (4 dəfə 6 saatdan bir) - 1 azn
-          </el-radio>
-          <el-radio :label="2">
-            3 gün (12 dəfə 6 saatdan bir) - 2 azn
-          </el-radio>
-          <el-radio :label="3">
-            5 gün (20 dəfə 6 saatdan bir) - 3 azn
-          </el-radio>
-          <el-radio :label="4">
-            10 gün (40 dəfə 6 saatdan bir) - 5 azn
-          </el-radio>
-        </el-radio-group>
-      </div>
+      <el-row>
+        <el-col
+          :span="12"
+          class="block"
+        >
+          <label for="dates">{{ $t('used.special_service_dates_label') }} :</label>
+          <el-date-picker
+            id="dates"
+            v-model="dates"
+            class="d-block mt-4"
+            type="dates"
+            :picker-options="pickerOptions"
+            clearable
+            format="yyyy-MM-dd"
+            value-format="yyyy-MM-dd"
+            :placeholder="$t('used.choose_dates')"
+          />
+          <p>
+            * {{ special_list.slots.join(',') }} -> {{ $t('used.busy') }}
+          </p>
+        </el-col>
+        <el-col
+          :span="12"
+          class="info"
+        >
+          <div>
+            <span>{{ $t('used.special_service_period') }}:</span>
+            <p>
+              {{ dates?.length ?? 0 }} {{ $t('day') }} ( {{ dates?.join(',') }} )
+            </p>
+          </div>
+          <div>
+            <span>{{ $t('used.special_service_cost') }}:</span>
+            <p>1 {{ $t('day') }} - 20 azn</p>
+          </div>
+          <div>
+            <span>{{ $t('orders.total_price') }}:</span>
+            <p class="price">
+              {{ dates?.length ?? 0 }} {{ $t('day') }} - {{ 20 * (dates?.length || 0) }} AZN
+            </p>
+          </div>
+        </el-col>
+      </el-row>
 
       <div class="el-card__footer">
         <el-row
@@ -80,7 +106,7 @@
           <el-col :span="4">
             <el-button
               type="primary"
-              :disabled="!!product.id"
+              :disabled="!product.id || (!dates || !dates.length)"
               @click="pay"
             >
               {{ $t('actions.pay') }}
@@ -117,23 +143,50 @@ export default {
   name: 'Used',
   data () {
     return {
+      dates: [],
       loading: false,
-      chosenDay: 1
+      chosenDay: 1,
+      pickerOptions2: {
+        disabledDate (time) {
+          let tt = time.toISOString().substring(0, 10)
+          console.log(111, this)
+
+          return ['2023-05-18'].includes(tt) || time.getTime() < Date.now()
+        }
+      }
     }
   },
   computed: {
     ...mapGetters({
       product: 'used/product',
       currencies: 'app/currencies',
+      special_list: 'used/special_list',
     }),
+    pickerOptions () {
+      let slots = this.special_list.slots
+
+      return {
+        disabledDate (time) {
+          let date = new Date(time)
+
+          let tt = date.getFullYear() + '-' +
+            (date.getMonth() + 1).toString().padStart(2, '0') + '-' +
+            date.getDate().toString().padStart(2, '0')
+
+          return slots.includes(tt) || time.getTime() < Date.now()
+        }
+      }
+    }
   },
-  async beforeMount () {
+  async mounted () {
     await this.GET_PRODUCT(this.$route.params.id)
+    await this.GET_SPECIAL()
   },
   methods: {
     ...mapActions({
       GET_PRODUCT: 'used/GET_PRODUCT',
-      PAY_VIP: 'used/PAY_VIP',
+      GET_SPECIAL: 'used/GET_SPECIAL',
+      PAY_SPECIAL: 'used/PAY_SPECIAL',
     }),
     async save () {
       this.loading = true
@@ -145,14 +198,14 @@ export default {
           message: 'Success.',
           type: 'success'
         })
+
       } finally {
         this.loading = false
       }
-
     },
     async pay () {
-      await this.PAY_VIP(this.day)
-    }
+      await this.PAY_SPECIAL({ partId: this.product.id, dates: this.dates })
+    },
   },
 }
 </script>
@@ -176,6 +229,38 @@ export default {
   display: flex;
   flex-direction: column;
   gap: 16px;
+}
+
+.block {
+  p, label {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    color: #98A2B3;
+  }
+}
+
+.info {
+  span {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    color: #98A2B3;
+  }
+
+  p {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    color: #344054;
+  }
+
+  p.price {
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 32px;
+    color: #0086C9;
+  }
 }
 
 </style>

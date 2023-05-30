@@ -73,7 +73,12 @@ export default {
     package_limit: 'Package limit',
     add_first_ad: 'Add first ad',
     first_ad_text: 'Create your first site, start selling, earn income',
-    vip_service_label: '{times} times every {hours} hours'
+    vip_service_label: '{times} times every {hours} hours',
+    special_service_dates_label: 'Choose service period',
+    special_service_period: 'Service period',
+    special_service_cost: 'Cost of service',
+    busy: 'Busy',
+    choose_dates: 'Select dates',
   },
   actions: {
     add: 'Add',

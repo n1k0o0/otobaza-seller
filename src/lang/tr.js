@@ -73,7 +73,12 @@ export default {
     package_limit: 'Paket limiti',
     add_first_ad: 'İlk reklamınızı oluşturun',
     first_ad_text: 'İlk reklamınızı oluşturun, satışa başlayın, gelir elde edin',
-    vip_service_label: '{hours} saatte bir {times} kez'
+    vip_service_label: '{hours} saatte bir {times} kez',
+    special_service_dates_label: 'Hizmet süresini seçin',
+    special_service_period: 'Hizmet süresi',
+    special_service_cost: 'Hizmet maliyeti',
+    busy: 'Meşgul',
+    choose_dates: 'Tarihleri ​​seçin',
   },
   actions: {
     add: 'Ekle',
